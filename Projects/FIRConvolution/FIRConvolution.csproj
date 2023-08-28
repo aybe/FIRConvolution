@@ -15,12 +15,12 @@
 
 		<Reference Include="Unity.Burst">
 			<HintPath>$(SolutionDir)$(UnityScriptAssembliesPath)\Unity.Burst.dll</HintPath>
-			<Private>False</Private>
+			<Private>True</Private>
 		</Reference>
 
 		<Reference Include="Unity.Mathematics">
 			<HintPath>$(SolutionDir)$(UnityScriptAssembliesPath)\Unity.Mathematics.dll</HintPath>
-			<Private>False</Private>
+			<Private>True</Private>
 		</Reference>
 
 	</ItemGroup>
