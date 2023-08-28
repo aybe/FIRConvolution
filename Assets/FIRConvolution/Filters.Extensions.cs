@@ -70,7 +70,7 @@ namespace FIRConvolution
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Set(this ref int4 vector, int i) // TODO move
+        private static void Set(this ref int4 vector, int i) // TODO move
         {
             vector.x = i;
             vector.y = i;
@@ -79,7 +79,7 @@ namespace FIRConvolution
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Set(this ref int4 vector, int x, int y, int z, int w) // TODO move
+        private static void Set(this ref int4 vector, int x, int y, int z, int w) // TODO move
         {
             vector.x = x;
             vector.y = y;

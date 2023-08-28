@@ -5,7 +5,7 @@ namespace FIRConvolution
 {
     public static class Float4Extensions
     {
-        public static void CopyTo(this in float4 source, in Span<float> target)
+        internal static void CopyTo(this in float4 source, in Span<float> target)
         {
             if (target.Length < 4)
             {
