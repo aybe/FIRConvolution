@@ -493,6 +493,9 @@ crashlytics-build.properties
 # keep Unity packages (fix VisualStudio.gitignore)
 !**/[Pp]ackages/*
 
+# TODO
+/Assets/**/*bin*
+
 # somehow this ain't fixable but can be ignored (NuGet stuff)
 /Assets/**/*obj*
 

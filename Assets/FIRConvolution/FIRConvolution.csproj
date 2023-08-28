@@ -6,8 +6,7 @@
 		<LangVersion>9</LangVersion>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<DefaultItemExcludes>$(DefaultItemExcludes);**\*.meta</DefaultItemExcludes>
-		<BaseOutputPath>$(SolutionDir)bin\</BaseOutputPath>
-		<BaseIntermediateOutputPath>$(SolutionDir)obj\</BaseIntermediateOutputPath>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	</PropertyGroup>
 
 	<ItemGroup>
