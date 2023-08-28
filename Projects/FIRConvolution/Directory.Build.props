@@ -1,4 +1,3 @@
-<!-- Directory.Build.props -->
 <Project>
 	<PropertyGroup>
 		<UnityVersion>2022.3.8f1</UnityVersion>

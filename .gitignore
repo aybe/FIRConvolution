@@ -485,7 +485,8 @@ crashlytics-build.properties
 ################################################################################
 
 # keep project so it can be referenced by MSTest project (fix Unity.gitignore)
-!/Assets/**/*.csproj
+!/**/*.csproj
+/*.csproj
 
 # keep meta for Unity (fix VisualStudio.gitignore)
 !/Assets/**/*.meta

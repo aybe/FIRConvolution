@@ -33,7 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="$(SolutionDir)Assets\FIRConvolution\FIRConvolution.csproj" />
+		<ProjectReference Include="$(SolutionDir)Projects\FIRConvolution\FIRConvolution.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
