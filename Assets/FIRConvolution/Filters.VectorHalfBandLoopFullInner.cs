@@ -38,7 +38,7 @@ namespace FIRConvolution
                     var z2 = z[zT - 4];
                     var z3 = z[zT - 6];
 
-                    sum += h0 * z0 + h1 * z1 + h2 * z2 + h3 * z3;
+                    sum += math.dot(new float4(h0, h1, h2, h3), new float4(z0, z1, z2, z3));
                 }
 
                 for (end = n - 4; tap < end; tap += 4)
@@ -51,7 +51,7 @@ namespace FIRConvolution
                     var z0 = z[zT - 0];
                     var z1 = z[zT - 2];
 
-                    sum += h0 * z0 + h1 * z1;
+                    sum += math.dot(new float2(h0, h1), new float2(z0, z1));
                 }
 
                 for (end = n; tap < end; tap += 2)

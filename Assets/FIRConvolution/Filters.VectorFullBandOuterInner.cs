@@ -1,10 +1,11 @@
-﻿using System.Numerics;
+﻿using System;
+using Unity.Mathematics;
 
 namespace FIRConvolution
 {
     public static partial class Filters
     {
-        public static void VectorFullBandOuterInner(System.Span<float> source, System.Span<float> target, int length, ref Filter filter)
+        public static void VectorFullBandOuterInner(Span<float> source, Span<float> target, int length, ref Filter filter)
         {
             var h = filter.H;
             var z = filter.Z;
@@ -15,7 +16,7 @@ namespace FIRConvolution
             {
                 var zGet = Filter.UpdateZ(ref filter, source, sample, 4);
 
-                var sum = Vector4.Zero;
+                var sum = float4.zero;
 
                 var tap = 0;
 
@@ -36,11 +37,18 @@ namespace FIRConvolution
                     var z5 = z[zT - 5];
                     var z6 = z[zT - 6];
 
-                    sum += new Vector4(
-                        h0 * z0 + h1 * z1 + h2 * z2 + h3 * z3,
-                        h0 * z1 + h1 * z2 + h2 * z3 + h3 * z4,
-                        h0 * z2 + h1 * z3 + h2 * z4 + h3 * z5,
-                        h0 * z3 + h1 * z4 + h2 * z5 + h3 * z6);
+                    var hv0 = new float4(h0, h1, h2, h3);
+
+                    var zv0 = new float4(z0, z1, z2, z3);
+                    var zv1 = new float4(z1, z2, z3, z4);
+                    var zv2 = new float4(z2, z3, z4, z5);
+                    var zv3 = new float4(z3, z4, z5, z6);
+
+                    sum += new float4(
+                        math.dot(hv0, zv0),
+                        math.dot(hv0, zv1),
+                        math.dot(hv0, zv2),
+                        math.dot(hv0, zv3));
                 }
 
                 // TODO process 4 floats 1 tap 1 tap hop
@@ -56,7 +64,7 @@ namespace FIRConvolution
                     var z2 = z[zT - 2];
                     var z3 = z[zT - 3];
 
-                    sum += new Vector4(h0) * new Vector4(z0, z1, z2, z3);
+                    sum += new float4(h0) * new float4(z0, z1, z2, z3);
                 }
 
                 sum.CopyTo(target[sample..]);

@@ -210,7 +210,7 @@ namespace FIRConvolution
             return cs;
         }
 
-        public static Vector4 ProcessCenterVector(ref Filter filter)
+        public static float4 ProcessCenterVector(ref Filter filter)
         {
             var h = filter.H;
             var c = filter.HCenter;
@@ -225,13 +225,11 @@ namespace FIRConvolution
             var z2 = z[zT + 1];
             var z3 = z[zT + 0];
 
-            var v1 = math.float4(h0);
+            var v1 = math.float4(h0, h0,h0,h0);
             var v2 = math.float4(z0, z1, z2, z3);
-            var v3 = v1 * v2; // TODO
+            var v3 = v1 * v2;
 
-            var cv = new Vector4(h0 * z0, h0 * z1, h0 * z2, h0 * z3);
-
-            return cv;
+            return v3;
         }
     }
 }

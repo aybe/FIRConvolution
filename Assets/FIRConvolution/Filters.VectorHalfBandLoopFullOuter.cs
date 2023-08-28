@@ -1,10 +1,11 @@
-﻿using System.Numerics;
+﻿using System;
+using Unity.Mathematics;
 
 namespace FIRConvolution
 {
     public static partial class Filters
     {
-        public static void VectorHalfBandLoopFullOuter(System.Span<float> source, System.Span<float> target, int length, ref Filter filter)
+        public static void VectorHalfBandLoopFullOuter(Span<float> source, Span<float> target, int length, ref Filter filter)
         {
             var h = filter.H;
             var z = filter.Z;
@@ -15,7 +16,7 @@ namespace FIRConvolution
             {
                 var zGet = Filter.UpdateZ(ref filter, source, sample, 4);
 
-                var sum = Vector4.Zero;
+                var sum = float4.zero;
 
                 // TODO process 4 floats 1 tap 2 tap hop
 
@@ -30,7 +31,7 @@ namespace FIRConvolution
                     var z2 = z[zT - 2];
                     var z3 = z[zT - 3];
 
-                    sum += new Vector4(h0) * new Vector4(z0, z1, z2, z3);
+                    sum += new float4(h0, h0, h0, h0) * new float4(z0, z1, z2, z3);
                 }
 
                 if (filter.TCenter)
