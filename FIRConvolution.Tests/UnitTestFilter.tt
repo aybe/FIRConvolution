@@ -1,0 +1,49 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".g.cs" #>
+#pragma warning disable CS0618 // Type or member is obsolete
+
+namespace FIRConvolution.Tests;
+
+<#
+	var names = new[]
+	{
+		"ScalarFullBand",
+		"ScalarHalfBandLoopFull",
+		"ScalarHalfBandLoopHalf",
+		"VectorFullBandInner",
+		"VectorFullBandOuter",
+		"VectorFullBandOuterInner",
+		"VectorHalfBandLoopFullInner",
+		"VectorHalfBandLoopFullOuter",
+		"VectorHalfBandLoopFullOuterInner",
+		"VectorHalfBandLoopHalfInner",
+		"VectorHalfBandLoopHalfOuter",
+		"VectorHalfBandLoopHalfOuterInner"
+	};
+
+	for (var i = 1; i <= 20; i++)
+	{
+		var bandwidth = i * 441;
+		var className = bandwidth.ToString("D4");
+#>
+[TestClass]
+[UnitTestFilter(<#= bandwidth #>)]
+public sealed class UnitTestFilter<#= className #> : UnitTestFilter
+{
+<#
+		foreach (var name in names)
+		{
+#>
+	[TestCategory("<#= name #>")]
+	[TestCategory("<#= className #>")]
+	[TestMethod] public void <#= name #><#= className #>() => TestFilter(s => new <#= name #>(s), <#= bandwidth #>);
+
+<#
+		}
+#>
+}
+
+<#
+	}
+#>

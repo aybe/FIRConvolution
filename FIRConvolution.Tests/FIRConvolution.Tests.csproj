@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<IsPackable>false</IsPackable>
+		<IsTestProject>true</IsTestProject>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<!--<DebugType>full</DebugType>-->
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Bass24.Net\**" />
+		<Compile Remove="bass24\**" />
+		<EmbeddedResource Remove="Bass24.Net\**" />
+		<EmbeddedResource Remove="bass24\**" />
+		<None Remove="Bass24.Net\**" />
+		<None Remove="bass24\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.1" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+		<PackageReference Include="coverlet.collector" Version="6.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="NWaves" Version="0.9.6" />
+		<PackageReference Include="ServiceStack.Text" Version="6.10.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="$(SolutionDir)Assets\FIRConvolution\FIRConvolution.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="UnitTestFilter.tt">
+			<Generator>TextTemplatingFileGenerator</Generator>
+			<LastGenOutput>UnitTestFilter.g.cs</LastGenOutput>
+		</None>
+		<None Update="bass.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="UnitTestFilter.g.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>UnitTestFilter.tt</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+</Project>
