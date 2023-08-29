@@ -1,8 +1,10 @@
+﻿using Unity.Burst;
 
 namespace FIRConvolution
 {
     public static partial class Filters
     {
+        [BurstCompile]
         public static unsafe void ScalarHalfBandLoopFull(float* source, float* target, int length, ref Filter filter)
         {
             var h = filter.H;

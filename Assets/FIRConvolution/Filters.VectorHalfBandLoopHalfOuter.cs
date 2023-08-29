@@ -1,9 +1,11 @@
+﻿using Unity.Burst;
 using Unity.Mathematics;
 
 namespace FIRConvolution
 {
     public static partial class Filters
     {
+        [BurstCompile]
         public static unsafe void VectorHalfBandLoopHalfOuter(float* source, float* target, int length, ref Filter filter)
         {
             var h = filter.H;

@@ -2,12 +2,15 @@
 #define USE_LOOPED
 using System;
 using System.Runtime.CompilerServices;
+using Unity.Burst;
 using Unity.Mathematics;
 
 namespace FIRConvolution
 {
+    [BurstCompile]
     public static partial class Filters
     {
+        [BurstCompile]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static unsafe void CopyTo(in float4 source, in float* target, in int offset)
         {
