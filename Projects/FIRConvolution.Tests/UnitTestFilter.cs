@@ -39,7 +39,7 @@ public abstract class UnitTestFilter
         return target;
     }
 
-    private static List<float> MakeFilter(float[] input, float[] taps, UnitTestFilterFactory<Filter> factory)
+    private static unsafe List<float> MakeFilter(float[] input, float[] taps, UnitTestFilterFactory<Filter> factory)
     {
         const int blockSize = 16;
 

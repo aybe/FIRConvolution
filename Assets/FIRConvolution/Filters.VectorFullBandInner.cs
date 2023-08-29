@@ -5,7 +5,7 @@ namespace FIRConvolution
 {
     public static partial class Filters
     {
-        public static void VectorFullBandInner(float* source, float* target, int length, ref Filter filter)
+        public static unsafe void VectorFullBandInner(float* source, float* target, int length, ref Filter filter)
         {
             var h = filter.H;
             var z = filter.Z;

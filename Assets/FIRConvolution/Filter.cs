@@ -97,7 +97,7 @@ namespace FIRConvolution
         /// </summary>
         public int VLength { get; }
 
-        public virtual void Process(float* source, float* target, int length)
+        public virtual unsafe void Process(float* source, float* target, int length)
         {
             throw new NotImplementedException();
         }
@@ -156,7 +156,7 @@ namespace FIRConvolution
             return false;
         }
 
-        public static int UpdateZ(ref Filter filter, Span<float> source, int sample)
+        public static unsafe int UpdateZ(ref Filter filter, float* source, int sample)
         {
             // normally one would need for a call to update the Z offset at the end
 

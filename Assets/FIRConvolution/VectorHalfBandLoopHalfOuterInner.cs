@@ -10,7 +10,7 @@ namespace FIRConvolution
         {
         }
 
-        public override void Process(float* source, float* target, int length)
+        public override unsafe void Process(float* source, float* target, int length)
         {
             Filter filter = this;
             Filters.VectorHalfBandLoopHalfOuterInner(source, target, length, ref filter);
