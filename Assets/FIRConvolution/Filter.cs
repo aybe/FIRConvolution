@@ -17,7 +17,7 @@ namespace FIRConvolution
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class Filter
     {
-        public Filter(IReadOnlyCollection<float> h, int vLength)
+        public Filter(IReadOnlyCollection<float> h, int vLength, int hOffset = 0)
         {
             if ((h.Count & 1) == 0)
             {
@@ -29,6 +29,11 @@ namespace FIRConvolution
                 throw new ArgumentOutOfRangeException(nameof(vLength));
             }
 
+            if (hOffset < 0 || hOffset >= h.Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(hOffset));
+            }
+
             VLength    = vLength;
             H          = h.ToArray();
             HLength    = H.Length;
@@ -38,7 +43,7 @@ namespace FIRConvolution
             ZOffset    = VLength; // check UpdateZ
             ZOffsetGet = 0;
             ZOffsetSet = HLength + VLength - 1;
-            HOffset    = TryGetHalfBandStartTap(H); // TODO make it external
+            HOffset    = hOffset;
             TCenter    = HCenter % 2 == 1 || HOffset == 1;
         }
 

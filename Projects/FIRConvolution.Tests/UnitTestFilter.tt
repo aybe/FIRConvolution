@@ -36,7 +36,11 @@ public sealed class UnitTestFilter<#= className #> : UnitTestFilter
 	[TestCategory("<#= name #>")]
 	[TestCategory("<#= className #>")]
 	[TestMethod]
-	public void <#= name #><#= className #>() => TestFilter(s => new <#= name #>(s), <#= bandwidth #>);
+	public unsafe void <#= name #><#= className #>()
+		=> TestFilter(
+			FilterFactory.Create<#= name #>,
+			Filters.<#= name #>,
+			<#= bandwidth #>);
 
 <#
 		}

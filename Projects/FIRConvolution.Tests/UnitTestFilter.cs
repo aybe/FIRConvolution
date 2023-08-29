@@ -39,7 +39,7 @@ public abstract class UnitTestFilter
         return target;
     }
 
-    private static unsafe List<float> MakeFilter(float[] input, float[] taps, UnitTestFilterFactory<Filter> factory)
+    private static unsafe List<float> MakeFilter(float[] input, float[] taps, UnitTestFilterFactory<Filter> factory, FilterMethod filterMethod)
     {
         const int blockSize = 16;
 
@@ -58,7 +58,7 @@ public abstract class UnitTestFilter
             fixed (float* pSource = source)
             fixed (float* pTarget = target)
             {
-                filter.Process(pSource, pTarget, blockSize);
+                filterMethod(pSource, pTarget, blockSize, ref filter);
             }
 
             foreach (var sample in target)
@@ -70,7 +70,7 @@ public abstract class UnitTestFilter
         return output;
     }
 
-    protected void TestFilter(UnitTestFilterFactory<Filter> factory, int bandwidth)
+    protected unsafe void TestFilter(UnitTestFilterFactory<Filter> factory, FilterMethod filterMethod, int bandwidth)
     {
 #if !DEBUG
         TestContext.WriteLine("Not printing stats for release configuration!"); // OOM otherwise
@@ -80,9 +80,9 @@ public abstract class UnitTestFilter
 
         var input = GetInput(TestSignal, TestIterations);
 
-        var actual = MakeFilter(input, taps, factory);
+        var actual = MakeFilter(input, taps, factory, filterMethod);
 
-        var expected = MakeFilter(input, taps, s => new ScalarFullBand(s));
+        var expected = MakeFilter(input, taps, FilterFactory.CreateScalarFullBand, Filters.ScalarFullBand);
 
 #if DEBUG
         TestContext.WriteLine($"{nameof(taps)}: {taps.Length}, {nameof(input)}: {input.Length}");

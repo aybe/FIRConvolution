@@ -1,83 +1,83 @@
 ﻿namespace FIRConvolution
 {
-    public static unsafe class FilterFactory
+    public static class FilterFactory
     {
-        private static FilterWorkspace Create
-            (float[] h, int v, FilterMethod method)
+        private static Filter Create
+            (float[] h, int v)
         {
-            return new FilterWorkspace(new Filter(h, v, Filter.TryGetHalfBandStartTap(h, out var result) ? result : default), method);
+            return new Filter(h, v, Filter.TryGetHalfBandStartTap(h, out var result) ? result : default);
         }
 
-        public static FilterWorkspace CreateScalarFullBand
+        public static Filter CreateScalarFullBand
             (float[] h)
         {
-            return Create(h, 1, Filters.ScalarFullBand);
+            return Create(h, 1);
         }
 
-        public static FilterWorkspace CreateScalarHalfBandLoopFull
+        public static Filter CreateScalarHalfBandLoopFull
             (float[] h)
         {
-            return Create(h, 1, Filters.ScalarHalfBandLoopFull);
+            return Create(h, 1);
         }
 
-        public static FilterWorkspace CreateScalarHalfBandLoopHalf
+        public static Filter CreateScalarHalfBandLoopHalf
             (float[] h)
         {
-            return Create(h, 1, Filters.ScalarHalfBandLoopHalf);
+            return Create(h, 1);
         }
 
-        public static FilterWorkspace CreateVectorFullBandInner
+        public static Filter CreateVectorFullBandInner
             (float[] h)
         {
-            return Create(h, 1, Filters.VectorFullBandInner);
+            return Create(h, 1);
         }
 
-        public static FilterWorkspace CreateVectorFullBandOuter
+        public static Filter CreateVectorFullBandOuter
             (float[] h)
         {
-            return Create(h, 4, Filters.VectorFullBandOuter);
+            return Create(h, 4);
         }
 
-        public static FilterWorkspace CreateVectorFullBandOuterInner
+        public static Filter CreateVectorFullBandOuterInner
             (float[] h)
         {
-            return Create(h, 4, Filters.VectorFullBandOuterInner);
+            return Create(h, 4);
         }
 
-        public static FilterWorkspace CreateVectorHalfBandLoopFullInner
+        public static Filter CreateVectorHalfBandLoopFullInner
             (float[] h)
         {
-            return Create(h, 1, Filters.VectorHalfBandLoopFullInner);
+            return Create(h, 1);
         }
 
-        public static FilterWorkspace CreateVectorHalfBandLoopFullOuter
+        public static Filter CreateVectorHalfBandLoopFullOuter
             (float[] h)
         {
-            return Create(h, 4, Filters.VectorHalfBandLoopFullOuter);
+            return Create(h, 4);
         }
 
-        public static FilterWorkspace CreateVectorHalfBandLoopFullOuterInner
+        public static Filter CreateVectorHalfBandLoopFullOuterInner
             (float[] h)
         {
-            return Create(h, 4, Filters.VectorHalfBandLoopFullOuterInner);
+            return Create(h, 4);
         }
 
-        public static FilterWorkspace CreateVectorHalfBandLoopHalfInner
+        public static Filter CreateVectorHalfBandLoopHalfInner
             (float[] h)
         {
-            return Create(h, 1, Filters.VectorHalfBandLoopHalfInner);
+            return Create(h, 1);
         }
 
-        public static FilterWorkspace CreateVectorHalfBandLoopHalfOuter
+        public static Filter CreateVectorHalfBandLoopHalfOuter
             (float[] h)
         {
-            return Create(h, 4, Filters.VectorHalfBandLoopHalfOuter);
+            return Create(h, 4);
         }
 
-        public static FilterWorkspace CreateVectorHalfBandLoopHalfOuterInner
+        public static Filter CreateVectorHalfBandLoopHalfOuterInner
             (float[] h)
         {
-            return Create(h, 4, Filters.VectorHalfBandLoopHalfOuterInner);
+            return Create(h, 4);
         }
     }
 }
