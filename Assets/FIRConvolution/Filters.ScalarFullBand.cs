@@ -20,7 +20,7 @@ namespace FIRConvolution
 
                 var sum = 0.0f;
 
-                var tap = filter.HOffset;
+                var tap = 0;
 
                 for (; tap < n; tap += 1)
                 {
