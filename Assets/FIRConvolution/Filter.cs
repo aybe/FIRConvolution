@@ -1,10 +1,9 @@
-﻿#define DEBUG_HALF_BAND_START_TAP_
+﻿//#define DEBUG_HALF_BAND_START_TAP
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Numerics;
 using Unity.Mathematics;
 #if DEBUG_HALF_BAND_START_TAP
 using System.Diagnostics;
@@ -122,23 +121,23 @@ namespace FIRConvolution
             var sum1 = tap1.Sum(Math.Abs);
 
 #if DEBUG_HALF_BAND_START_TAP
-        Debug.WriteLine(nameof(TryGetHalfBandStartTap));
-        Debug.WriteLine($"{taps.Count}, {tap0.Length}, {tap1.Length}, {sum0}, {sum1}");
-        Debug.WriteLine(nameof(tap0));
+            Debug.WriteLine(nameof(TryGetHalfBandStartTap));
+            Debug.WriteLine($"{taps.Count}, {tap0.Length}, {tap1.Length}, {sum0}, {sum1}");
+            Debug.WriteLine(nameof(tap0));
 
-        foreach (var f in tap0)
-        {
-            Debug.WriteLine(f);
-        }
+            foreach (var f in tap0)
+            {
+                Debug.WriteLine(f);
+            }
 
-        Debug.WriteLine(nameof(tap1));
+            Debug.WriteLine(nameof(tap1));
 
-        foreach (var f in tap1)
-        {
-            Debug.WriteLine(f);
-        }
+            foreach (var f in tap1)
+            {
+                Debug.WriteLine(f);
+            }
 
-        Debug.WriteLine(string.Empty);
+            Debug.WriteLine(string.Empty);
 #endif
 
             if (sum0 > sum1)
@@ -225,7 +224,7 @@ namespace FIRConvolution
             var z2 = z[zT + 1];
             var z3 = z[zT + 0];
 
-            var v1 = math.float4(h0, h0,h0,h0);
+            var v1 = math.float4(h0, h0, h0, h0);
             var v2 = math.float4(z0, z1, z2, z3);
             var v3 = v1 * v2;
 
