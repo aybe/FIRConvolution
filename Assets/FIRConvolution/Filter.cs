@@ -15,7 +15,7 @@ namespace FIRConvolution
 // TODO make UpdateZ update offset, delete method
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public class Filter
+    public struct Filter
     {
         public Filter(IReadOnlyCollection<float> h, int vLength, int hOffset = 0)
         {
@@ -101,11 +101,6 @@ namespace FIRConvolution
         ///     The vectorization count.
         /// </summary>
         public int VLength { get; }
-
-        public virtual unsafe void Process(float* source, float* target, int length)
-        {
-            throw new NotImplementedException();
-        }
 
         private static int TryGetHalfBandStartTap(IReadOnlyCollection<float> taps)
         {
