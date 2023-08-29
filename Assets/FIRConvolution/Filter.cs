@@ -156,13 +156,8 @@ namespace FIRConvolution
             return false;
         }
 
-        public static int UpdateZ(ref Filter filter, Span<float> source, int sample, int length)
+        public static int UpdateZ(ref Filter filter, Span<float> source, int sample)
         {
-            if (length is < 1 or > 4)
-            {
-                throw new ArgumentOutOfRangeException(nameof(length), length, null);
-            }
-
             // normally one would need for a call to update the Z offset at the end
 
             // but by doing stuff in opposite way we can remove the need to have to
@@ -183,13 +178,14 @@ namespace FIRConvolution
 
             // update the Z line with incoming samples, return the Z offset for use
 
+            var v = filter.VLength;
             var z = filter.Z;
 
-            for (var i = 0; i < length; i++)
+            for (var i = 0; i < v; i++)
             {
                 var j = filter.ZOffset + i;
                 var k = (j + filter.ZOffsetSet) % filter.ZLength;
-                var l = source[sample + (length - 1 - i)];
+                var l = source[sample + (v - 1 - i)];
 
                 z[j] = z[k] = l;
             }
