@@ -58,7 +58,7 @@ namespace FIRConvolution
         public int HLength { get; }
 
         /// <summary>
-        ///     The taps start offset.
+        ///     The first tap offset (for half-band filtering).
         /// </summary>
         public int HOffset { get; }
 
