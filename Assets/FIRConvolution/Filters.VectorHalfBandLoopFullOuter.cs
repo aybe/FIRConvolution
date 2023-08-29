@@ -14,24 +14,27 @@ namespace FIRConvolution
 
             for (var sample = 0; sample < length; sample += v)
             {
-                var zGet = Filter.UpdateZ(ref filter, source, sample, 4);
+                var pos = Filter.UpdateZ(ref filter, source, sample, v);
 
                 var sum = float4.zero;
 
-                // TODO process 4 floats 1 tap 2 tap hop
+                var tap = filter.HOffset;
 
-                for (var tap = filter.HOffset; tap < n; tap += 2)
+                for (; tap < n; tap += 2)
                 {
                     var h0 = h[tap];
 
-                    var zT = zGet - tap;
+                    var zP = pos - tap;
 
-                    var z0 = z[zT - 0];
-                    var z1 = z[zT - 1];
-                    var z2 = z[zT - 2];
-                    var z3 = z[zT - 3];
+                    var z0 = z[zP - 0];
+                    var z1 = z[zP - 1];
+                    var z2 = z[zP - 2];
+                    var z3 = z[zP - 3];
 
-                    sum += new float4(h0, h0, h0, h0) * new float4(z0, z1, z2, z3);
+                    var hv = new float4(h0, h0, h0, h0);
+                    var zv = new float4(z0, z1, z2, z3);
+
+                    sum += hv * zv;
                 }
 
                 if (filter.TCenter)
