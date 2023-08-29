@@ -12,27 +12,39 @@ namespace FIRConvolution
             var n = filter.HLength;
             var v = filter.VLength;
 
-            for (var sample = 0; sample <= length - v; sample += v)
+            var k = length - v;
+
+            for (var sample = 0; sample <= k; sample += v)
             {
-                var zGet = Filter.UpdateZ(ref filter, source, sample, 4);
+                var pos = Filter.UpdateZ(ref filter, source, sample, v);
 
                 var sum = float4.zero;
 
-                int tap, len, idx;
+                var tap = filter.HOffset;
 
-                for (tap = filter.HOffset, len = n / (v * 2), idx = 0; idx < len; tap += v * 2, idx++)
+                var idx = 0;
+
+                int end;
+
+                for (end = n / (v * 2); idx < end; tap += v * 2, idx++)
                 {
                     var h0 = h[tap + 0];
                     var h1 = h[tap + 2];
                     var h2 = h[tap + 4];
                     var h3 = h[tap + 6];
 
-                    var zT = zGet - tap;
+                    var zP = pos - tap;
 
-                    // @formatter:off
-                    var z0 = z[zT - 0]; var z1 = z[zT - 1]; var z2 = z[zT - 2]; var z3 = z[zT - 3]; var z4 = z[zT - 4];
-                    var z5 = z[zT - 5]; var z6 = z[zT - 6]; var z7 = z[zT - 7]; var z8 = z[zT - 8]; var z9 = z[zT - 9];
-                    // @formatter:on
+                    var z0 = z[zP - 0];
+                    var z1 = z[zP - 1];
+                    var z2 = z[zP - 2];
+                    var z3 = z[zP - 3];
+                    var z4 = z[zP - 4];
+                    var z5 = z[zP - 5];
+                    var z6 = z[zP - 6];
+                    var z7 = z[zP - 7];
+                    var z8 = z[zP - 8];
+                    var z9 = z[zP - 9];
 
                     var hv0 = new float4(h0, h1, h2, h3);
                     var zv0 = new float4(z0, z2, z4, z6);
@@ -47,23 +59,21 @@ namespace FIRConvolution
                         math.dot(hv0, zv3));
                 }
 
-                // TODO process 4 floats 1 tap 2 tap hop
-
-                for (; tap < n; tap += 2)
+                for (end = n; tap < end; tap += 2)
                 {
                     var h0 = h[tap];
 
-                    var zT = zGet - tap;
+                    var zP = pos - tap;
 
-                    var z0 = z[zT - 0];
-                    var z1 = z[zT - 1];
-                    var z2 = z[zT - 2];
-                    var z3 = z[zT - 3];
+                    var z0 = z[zP - 0];
+                    var z1 = z[zP - 1];
+                    var z2 = z[zP - 2];
+                    var z3 = z[zP - 3];
 
-                    var hv0 = new float4(h0);
-                    var zv0 = new float4(z0, z1, z2, z3);
+                    var hv = new float4(h0, h0, h0, h0);
+                    var zv = new float4(z0, z1, z2, z3);
 
-                    sum += hv0 * zv0;
+                    sum += hv * zv;
                 }
 
                 if (filter.TCenter)
