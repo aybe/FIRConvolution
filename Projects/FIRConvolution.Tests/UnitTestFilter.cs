@@ -55,7 +55,11 @@ public abstract class UnitTestFilter
 
             target.Clear();
 
-            filter.Process(source, target, blockSize);
+            fixed (float* pSource = source)
+            fixed (float* pTarget = target)
+            {
+                filter.Process(pSource, pTarget, blockSize);
+            }
 
             foreach (var sample in target)
             {

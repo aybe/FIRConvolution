@@ -72,7 +72,7 @@ namespace FIRConvolution
                     sum += hv * zv;
                 }
 
-                sum.CopyTo(target[sample..]);
+                CopyTo(sum, target, sample);
             }
         }
     }

@@ -9,6 +9,12 @@ namespace FIRConvolution
     public static partial class Filters
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe void CopyTo(in float4 source, in float* target, in int offset)
+        {
+            *(float4*)(target + offset) = source;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void Set(
 #if USE_ARRAYS
             in float[] source,
