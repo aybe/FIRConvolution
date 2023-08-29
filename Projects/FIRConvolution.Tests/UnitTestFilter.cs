@@ -87,7 +87,7 @@ public abstract class UnitTestFilter
         Assert.AreEqual(expected.Count, actual.Count, "Count mismatch.");
 
 #if DEBUG
-        TestContext.WriteLine($"{"index",8} {"expected",16} {"actual",16} {"difference",16} {"match",8}");
+        TestContext.WriteLine($"{"index",8} {"expected",16} {"actual",16} {"difference",16} {"deviation",16} {"match",8}");
 #endif
 
         var errors = 0;
@@ -97,10 +97,11 @@ public abstract class UnitTestFilter
             var expectedValue = expected[i];
             var actualValue   = actual[i];
             var difference    = Math.Abs(expectedValue - actualValue);
+            var deviation     = FormatPercent(TestDelta, 1 - actualValue / expectedValue);
             var failed        = difference > TestDelta;
 
 #if DEBUG
-            TestContext.WriteLine($"{i,8} {expectedValue,16} {actualValue,16} {difference,16:E} {!failed,8}");
+            TestContext.WriteLine($"{i,8} {expectedValue,16} {actualValue,16} {difference,16:E} {deviation,16} {!failed,8}");
 #endif
 
             if (failed)
@@ -117,5 +118,16 @@ public abstract class UnitTestFilter
         var percentage = (double)errors / actual.Count;
 
         Assert.Fail($"ERRORS: {errors}/{actual.Count}, PASS: {1 - percentage:P}, FAIL: {percentage:P}");
+    }
+
+    private static string FormatPercent(in float delta, in float value)
+    {
+        var s = delta.ToString("F16");
+        var i = s.IndexOf('.');
+        var j = s.LastIndexOf('0');
+        var k = j - i + 1;
+        var l = value.ToString($"P{k}");
+
+        return l;
     }
 }
