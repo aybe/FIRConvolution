@@ -7,7 +7,7 @@ namespace FIRConvolution
     {
         [BurstCompile]
         [MonoPInvokeCallback(typeof(FilterMethod))]
-        public static unsafe void ScalarFullBand(float* source, float* target, int length, ref Filter filter)
+        public static unsafe void ScalarFullBand(in float* source, in float* target, in int length, ref Filter filter)
         {
             var h = filter.H;
             var z = filter.Z;
