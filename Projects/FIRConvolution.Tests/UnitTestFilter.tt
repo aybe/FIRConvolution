@@ -1,8 +1,6 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ output extension=".g.cs" #>
-#pragma warning disable CS0618 // Type or member is obsolete
-
 namespace FIRConvolution.Tests;
 
 <#
@@ -37,7 +35,8 @@ public sealed class UnitTestFilter<#= className #> : UnitTestFilter
 #>
 	[TestCategory("<#= name #>")]
 	[TestCategory("<#= className #>")]
-	[TestMethod] public void <#= name #><#= className #>() => TestFilter(s => new <#= name #>(s), <#= bandwidth #>);
+	[TestMethod]
+	public void <#= name #><#= className #>() => TestFilter(s => new <#= name #>(s), <#= bandwidth #>);
 
 <#
 		}
