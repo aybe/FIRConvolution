@@ -9,20 +9,23 @@ namespace FIRConvolution
             var h = filter.H;
             var z = filter.Z;
             var n = filter.HLength;
+            var v = filter.VLength;
 
-            for (var sample = 0; sample < length; sample += 1)
+            for (var sample = 0; sample < length; sample += v)
             {
-                var zGet = Filter.UpdateZ(ref filter, source, sample, 1);
+                var pos = Filter.UpdateZ(ref filter, source, sample, v);
 
                 var sum = 0.0f;
 
-                for (var tap = 0; tap < n; tap += 1)
+                var tap = filter.HOffset;
+
+                for (; tap < n; tap += 1)
                 {
                     var h0 = h[tap];
 
-                    var i0 = zGet - tap;
+                    var zP = pos - tap;
 
-                    var z0 = z[i0];
+                    var z0 = z[zP];
 
                     sum += h0 * z0;
                 }
