@@ -112,7 +112,7 @@ namespace FIRConvolution
             return result;
         }
 
-        private static bool TryGetHalfBandStartTap(IReadOnlyCollection<float> taps, out int result)
+        public static bool TryGetHalfBandStartTap(IReadOnlyCollection<float> taps, out int result)
         {
             var tap0 = taps.Where((_, i) => i % 2 == 0).ToArray();
             var tap1 = taps.Where((_, i) => i % 2 == 1).ToArray();

@@ -3,81 +3,81 @@
     public static unsafe class FilterFactory
     {
         private static FilterWorkspace Create
-            (float[] h, int v, int t, FilterMethod method)
+            (float[] h, int v, FilterMethod method)
         {
-            return new FilterWorkspace(new Filter(h, v), method); // TODO pass first tap
+            return new FilterWorkspace(new Filter(h, v, Filter.TryGetHalfBandStartTap(h, out var result) ? result : default), method);
         }
 
         public static FilterWorkspace CreateScalarFullBand
-            (float[] h, int t)
+            (float[] h)
         {
-            return Create(h, 1, t, Filters.ScalarFullBand);
+            return Create(h, 1, Filters.ScalarFullBand);
         }
 
         public static FilterWorkspace CreateScalarHalfBandLoopFull
-            (float[] h, int t)
+            (float[] h)
         {
-            return Create(h, 1, t, Filters.ScalarHalfBandLoopFull);
+            return Create(h, 1, Filters.ScalarHalfBandLoopFull);
         }
 
         public static FilterWorkspace CreateScalarHalfBandLoopHalf
-            (float[] h, int t)
+            (float[] h)
         {
-            return Create(h, 1, t, Filters.ScalarHalfBandLoopHalf);
+            return Create(h, 1, Filters.ScalarHalfBandLoopHalf);
         }
 
         public static FilterWorkspace CreateVectorFullBandInner
-            (float[] h, int t)
+            (float[] h)
         {
-            return Create(h, 1, t, Filters.VectorFullBandInner);
+            return Create(h, 1, Filters.VectorFullBandInner);
         }
 
         public static FilterWorkspace CreateVectorFullBandOuter
-            (float[] h, int t)
+            (float[] h)
         {
-            return Create(h, 4, t, Filters.VectorFullBandOuter);
+            return Create(h, 4, Filters.VectorFullBandOuter);
         }
 
         public static FilterWorkspace CreateVectorFullBandOuterInner
-            (float[] h, int t)
+            (float[] h)
         {
-            return Create(h, 4, t, Filters.VectorFullBandOuterInner);
+            return Create(h, 4, Filters.VectorFullBandOuterInner);
         }
 
         public static FilterWorkspace CreateVectorHalfBandLoopFullInner
-            (float[] h, int t)
+            (float[] h)
         {
-            return Create(h, 1, t, Filters.VectorHalfBandLoopFullInner);
+            return Create(h, 1, Filters.VectorHalfBandLoopFullInner);
         }
 
         public static FilterWorkspace CreateVectorHalfBandLoopFullOuter
-            (float[] h, int t)
+            (float[] h)
         {
-            return Create(h, 4, t, Filters.VectorHalfBandLoopFullOuter);
+            return Create(h, 4, Filters.VectorHalfBandLoopFullOuter);
         }
 
         public static FilterWorkspace CreateVectorHalfBandLoopFullOuterInner
-            (float[] h, int t)
+            (float[] h)
         {
-            return Create(h, 4, t, Filters.VectorHalfBandLoopFullOuterInner);
+            return Create(h, 4, Filters.VectorHalfBandLoopFullOuterInner);
         }
 
         public static FilterWorkspace CreateVectorHalfBandLoopHalfInner
-            (float[] h, int t)
+            (float[] h)
         {
-            return Create(h, 1, t, Filters.VectorHalfBandLoopHalfInner);
+            return Create(h, 1, Filters.VectorHalfBandLoopHalfInner);
         }
 
         public static FilterWorkspace CreateVectorHalfBandLoopHalfOuter
-            (float[] h, int t)
+            (float[] h)
         {
-            return Create(h, 4, t, Filters.VectorHalfBandLoopHalfOuter);
+            return Create(h, 4, Filters.VectorHalfBandLoopHalfOuter);
         }
 
         public static FilterWorkspace CreateVectorHalfBandLoopHalfOuterInner
-            (float[] h, int t)
+            (float[] h)
         {
-            return Create(h, 4, t, Filters.VectorHalfBandLoopHalfOuterInner);
+            return Create(h, 4, Filters.VectorHalfBandLoopHalfOuterInner);
         }
     }
 }
