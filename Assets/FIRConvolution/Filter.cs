@@ -97,7 +97,7 @@ namespace FIRConvolution
         /// </summary>
         public int VLength { get; }
 
-        public virtual void Process(Span<float> source, Span<float> target, int length)
+        public virtual void Process(float* source, float* target, int length)
         {
             throw new NotImplementedException();
         }

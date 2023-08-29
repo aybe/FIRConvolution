@@ -11,7 +11,7 @@ namespace FIRConvolution
         {
         }
 
-        public override void Process(Span<float> source, Span<float> target, int length)
+        public override void Process(float* source, float* target, int length)
         {
             Filter filter = this;
             Filters.VectorHalfBandLoopFullOuter(source, target, length, ref filter);

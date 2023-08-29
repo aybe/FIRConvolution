@@ -4,7 +4,7 @@ namespace FIRConvolution
 {
     public static partial class Filters
     {
-        public static void ScalarHalfBandLoopFull(Span<float> source, Span<float> target, int length, ref Filter filter)
+        public static void ScalarHalfBandLoopFull(float* source, float* target, int length, ref Filter filter)
         {
             var h = filter.H;
             var z = filter.Z;
