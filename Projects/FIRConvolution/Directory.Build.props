@@ -1,5 +1,5 @@
 <Project>
 	<PropertyGroup>
-		<UnityVersion>2022.3.8f1</UnityVersion>
+		<UnityProjectPath>$(SolutionDir)</UnityProjectPath>
 	</PropertyGroup>
 </Project>

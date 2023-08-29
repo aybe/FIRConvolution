@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
@@ -7,21 +7,29 @@
 		<LangVersion>9</LangVersion>
 	</PropertyGroup>
 
+	<!--enable assertions-->
+	<PropertyGroup>
+		<DefineConstants>$(DefineConstants);UNITY_ASSERTIONS</DefineConstants>
+	</PropertyGroup>
+
 	<ItemGroup>
 
-		<Compile Include="$(SolutionDir)Assets\FIRConvolution\**\*.cs" />
-
 		<PackageReference Include="Unity3D" Version="2.1.3" />
+		
+		<!--fix incoming ambiguous references-->
+		<Reference Remove="$(UnityEnginePath)" />
 
-		<Reference Include="Unity.Burst">
-			<HintPath>$(SolutionDir)$(UnityScriptAssembliesPath)\Unity.Burst.dll</HintPath>
-			<Private>True</Private>
-		</Reference>
+		<!--NOTE: Live Unit Testing wants Private="True"-->
 
-		<Reference Include="Unity.Mathematics">
-			<HintPath>$(SolutionDir)$(UnityScriptAssembliesPath)\Unity.Mathematics.dll</HintPath>
-			<Private>True</Private>
-		</Reference>
+		<!--enable assertions-->
+		<Reference Include="$(UnityModulesPath)\UnityEngine.CoreModule.dll" Private="True" />
+
+		<!--enable extra stuff-->
+		<Reference Include="$(UnityScriptAssembliesPath)\Unity.Burst.dll" Private="True" />
+		<Reference Include="$(UnityScriptAssembliesPath)\Unity.Mathematics.dll" Private="True" />
+
+		<!--setup project content-->
+		<Compile Include="$(SolutionDir)Assets\FIRConvolution\**\*.cs" />
 
 	</ItemGroup>
 
