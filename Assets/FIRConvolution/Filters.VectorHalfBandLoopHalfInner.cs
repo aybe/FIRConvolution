@@ -11,12 +11,12 @@ namespace FIRConvolution
             var z = filter.Z;
             var n = filter.HLength;
             var c = filter.HCenter;
+            var v = filter.VLength;
+            var e = n - 1;
 
-            var tEnd = n - 1; // TODO extract tEnd
-
-            for (var sample = 0; sample < length; sample += 1)
+            for (var sample = 0; sample < length; sample += v)
             {
-                var zGet = Filter.UpdateZ(ref filter, source, sample, 1);
+                var pos = Filter.UpdateZ(ref filter, source, sample, v);
 
                 var sum = 0.0f;
 
@@ -31,17 +31,25 @@ namespace FIRConvolution
                     var h2 = h[tap + 4];
                     var h3 = h[tap + 6];
 
-                    // @formatter:off
-                    var i0 = zGet - (tap + 0); var i4 = zGet - (tEnd - (tap + 0));
-                    var i1 = zGet - (tap + 2); var i5 = zGet - (tEnd - (tap + 2));
-                    var i2 = zGet - (tap + 4); var i6 = zGet - (tEnd - (tap + 4));
-                    var i3 = zGet - (tap + 6); var i7 = zGet - (tEnd - (tap + 6));
+                    var i0 = pos - (tap + 0);
+                    var i1 = pos - (tap + 2);
+                    var i2 = pos - (tap + 4);
+                    var i3 = pos - (tap + 6);
 
-                    var z0 = z[i0]; var z4 = z[i4];
-                    var z1 = z[i1]; var z5 = z[i5];
-                    var z2 = z[i2]; var z6 = z[i6];
-                    var z3 = z[i3]; var z7 = z[i7];
-                    // @formatter:on
+                    var i4 = pos - (e - (tap + 0));
+                    var i5 = pos - (e - (tap + 2));
+                    var i6 = pos - (e - (tap + 4));
+                    var i7 = pos - (e - (tap + 6));
+
+                    var z0 = z[i0];
+                    var z1 = z[i1];
+                    var z2 = z[i2];
+                    var z3 = z[i3];
+
+                    var z4 = z[i4];
+                    var z5 = z[i5];
+                    var z6 = z[i6];
+                    var z7 = z[i7];
 
                     var hv0 = new float4(h0, h1, h2, h3);
                     var zv0 = new float4(z0, z1, z2, z3);
@@ -55,13 +63,17 @@ namespace FIRConvolution
                     var h0 = h[tap + 0];
                     var h1 = h[tap + 2];
 
-                    // @formatter:off
-                    var i0 = zGet - (tap + 0); var i2 = zGet - (tEnd - (tap + 0));
-                    var i1 = zGet - (tap + 2); var i3 = zGet - (tEnd - (tap + 2));
+                    var i0 = pos - (tap + 0);
+                    var i1 = pos - (tap + 2);
 
-                    var z0 = z[i0]; var z2 = z[i2];
-                    var z1 = z[i1]; var z3 = z[i3];
-                    // @formatter:on
+                    var i2 = pos - (e - (tap + 0));
+                    var i3 = pos - (e - (tap + 2));
+
+                    var z0 = z[i0];
+                    var z1 = z[i1];
+
+                    var z2 = z[i2];
+                    var z3 = z[i3];
 
                     var hv0 = new float2(h0, h1);
                     var zv0 = new float2(z0, z1);
@@ -72,10 +84,10 @@ namespace FIRConvolution
 
                 for (end = c - 0; tap < end; tap += 2)
                 {
-                    var h0 = h[tap + 0];
+                    var h0 = h[tap];
 
-                    var i0 = zGet - (tap + 0);
-                    var i1 = zGet - (tEnd - (tap + 0));
+                    var i0 = pos - tap;
+                    var i1 = pos - (e - tap);
 
                     var z0 = z[i0];
                     var z1 = z[i1];
