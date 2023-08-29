@@ -1,5 +1,6 @@
 ﻿#define USE_ARRAYS
 #define USE_LOOPED
+using System;
 using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 
@@ -85,6 +86,49 @@ namespace FIRConvolution
             vector.y = y;
             vector.z = z;
             vector.w = w;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] // TODO move
+        private static void Convolve1(ref float sum, ref int tap, in int len, in int hop, in int num, in int mul, in int pos, in float[] h, in float[] z)
+        {
+            var vh = new float4(); // coefficients
+
+            var vz = new float4(); // delays
+
+            var tp = new int4(0, 1, 2, 3) * mul; // taps
+
+            var end = len - hop;
+
+            //Console.WriteLine($"tap: {tap,2}, taps: {tp}, len: {len,2}, hop: {hop,2}, num: {num,2}, mul: {mul,2}, pos: {pos,2}, end: {end,2}");
+
+            for (; tap < end; tap += hop)
+            {
+                var idx = pos - tap; // Z index
+
+                var iH = tap + tp;
+                var iZ = idx - tp;
+
+                var i = num;
+                if (tap is 21)
+                {
+                    Console.WriteLine("z");
+                }
+
+                Set(h, ref vh, iH, i);
+                Set(z, ref vz, iZ, i);
+                sum += math.dot(vh, vz);
+                continue;
+                Console.WriteLine(
+                    $"tap: {tap,2}, " +
+                    $"z: {idx,2}, " +
+                    $"iH: {iH,-20}, " +
+                    $"iZ: {iZ,-20}, " +
+                    $"vh: {vh}, " +
+                    $"vz: {vz}, " +
+                    $"sum: {sum}");
+            }
+
+            //Console.WriteLine();
         }
     }
 }
