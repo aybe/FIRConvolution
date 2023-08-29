@@ -12,30 +12,34 @@ namespace FIRConvolution
             var n = filter.HLength;
             var v = filter.VLength;
 
-            for (var sample = 0; sample <= length - v; sample += v)
+            var k = length - v;
+
+            for (var sample = 0; sample <= k; sample += v)
             {
-                var zGet = Filter.UpdateZ(ref filter, source, sample, 4);
+                var pos = Filter.UpdateZ(ref filter, source, sample, v);
 
                 var sum = float4.zero;
 
                 var tap = 0;
 
-                for (; tap < n - v; tap += v)
+                int end;
+
+                for (end = n - v; tap < end; tap += v)
                 {
                     var h0 = h[tap + 0];
                     var h1 = h[tap + 1];
                     var h2 = h[tap + 2];
                     var h3 = h[tap + 3];
 
-                    var zT = zGet - tap;
+                    var zP = pos - tap;
 
-                    var z0 = z[zT - 0];
-                    var z1 = z[zT - 1];
-                    var z2 = z[zT - 2];
-                    var z3 = z[zT - 3];
-                    var z4 = z[zT - 4];
-                    var z5 = z[zT - 5];
-                    var z6 = z[zT - 6];
+                    var z0 = z[zP - 0];
+                    var z1 = z[zP - 1];
+                    var z2 = z[zP - 2];
+                    var z3 = z[zP - 3];
+                    var z4 = z[zP - 4];
+                    var z5 = z[zP - 5];
+                    var z6 = z[zP - 6];
 
                     var hv0 = new float4(h0, h1, h2, h3);
 
@@ -51,20 +55,21 @@ namespace FIRConvolution
                         math.dot(hv0, zv3));
                 }
 
-                // TODO process 4 floats 1 tap 1 tap hop
-
-                for (; tap < n; tap += 1)
+                for (end = n - 0; tap < end; tap += 1)
                 {
                     var h0 = h[tap];
 
-                    var zT = zGet - tap;
+                    var zP = pos - tap;
 
-                    var z0 = z[zT - 0];
-                    var z1 = z[zT - 1];
-                    var z2 = z[zT - 2];
-                    var z3 = z[zT - 3];
+                    var z0 = z[zP - 0];
+                    var z1 = z[zP - 1];
+                    var z2 = z[zP - 2];
+                    var z3 = z[zP - 3];
 
-                    sum += new float4(h0) * new float4(z0, z1, z2, z3);
+                    var hv = new float4(h0, h0, h0, h0);
+                    var zv = new float4(z0, z1, z2, z3);
+
+                    sum += hv * zv;
                 }
 
                 sum.CopyTo(target[sample..]);
