@@ -1,4 +1,5 @@
-﻿using Unity.Burst;
+﻿using AOT;
+using Unity.Burst;
 using Unity.Mathematics;
 
 namespace FIRConvolution
@@ -6,6 +7,7 @@ namespace FIRConvolution
     public static partial class Filters
     {
         [BurstCompile]
+        [MonoPInvokeCallback(typeof(FilterMethod))]
         public static unsafe void VectorHalfBandLoopHalfInner(float* source, float* target, int length, ref Filter filter)
         {
             var h = filter.H;
