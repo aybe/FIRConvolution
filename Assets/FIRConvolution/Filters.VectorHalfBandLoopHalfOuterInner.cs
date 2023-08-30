@@ -132,10 +132,7 @@ namespace FIRConvolution
                     sum += hv0 * (zv1 + zv2);
                 }
 
-                if (filter.TCenter)
-                {
-                    sum += Filter.ProcessCenterVector(ref filter);
-                }
+                sum += filter.TCenter * Filter.ProcessCenterVector(ref filter);
 
                 CopyTo(sum, target, sample);
             }

@@ -33,10 +33,7 @@ namespace FIRConvolution
                     sum += h0 * z0;
                 }
 
-                if (filter.TCenter)
-                {
-                    sum += Filter.ProcessCenterScalar(ref filter);
-                }
+                sum += filter.TCenter * Filter.ProcessCenterScalar(ref filter);
 
                 target[sample] = sum;
             }

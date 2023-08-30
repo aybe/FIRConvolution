@@ -45,7 +45,7 @@ namespace FIRConvolution
             ZOffsetGet = 0;
             ZOffsetSet = HLength + VLength - 1;
             HOffset    = hOffset;
-            TCenter    = HCenter % 2 == 1 || HOffset == 1;
+            TCenter    = HCenter % 2 == 1 || HOffset == 1 ? 1.0f : 0.0f;
         }
 
         /// <summary>
@@ -69,9 +69,9 @@ namespace FIRConvolution
         public int HOffset { get; }
 
         /// <summary>
-        ///     The center tap process flag;
+        ///     The center tap multiplier.
         /// </summary>
-        public bool TCenter { get; } // TODO rename TCenter // TODO one could avoid branching by doing `xyz * PCenter`
+        public float TCenter { get; } // TODO rename TCenter
 
         /// <summary>
         ///     The doubled delay line.
