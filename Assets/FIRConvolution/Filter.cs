@@ -103,16 +103,6 @@ namespace FIRConvolution
         /// </summary>
         public int VLength { get; }
 
-        private static int TryGetHalfBandStartTap(IReadOnlyCollection<float> taps)
-        {
-            if (!TryGetHalfBandStartTap(taps, out var result))
-            {
-                throw new InvalidOperationException("Failed to detect half band start tap.");
-            }
-
-            return result;
-        }
-
         public static bool TryGetHalfBandStartTap(IReadOnlyCollection<float> taps, out int result)
         {
             var tap0 = taps.Where((_, i) => i % 2 == 0).ToArray();
