@@ -29,6 +29,7 @@
 		<Reference Include="$(UnityScriptAssembliesPath)\Unity.Mathematics.dll" Private="True" />
 
 		<!--setup project content-->
+		<None Include="$(SolutionDir)Assets\FIRConvolution\**\*.cd" />
 		<Compile Include="$(SolutionDir)Assets\FIRConvolution\**\*.cs" />
 
 	</ItemGroup>
