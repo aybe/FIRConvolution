@@ -37,7 +37,7 @@ namespace FIRConvolution
                     sum += h0 * z0 + h0 * z1;
                 }
 
-                sum += filter.TCenter * Filter.ProcessCenterScalar(ref filter);
+                Filter.ProcessCenterScalar(ref filter, ref sum);
 
                 target[sample] = sum;
             }

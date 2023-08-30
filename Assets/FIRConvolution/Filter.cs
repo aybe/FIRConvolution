@@ -189,7 +189,7 @@ namespace FIRConvolution
         }
 
         [BurstCompile]
-        public static float ProcessCenterScalar(ref Filter filter) // TODO could be a multiplication instead of branching
+        public static void ProcessCenterScalar(ref Filter filter, ref float sum)
         {
             var h = filter.H;
             var z = filter.Z;
@@ -197,11 +197,11 @@ namespace FIRConvolution
 
             var cs = h[c] * z[filter.ZOffsetGet - c];
 
-            return cs;
+            sum += filter.TCenter * cs;
         }
 
-        public static float4 ProcessCenterVector(ref Filter filter)
         [BurstCompile]
+        public static void ProcessCenterVector(ref Filter filter, ref float4 sum)
         {
             var h = filter.H;
             var c = filter.HCenter;
@@ -220,7 +220,7 @@ namespace FIRConvolution
             var v2 = math.float4(z0, z1, z2, z3);
             var v3 = v1 * v2;
 
-            return v3;
+            sum += filter.TCenter * v3;
         }
     }
 }
