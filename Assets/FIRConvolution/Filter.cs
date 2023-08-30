@@ -11,9 +11,6 @@ using System.Diagnostics;
 
 namespace FIRConvolution
 {
-    // TODO make UpdateZ return zGet, delete field
-// TODO make UpdateZ update offset, delete method
-
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public unsafe struct Filter
     {
