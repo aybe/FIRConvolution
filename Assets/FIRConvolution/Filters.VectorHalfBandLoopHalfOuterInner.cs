@@ -21,7 +21,7 @@ namespace FIRConvolution
 
             for (var sample = 0; sample <= d; sample += v)
             {
-                var pos = Filter.UpdateZ(ref filter, source, sample);
+                var pos = UpdateZ(ref filter, source, sample);
 
                 var sum = float4.zero;
 
@@ -134,7 +134,7 @@ namespace FIRConvolution
 
                 if (filter.TCenter)
                 {
-                    sum += Filter.ProcessCenterVector(ref filter);
+                    sum += ProcessCenterVector(ref filter);
                 }
 
                 CopyTo(sum, target, sample);

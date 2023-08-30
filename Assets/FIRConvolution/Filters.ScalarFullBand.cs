@@ -16,7 +16,7 @@ namespace FIRConvolution
 
             for (var sample = 0; sample < length; sample += v)
             {
-                var pos = Filter.UpdateZ(ref filter, source, sample);
+                var pos = UpdateZ(ref filter, source, sample);
 
                 var sum = 0.0f;
 
