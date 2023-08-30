@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Unity.Burst;
 using Unity.Mathematics;
 #if DEBUG_HALF_BAND_START_TAP
 using System.Diagnostics;
@@ -11,6 +12,7 @@ using System.Diagnostics;
 
 namespace FIRConvolution
 {
+    [BurstCompile]
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public unsafe struct Filter
     {
@@ -147,6 +149,7 @@ namespace FIRConvolution
             return false;
         }
 
+        [BurstCompile]
         public static int UpdateZ(ref Filter filter, float* source, int sample)
         {
             // normally one would need for a call to update the Z offset at the end
@@ -185,6 +188,7 @@ namespace FIRConvolution
             return filter.ZOffsetGet;
         }
 
+        [BurstCompile]
         public static float ProcessCenterScalar(ref Filter filter) // TODO could be a multiplication instead of branching
         {
             var h = filter.H;
@@ -197,6 +201,7 @@ namespace FIRConvolution
         }
 
         public static float4 ProcessCenterVector(ref Filter filter)
+        [BurstCompile]
         {
             var h = filter.H;
             var c = filter.HCenter;
