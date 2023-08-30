@@ -19,7 +19,7 @@ namespace FIRConvolution
 
             for (var sample = 0; sample <= k; sample += v)
             {
-                var pos = UpdateZ(ref filter, source, sample);
+                var pos = Filter.UpdateZ(ref filter, source, sample);
 
                 var sum = float4.zero;
 

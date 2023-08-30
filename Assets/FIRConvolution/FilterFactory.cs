@@ -5,7 +5,7 @@
         private static Filter Create
             (float[] h, int v)
         {
-            return new Filter(h, v, Filters.TryGetHalfBandStartTap(h, out var result) ? result : default);
+            return new Filter(h, v, Filter.TryGetHalfBandStartTap(h, out var result) ? result : default);
         }
 
         public static Filter CreateScalarFullBand

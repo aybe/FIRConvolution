@@ -19,7 +19,7 @@ namespace FIRConvolution
 
             for (var sample = 0; sample < length; sample += v)
             {
-                var pos = UpdateZ(ref filter, source, sample);
+                var pos = Filter.UpdateZ(ref filter, source, sample);
 
                 var sum = 0.0f;
 
@@ -100,7 +100,7 @@ namespace FIRConvolution
 
                 if (filter.TCenter)
                 {
-                    sum += ProcessCenterScalar(ref filter);
+                    sum += Filter.ProcessCenterScalar(ref filter);
                 }
 
                 target[sample] = sum;
