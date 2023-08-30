@@ -67,6 +67,11 @@ public abstract class UnitTestFilter
             }
         }
 
+        var allocator = MemoryAllocator.Current;
+
+        allocator.Free(filter.H);
+        allocator.Free(filter.Z);
+
         return output;
     }
 

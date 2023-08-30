@@ -15,11 +15,11 @@ namespace FIRConvolution
 // TODO make UpdateZ update offset, delete method
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public struct Filter
+    public unsafe struct Filter
     {
-        public Filter(IReadOnlyCollection<float> h, int vLength, int hOffset = 0)
+        public Filter(float[] h, int vLength, int hOffset = 0) // TODO replace by method
         {
-            if ((h.Count & 1) == 0)
+            if ((h.Length & 1) == 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(h), "Expected an odd number of taps.");
             }
@@ -29,17 +29,21 @@ namespace FIRConvolution
                 throw new ArgumentOutOfRangeException(nameof(vLength));
             }
 
-            if (hOffset < 0 || hOffset >= h.Count)
+            if (hOffset < 0 || hOffset >= h.Length)
             {
                 throw new ArgumentOutOfRangeException(nameof(hOffset));
             }
 
+            var z = new float[(h.Length + (vLength - 1)) * 2];
+
+            var allocator = MemoryAllocator.Current;
+
             VLength    = vLength;
-            H          = h.ToArray();
-            HLength    = H.Length;
-            HCenter    = H.Length / 2;
-            Z          = new float[(H.Length + (vLength - 1)) * 2];
-            ZLength    = Z.Length;
+            H          = allocator.AllocArray(h);
+            HLength    = h.Length;
+            HCenter    = h.Length / 2;
+            Z          = allocator.AllocArray(z);
+            ZLength    = z.Length;
             ZOffset    = VLength; // check UpdateZ
             ZOffsetGet = 0;
             ZOffsetSet = HLength + VLength - 1;
@@ -50,7 +54,7 @@ namespace FIRConvolution
         /// <summary>
         ///     The taps.
         /// </summary>
-        public float[] H { get; }
+        public float* H { get; }
 
         /// <summary>
         ///     The taps center index.
@@ -75,7 +79,7 @@ namespace FIRConvolution
         /// <summary>
         ///     The doubled delay line.
         /// </summary>
-        public float[] Z { get; }
+        public float* Z { get; }
 
         /// <summary>
         ///     The delay line length.
@@ -156,7 +160,7 @@ namespace FIRConvolution
             return false;
         }
 
-        public static unsafe int UpdateZ(ref Filter filter, float* source, int sample)
+        public static int UpdateZ(ref Filter filter, float* source, int sample)
         {
             // normally one would need for a call to update the Z offset at the end
 
