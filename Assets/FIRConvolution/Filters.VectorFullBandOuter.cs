@@ -11,6 +11,8 @@ namespace FIRConvolution
         public static unsafe void VectorFullBandOuter(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
+            ValidateArguments(source, target, length, stride, offset, ref filter);
+
             var h = filter.H;
             var z = filter.Z;
             var n = filter.HLength;
