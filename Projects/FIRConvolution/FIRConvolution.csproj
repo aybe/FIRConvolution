@@ -12,6 +12,11 @@
 		<DefineConstants>$(DefineConstants);UNITY_ASSERTIONS</DefineConstants>
 	</PropertyGroup>
 
+	<!--enable experimental stuff-->
+	<PropertyGroup>
+		<DefineConstants>$(DefineConstants);UNITY_BURST_EXPERIMENTAL_LOOP_INTRINSICS</DefineConstants>
+	</PropertyGroup>
+
 	<ItemGroup>
 
 		<PackageReference Include="Unity3D" Version="2.1.3" />
