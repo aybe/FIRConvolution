@@ -47,7 +47,7 @@ namespace FIRConvolution
                     sum += hv * zv;
                 }
 
-                CopyTo(sum, target, sample);
+                CopyTo(sum, &target[sample], stride, offset);
             }
         }
     }

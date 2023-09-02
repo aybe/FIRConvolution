@@ -137,7 +137,7 @@ namespace FIRConvolution
 
                 Filter.ProcessCenterVector(ref filter, ref sum);
 
-                CopyTo(sum, target, sample);
+                CopyTo(sum, &target[sample], stride, offset);
             }
         }
     }

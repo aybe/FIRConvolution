@@ -15,9 +15,12 @@ namespace FIRConvolution
 #endif
 
         [BurstCompile]
-        private static unsafe void CopyTo(in float4 source, in float* target, in int offset)
+        private static unsafe void CopyTo(in float4 source, in float* target, in int stride, in int offset)
         {
-            *(float4*)(target + offset) = source;
+            for (var i = 0; i < 4; i++)
+            {
+                target[i * stride + offset] = source[i];
+            }
         }
 
         [BurstCompile]
