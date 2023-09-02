@@ -1,6 +1,11 @@
 ﻿using AOT;
 using Unity.Burst;
+
+#if FIR_NEW
+
+#else
 using Unity.Mathematics;
+#endif
 
 namespace FIRConvolution
 {
@@ -26,6 +31,9 @@ namespace FIRConvolution
 
                 var tap = 0;
 
+#if FIR_NEW
+                Convolve1(ref sum, ref tap, n, 4, 1, 4, 4, pos, h, z);
+#else
                 int end;
 
                 for (end = n - 4; tap < end; tap += 4)
@@ -47,7 +55,11 @@ namespace FIRConvolution
 
                     sum += math.dot(hv, zh);
                 }
+#endif
 
+#if FIR_NEW
+                Convolve1(ref sum, ref tap, n, 2, 1, 2, 2, pos, h, z);
+#else
                 for (end = n - 1; tap < end; tap += 2)
                 {
                     var h0 = h[tap + 0];
@@ -63,7 +75,11 @@ namespace FIRConvolution
 
                     sum += math.dot(hv, zv);
                 }
+#endif
 
+#if FIR_NEW
+                Convolve1(ref sum, ref tap, n, 1, 1, 1, 1, pos, h, z);
+#else
                 for (end = n - 0; tap < end; tap += 1)
                 {
                     var h0 = h[tap];
@@ -74,6 +90,7 @@ namespace FIRConvolution
 
                     sum += math.dot(h0, z0);
                 }
+#endif
 
                 target[sample] = sum;
             }
