@@ -9,7 +9,7 @@ namespace FIRConvolution
         [BurstCompile]
         [MonoPInvokeCallback(typeof(FilterMethod))]
         public static unsafe void VectorHalfBandLoopHalfOuterInner(
-            in float* source, in float* target, in int length, ref Filter filter)
+            in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
             var h = filter.H;
             var z = filter.Z;

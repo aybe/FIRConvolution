@@ -58,7 +58,7 @@ public abstract class UnitTestFilter
             fixed (float* pSource = source)
             fixed (float* pTarget = target)
             {
-                filterMethod(pSource, pTarget, blockSize, ref filter);
+                filterMethod(pSource, pTarget, blockSize, 1, 0, ref filter);
             }
 
             foreach (var sample in target)
