@@ -74,7 +74,7 @@ namespace FIRConvolution
         /// <summary>
         ///     The center tap multiplier.
         /// </summary>
-        public float TCenter { get; } // TODO rename TCenter
+        private float TCenter { get; } // TODO rename TCenter
 
         /// <summary>
         ///     The doubled delay line.
