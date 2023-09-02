@@ -22,6 +22,11 @@
 		<DefineConstants>$(DefineConstants);FIR_LOG</DefineConstants>
 	</PropertyGroup>
 
+	<!--enable new convolution approach-->
+	<PropertyGroup>
+		<DefineConstants>$(DefineConstants);FIR_NEW</DefineConstants>
+	</PropertyGroup>
+
 	<ItemGroup>
 
 		<PackageReference Include="Unity3D" Version="2.1.3" />
