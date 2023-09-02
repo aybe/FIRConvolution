@@ -1,9 +1,8 @@
-﻿#define USE_ARRAYS
-#define USE_LOOPED
-using System;
+﻿using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Unity.Burst;
+using Unity.Burst.CompilerServices;
 using Unity.Mathematics;
 
 namespace FIRConvolution
@@ -22,127 +21,84 @@ namespace FIRConvolution
             *(float4*)(target + offset) = source;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void Set(
-#if USE_ARRAYS
-            in float[] source,
-#else
-        in Span<float> source,
-#endif
-            ref float4 target, in int4 indices, int len = 4)
+        [BurstCompile]
+        private static unsafe void Set(
+            in float* source, out float4 target, in int4 indices, [AssumeRange(1, 4)] int components)
         {
-#if USE_LOOPED
-            for (var i = 0; i < len; i++)
+            target = float4.zero;
+
+            for (var i = 0; i < components; i++)
             {
-                target[i] = source[indices[i]];
+                var index = indices[i];
+                var value = source[index];
+                target[i] = value;
+            }
+        }
+
+        /// <summary>
+        ///     Convolve a scalar value.
+        /// </summary>
+        /// <param name="fSum">The sum value.</param>
+        /// <param name="tIdx">The tap index.</param>
+        /// <param name="tNum">The tap count.</param>
+        /// <param name="tHop">The tap pitch.</param>
+        /// <param name="tMul">The tap multiplier.</param>
+        /// <param name="hLen">The components for <paramref name="h" />.</param>
+        /// <param name="zLen">The components for <paramref name="z" />.</param>
+        /// <param name="zPos">The delay line position.</param>
+        /// <param name="h">The coefficients.</param>
+        /// <param name="z">The delay line.</param>
+        [BurstCompile]
+        private static unsafe void Convolve1(
+            ref float fSum, ref int tIdx, in int tNum, in int tHop, in int tMul, in int hLen, int zLen, in int zPos, in float* h, in float* z)
+        {
+            var tVec = new int4(0, 1, 2, 3) * tMul;
+
+            var tEnd = tNum - tHop;
+
+#if FIR_LOG
+            Logger?.Invoke(
+                $"{nameof(tIdx)}: {tIdx,2}, " +
+                $"{nameof(tNum)}: {tNum,2}, " +
+                $"{nameof(tHop)}: {tHop,2}, " +
+                $"{nameof(hLen)}: {hLen,2}, " +
+                $"{nameof(zLen)}: {zLen,2}, " +
+                $"{nameof(tMul)}: {tMul,2}, " +
+                $"{nameof(zPos)}: {zPos,2}, " +
+                $"{nameof(tEnd)}: {tEnd,2}, " +
+                $"{nameof(tVec)}: {tVec}, " +
+                "");
+#endif
+
+            for (; tIdx <= tEnd; tIdx += tHop)
+            {
+                Loop.ExpectNotVectorized();
+
+                var zGet = zPos - tIdx;
+
+                var hIdx = tIdx + tVec;
+                var zIdx = zGet - tVec;
+
+                Set(h, out var hVec, hIdx, hLen);
+                Set(z, out var zVec, zIdx, zLen);
+
+                fSum += math.dot(hVec, zVec);
+
+#if FIR_LOG
+                Logger?.Invoke(
+                    $"{nameof(tIdx)}: {tIdx,2}, " +
+                    $"{nameof(hIdx)}: {hIdx}, " +
+                    $"{nameof(zIdx)}: {zIdx}, " +
+                    $"\n\t{nameof(zGet)}: {zGet,2}, " +
+                    $"\n\t{nameof(hVec)}: {hVec}, " +
+                    $"\n\t{nameof(zVec)}: {zVec}, " +
+                    $"\n\t{nameof(fSum)}: {fSum}");
+#endif
             }
 
-            for (var i = len; i < 4; i++)
-            {
-                target[i] = default;
-            }
-#else
-        #error not valid anymore because of the above
-        target[0] = source[indices[0]];
-        target[1] = source[indices[1]];
-        target[2] = source[indices[2]];
-        target[3] = source[indices[3]];
+#if FIR_LOG
+            Logger?.Invoke(string.Empty);
 #endif
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void Set(
-#if USE_ARRAYS
-            ref float[] source,
-#else
-        ref Span<float> source,
-#endif
-            ref float2 target, in int2 indices)
-        {
-#if USE_LOOPED
-            for (var i = 0; i < 2; i++)
-            {
-                target[i] = source[indices[i]];
-            }
-#else
-        target[0] = source[indices[0]];
-        target[1] = source[indices[1]];
-#endif
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Set(this ref int2 vector, int i) // TODO move
-        {
-            vector.x = i;
-            vector.y = i;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Set(this ref int2 vector, int x, int y) // TODO move
-        {
-            vector.x = x;
-            vector.y = y;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void Set(this ref int4 vector, int i) // TODO move
-        {
-            vector.x = i;
-            vector.y = i;
-            vector.z = i;
-            vector.w = i;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void Set(this ref int4 vector, int x, int y, int z, int w) // TODO move
-        {
-            vector.x = x;
-            vector.y = y;
-            vector.z = z;
-            vector.w = w;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // TODO move
-        private static void Convolve1(ref float sum, ref int tap, in int len, in int hop, in int num, in int mul, in int pos, in float[] h, in float[] z)
-        {
-            var vh = new float4(); // coefficients
-
-            var vz = new float4(); // delays
-
-            var tp = new int4(0, 1, 2, 3) * mul; // taps
-
-            var end = len - hop;
-
-            //Console.WriteLine($"tap: {tap,2}, taps: {tp}, len: {len,2}, hop: {hop,2}, num: {num,2}, mul: {mul,2}, pos: {pos,2}, end: {end,2}");
-
-            for (; tap < end; tap += hop)
-            {
-                var idx = pos - tap; // Z index
-
-                var iH = tap + tp;
-                var iZ = idx - tp;
-
-                var i = num;
-                if (tap is 21)
-                {
-                    Console.WriteLine("z");
-                }
-
-                Set(h, ref vh, iH, i);
-                Set(z, ref vz, iZ, i);
-                sum += math.dot(vh, vz);
-                continue;
-                Console.WriteLine(
-                    $"tap: {tap,2}, " +
-                    $"z: {idx,2}, " +
-                    $"iH: {iH,-20}, " +
-                    $"iZ: {iZ,-20}, " +
-                    $"vh: {vh}, " +
-                    $"vz: {vz}, " +
-                    $"sum: {sum}");
-            }
-
-            //Console.WriteLine();
         }
 
         [BurstCompile]
