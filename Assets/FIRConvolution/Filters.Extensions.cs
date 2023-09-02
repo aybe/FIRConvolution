@@ -11,6 +11,10 @@ namespace FIRConvolution
     [BurstCompile]
     public static partial class Filters
     {
+#if FIR_LOG
+        public static Action<object?>? Logger { get; set; }
+#endif
+
         [BurstCompile]
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static unsafe void CopyTo(in float4 source, in float* target, in int offset)
