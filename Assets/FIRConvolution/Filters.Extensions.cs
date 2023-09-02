@@ -15,7 +15,6 @@ namespace FIRConvolution
 #endif
 
         [BurstCompile]
-        [MethodImpl(MethodImplOptions.NoInlining)]
         private static unsafe void CopyTo(in float4 source, in float* target, in int offset)
         {
             *(float4*)(target + offset) = source;
