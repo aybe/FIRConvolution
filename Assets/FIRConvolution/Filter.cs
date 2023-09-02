@@ -152,7 +152,7 @@ namespace FIRConvolution
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static int UpdateZ(ref Filter filter, float* source, int sample)
+        public static int UpdateZ(ref Filter filter, float* source, int sample, int stride, int offset)
         {
             // normally one would need for a call to update the Z offset at the end
 
@@ -181,7 +181,7 @@ namespace FIRConvolution
             {
                 var j = filter.ZOffset + i;
                 var k = (j + filter.ZOffsetSet) % filter.ZLength;
-                var l = source[sample + (v - 1 - i)];
+                var l = source[(sample + (v - 1 - i)) * stride + offset];
 
                 z[j] = z[k] = l;
             }
