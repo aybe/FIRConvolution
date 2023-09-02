@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Unity.Burst;
 using Unity.Mathematics;
 #if DEBUG_HALF_BAND_START_TAP
@@ -150,6 +151,7 @@ namespace FIRConvolution
         }
 
         [BurstCompile]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static int UpdateZ(ref Filter filter, float* source, int sample)
         {
             // normally one would need for a call to update the Z offset at the end
@@ -189,6 +191,7 @@ namespace FIRConvolution
         }
 
         [BurstCompile]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static void ProcessCenterScalar(ref Filter filter, ref float sum)
         {
             var h = filter.H;
@@ -201,6 +204,7 @@ namespace FIRConvolution
         }
 
         [BurstCompile]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static void ProcessCenterVector(ref Filter filter, ref float4 sum)
         {
             var h = filter.H;
