@@ -12,7 +12,7 @@ namespace FIRConvolution
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public unsafe partial struct Filter
     {
-        private Filter(float[] h, int vLength, int hOffset)
+        private Filter(float[] h, int hOffset, int vLength)
         {
             if (h.Length % 2 is not 1)
             {
@@ -20,16 +20,16 @@ namespace FIRConvolution
                     "The number of coefficients must be odd.");
             }
 
-            if (vLength is < 1 or > 4)
-            {
-                throw new ArgumentOutOfRangeException(nameof(vLength),
-                    "The vectorization count must be between 1 and 4.");
-            }
-
             if (hOffset < 0 || hOffset >= h.Length)
             {
                 throw new ArgumentOutOfRangeException(nameof(hOffset),
                     "The index to the first coefficient must be a valid coefficient index.");
+            }
+
+            if (vLength is < 1 or > 4)
+            {
+                throw new ArgumentOutOfRangeException(nameof(vLength),
+                    "The vectorization count must be between 1 and 4.");
             }
 
             var z = new float[(h.Length + (vLength - 1)) * 2];
@@ -111,7 +111,7 @@ namespace FIRConvolution
 
             var tap1 = sum0 > sum1 ? 0 : sum1 > sum0 ? 1 : 0;
 
-            return new Filter(h, v, tap1);
+            return new Filter(h, tap1, v);
         }
 
         [BurstCompile]
