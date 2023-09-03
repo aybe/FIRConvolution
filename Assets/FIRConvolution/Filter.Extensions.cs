@@ -6,8 +6,7 @@ using Unity.Mathematics;
 
 namespace FIRConvolution
 {
-    [BurstCompile]
-    public static partial class Filters
+    public partial struct Filter
     {
         [BurstCompile]
         private static unsafe void CopyTo(in float4 source, in float* target, in int stride, in int offset)

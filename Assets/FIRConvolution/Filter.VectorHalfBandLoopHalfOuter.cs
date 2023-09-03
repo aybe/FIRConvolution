@@ -4,7 +4,7 @@ using Unity.Mathematics;
 
 namespace FIRConvolution
 {
-    public static partial class Filters
+    public partial struct Filter
     {
         [BurstCompile]
         [MonoPInvokeCallback(typeof(FilterMethod))]

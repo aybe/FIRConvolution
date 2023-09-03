@@ -15,7 +15,7 @@ namespace FIRConvolution
 {
     [BurstCompile]
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public unsafe struct Filter
+    public unsafe partial struct Filter
     {
         public Filter(float[] h, int vLength, int hOffset = 0) // TODO replace by method
         {
