@@ -164,19 +164,19 @@ namespace FIRConvolution
             if (stride < 1)
             {
                 throw new ArgumentOutOfRangeException(nameof(stride),
-                    "Stride must be positive.");
+                    "The stride must be positive.");
             }
 
             if (offset < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(offset),
-                    "Offset must be positive.");
+                    "The offset must be positive.");
             }
 
             if (offset >= stride)
             {
                 throw new ArgumentOutOfRangeException(nameof(offset),
-                    "Offset must be less than stride.");
+                    "The offset must be less than stride.");
             }
         }
 
