@@ -1,6 +1,4 @@
-﻿//#define DEBUG_HALF_BAND_START_TAP
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -8,9 +6,6 @@ using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Unity.Burst;
 using Unity.Mathematics;
-#if DEBUG_HALF_BAND_START_TAP
-using System.Diagnostics;
-#endif
 
 namespace FIRConvolution
 {
@@ -122,26 +117,6 @@ namespace FIRConvolution
 
             var sum0 = tap0.Sum(Math.Abs);
             var sum1 = tap1.Sum(Math.Abs);
-
-#if DEBUG_HALF_BAND_START_TAP
-            Debug.WriteLine(nameof(TryGetHalfBandStartTap));
-            Debug.WriteLine($"{taps.Count}, {tap0.Length}, {tap1.Length}, {sum0}, {sum1}");
-            Debug.WriteLine(nameof(tap0));
-
-            foreach (var f in tap0)
-            {
-                Debug.WriteLine(f);
-            }
-
-            Debug.WriteLine(nameof(tap1));
-
-            foreach (var f in tap1)
-            {
-                Debug.WriteLine(f);
-            }
-
-            Debug.WriteLine(string.Empty);
-#endif
 
             if (sum0 > sum1)
             {
