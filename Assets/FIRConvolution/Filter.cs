@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -107,31 +106,12 @@ namespace FIRConvolution
 
         private static Filter Create(float[] h, int v)
         {
-            return new Filter(h, v, TryGetHalfBandStartTap(h, out var result) ? result : default);
-        }
+            var sum0 = h.Where((_, i) => i % 2 == 0).Sum(Math.Abs);
+            var sum1 = h.Where((_, i) => i % 2 == 1).Sum(Math.Abs);
 
-        public static bool TryGetHalfBandStartTap(IReadOnlyCollection<float> taps, out int result)
-        {
-            var tap0 = taps.Where((_, i) => i % 2 == 0).ToArray();
-            var tap1 = taps.Where((_, i) => i % 2 == 1).ToArray();
+            var tap1 = sum0 > sum1 ? 0 : sum1 > sum0 ? 1 : 0;
 
-            var sum0 = tap0.Sum(Math.Abs);
-            var sum1 = tap1.Sum(Math.Abs);
-
-            if (sum0 > sum1)
-            {
-                result = 0;
-                return true;
-            }
-
-            if (sum1 > sum0)
-            {
-                result = 1;
-                return true;
-            }
-
-            result = default;
-            return false;
+            return new Filter(h, v, tap1);
         }
 
         [BurstCompile]
