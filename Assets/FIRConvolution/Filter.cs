@@ -126,7 +126,7 @@ namespace FIRConvolution
         [BurstCompile]
         [MethodImpl(MethodImplOptions.NoInlining)]
         [AssertionMethod]
-        private static void ValidateArguments(
+        private static void ProcessArgs(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
             if (source == null)
