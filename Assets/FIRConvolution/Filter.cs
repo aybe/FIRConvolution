@@ -12,7 +12,7 @@ namespace FIRConvolution
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public unsafe partial struct Filter
     {
-        private Filter(float[] h, int hOffset, int vLength)
+        private Filter(float[] h, int hOffset, int vLength, MemoryAllocator allocator)
         {
             if (h.Length % 2 is not 1)
             {
@@ -32,9 +32,12 @@ namespace FIRConvolution
                     "The vectorization count must be between 1 and 4.");
             }
 
-            var z = new float[(h.Length + (vLength - 1)) * 2];
+            if (allocator == null)
+            {
+                throw new ArgumentNullException(nameof(allocator));
+            }
 
-            var allocator = MemoryAllocator.Current;
+            var z = new float[(h.Length + (vLength - 1)) * 2];
 
             VLength    = vLength;
             H          = allocator.AllocArray(h);
@@ -104,14 +107,14 @@ namespace FIRConvolution
         /// </summary>
         private int VLength { get; }
 
-        private static Filter Create(float[] h, int v)
+        private static Filter Create(float[] h, int v, MemoryAllocator allocator)
         {
             var sum0 = h.Where((_, i) => i % 2 == 0).Sum(Math.Abs);
             var sum1 = h.Where((_, i) => i % 2 == 1).Sum(Math.Abs);
 
             var tap1 = sum0 > sum1 ? 0 : sum1 > sum0 ? 1 : 0;
 
-            return new Filter(h, tap1, v);
+            return new Filter(h, tap1, v, allocator);
         }
 
         [BurstCompile]

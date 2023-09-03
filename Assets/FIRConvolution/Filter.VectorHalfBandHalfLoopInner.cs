@@ -6,9 +6,9 @@ namespace FIRConvolution
 {
     public partial struct Filter
     {
-        public static Filter CreateVectorHalfBandHalfLoopInner(float[] h)
+        public static Filter CreateVectorHalfBandHalfLoopInner(float[] h, MemoryAllocator allocator)
         {
-            return Create(h, 1);
+            return Create(h, 1, allocator);
         }
 
         [BurstCompile]
