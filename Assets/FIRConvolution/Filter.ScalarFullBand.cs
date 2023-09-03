@@ -5,7 +5,7 @@ namespace FIRConvolution
 {
     public partial struct Filter
     {
-        public static Filter CreateScalarFullBand(float[] h)
+        public static Filter ScalarFullBandCreate(float[] h)
         {
             return Create(h, 1);
         }
