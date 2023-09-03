@@ -486,6 +486,8 @@ crashlytics-build.properties
 
 # keep project so it can be referenced by MSTest project (fix Unity.gitignore)
 !/**/*.csproj
+
+# keep project ignores for Unity projects
 /*.csproj
 
 # keep meta for Unity (fix VisualStudio.gitignore)
@@ -494,13 +496,9 @@ crashlytics-build.properties
 # keep Unity packages (fix VisualStudio.gitignore)
 !**/[Pp]ackages/*
 
-# TODO
-/Assets/**/*bin*
-
-# somehow this ain't fixable but can be ignored (NuGet stuff)
-/Assets/**/*obj*
-
 # miscellaneous stuff
 *.cd
+*.cd.meta
 *.dgml
 *.g.cs
+*.txt
