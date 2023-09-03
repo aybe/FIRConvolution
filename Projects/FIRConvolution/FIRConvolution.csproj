@@ -7,20 +7,20 @@
 		<LangVersion>9</LangVersion>
 	</PropertyGroup>
 
-	<!--enable assertions-->
 	<PropertyGroup>
-		<DefineConstants>$(DefineConstants);UNITY_ASSERTIONS</DefineConstants>
-	</PropertyGroup>
 
-	<!--enable experimental stuff-->
-	<PropertyGroup>
+		<!--enable assertions-->
+		<DefineConstants>$(DefineConstants);UNITY_ASSERTIONS</DefineConstants>
+
+		<!--enable experimental stuff-->
 		<DefineConstants>$(DefineConstants);UNITY_BURST_EXPERIMENTAL_LOOP_INTRINSICS</DefineConstants>
+
 	</PropertyGroup>
 
 	<ItemGroup>
 
 		<PackageReference Include="Unity3D" Version="2.1.3" />
-		
+
 		<!--fix incoming ambiguous references-->
 		<Reference Remove="$(UnityEnginePath)" />
 
@@ -34,8 +34,8 @@
 		<Reference Include="$(UnityScriptAssembliesPath)\Unity.Mathematics.dll" Private="True" />
 
 		<!--setup project content-->
-		<None Include="$(SolutionDir)Assets\FIRConvolution\**\*.cd" />
-		<Compile Include="$(SolutionDir)Assets\FIRConvolution\**\*.cs" />
+		<None Include="$(SolutionDir)Assets\$(MSBuildProjectName)\**\*.cd" />
+		<Compile Include="$(SolutionDir)Assets\$(MSBuildProjectName)\**\*.cs" />
 
 	</ItemGroup>
 
