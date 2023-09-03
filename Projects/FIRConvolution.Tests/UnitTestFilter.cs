@@ -43,9 +43,11 @@ public abstract class UnitTestFilter
     {
         const int blockSize = 16;
 
+        var allocator = MemoryAllocator.Current;
+
         var output = new List<float>();
 
-        var filter = factory(taps);
+        var filter = factory(taps, allocator);
 
         Span<float> target = stackalloc float[blockSize];
 
@@ -67,8 +69,6 @@ public abstract class UnitTestFilter
             }
         }
 
-        var allocator = MemoryAllocator.Current;
-
         allocator.Free(filter.H);
         allocator.Free(filter.Z);
 
@@ -87,7 +87,7 @@ public abstract class UnitTestFilter
 
         var actual = MakeFilter(input, taps, factory, filterMethod);
 
-        var expected = MakeFilter(input, taps, h => Filter.CreateScalarFullBand(h, MemoryAllocator.Current), Filter.ProcessScalarFullBand);
+        var expected = MakeFilter(input, taps, Filter.CreateScalarFullBand, Filter.ProcessScalarFullBand);
 
 #if DEBUG
         TestContext.WriteLine($"{nameof(taps)}: {taps.Length}, {nameof(input)}: {input.Length}");
