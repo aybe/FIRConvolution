@@ -40,10 +40,10 @@ namespace FIRConvolution
             var z = new float[(h.Length + (vLength - 1)) * 2];
 
             VLength    = vLength;
-            H          = allocator.AllocArray(h);
+            H          = (float*)allocator.AlignedAlloc(h);
             HLength    = h.Length;
             HCenter    = h.Length / 2;
-            Z          = allocator.AllocArray(z);
+            Z          = (float*)allocator.AlignedAlloc(z);
             ZLength    = z.Length;
             ZOffset    = VLength; // check UpdateZ
             ZOffsetGet = 0;
