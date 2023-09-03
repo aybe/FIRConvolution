@@ -109,7 +109,7 @@ namespace FIRConvolution
 
         private static Filter Create(float[] h, int v)
         {
-            return new Filter(h, v, Filter.TryGetHalfBandStartTap(h, out var result) ? result : default);
+            return new Filter(h, v, TryGetHalfBandStartTap(h, out var result) ? result : default);
         }
 
         public static bool TryGetHalfBandStartTap(IReadOnlyCollection<float> taps, out int result)
@@ -157,7 +157,7 @@ namespace FIRConvolution
         }
 
         [BurstCompile]
-        private static unsafe void CopyTo(in float4 source, in float* target, in int stride, in int offset)
+        private static void CopyTo(in float4 source, in float* target, in int stride, in int offset)
         {
             for (var i = 0; i < 4; i++)
             {
@@ -245,7 +245,7 @@ namespace FIRConvolution
         [BurstCompile]
         [MethodImpl(MethodImplOptions.NoInlining)]
         [AssertionMethod]
-        private static unsafe void ValidateArguments(
+        private static void ValidateArguments(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
             if (source == null)
