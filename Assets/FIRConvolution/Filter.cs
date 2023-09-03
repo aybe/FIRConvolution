@@ -125,6 +125,43 @@ namespace FIRConvolution
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.NoInlining)]
+        private static void UpdateCenterScalar(ref Filter filter, ref float sum)
+        {
+            var h = filter.H;
+            var z = filter.Z;
+            var c = filter.HCenter;
+
+            var cs = h[c] * z[filter.ZOffsetGet - c];
+
+            sum += filter.TCenter * cs;
+        }
+
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static void UpdateCenterVector(ref Filter filter, ref float4 sum)
+        {
+            var h = filter.H;
+            var c = filter.HCenter;
+            var z = filter.Z;
+
+            var h0 = h[c];
+
+            var zT = filter.ZOffset + c;
+
+            var z0 = z[zT + 3];
+            var z1 = z[zT + 2];
+            var z2 = z[zT + 1];
+            var z3 = z[zT + 0];
+
+            var v1 = math.float4(h0, h0, h0, h0);
+            var v2 = math.float4(z0, z1, z2, z3);
+            var v3 = v1 * v2;
+
+            sum += filter.TCenter * v3;
+        }
+
+        [BurstCompile]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         private static int UpdateZ(ref Filter filter, float* source, int sample, int stride, int offset)
         {
             // normally one would need for a call to update the Z offset at the end
@@ -161,43 +198,6 @@ namespace FIRConvolution
 
 
             return filter.ZOffsetGet;
-        }
-
-        [BurstCompile]
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void UpdateCenterScalar(ref Filter filter, ref float sum)
-        {
-            var h = filter.H;
-            var z = filter.Z;
-            var c = filter.HCenter;
-
-            var cs = h[c] * z[filter.ZOffsetGet - c];
-
-            sum += filter.TCenter * cs;
-        }
-
-        [BurstCompile]
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void UpdateCenterVector(ref Filter filter, ref float4 sum)
-        {
-            var h = filter.H;
-            var c = filter.HCenter;
-            var z = filter.Z;
-
-            var h0 = h[c];
-
-            var zT = filter.ZOffset + c;
-
-            var z0 = z[zT + 3];
-            var z1 = z[zT + 2];
-            var z2 = z[zT + 1];
-            var z3 = z[zT + 0];
-
-            var v1 = math.float4(h0, h0, h0, h0);
-            var v2 = math.float4(z0, z1, z2, z3);
-            var v3 = v1 * v2;
-
-            sum += filter.TCenter * v3;
         }
 
         [BurstCompile]
