@@ -1,4 +1,6 @@
-﻿namespace FIRConvolution
+﻿using System;
+
+namespace FIRConvolution
 {
     public abstract class MemoryAllocator
     {
@@ -13,6 +15,10 @@
 #endif
             }
         }
+
+        public abstract IntPtr AlignedAlloc(int cb, int alignment);
+
+        public abstract void AlignedFree(IntPtr pointer);
 
         public abstract unsafe void* Alloc(int cb);
 

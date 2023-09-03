@@ -8,6 +8,29 @@ namespace FIRConvolution
     [UsedImplicitly]
     public sealed class MemoryAllocatorUnity : MemoryAllocator<MemoryAllocatorUnity>
     {
+        public override  IntPtr AlignedAlloc(int cb, int alignment)
+        {
+            unsafe
+            {
+                var pointer = UnsafeUtility.Malloc(cb, alignment, Allocator.Persistent);
+
+                if (pointer == null)
+                {
+                    throw new OutOfMemoryException();
+                }
+
+                return new IntPtr(pointer);
+            }
+        }
+
+        public override void AlignedFree(IntPtr pointer)
+        {
+            unsafe
+            {
+                UnsafeUtility.Free(pointer.ToPointer(), Allocator.Persistent);
+            }
+        }
+
         public override unsafe void* Alloc(int cb)
         {
             var pointer = UnsafeUtility.Malloc(cb, 1, Allocator.Persistent); // TODO alignment
