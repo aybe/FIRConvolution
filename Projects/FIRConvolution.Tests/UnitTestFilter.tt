@@ -39,7 +39,7 @@ public sealed class UnitTestFilter<#= className #> : UnitTestFilter
 	public unsafe void <#= name #><#= className #>()
 		=> TestFilter(
 			Filter.Create<#= name #>,
-			Filter.<#= name #>,
+			Filter.Process<#= name #>,
 			<#= bandwidth #>);
 
 <#

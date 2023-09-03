@@ -13,7 +13,7 @@ namespace FIRConvolution
 
         [BurstCompile]
         [MonoPInvokeCallback(typeof(FilterMethod))]
-        public static unsafe void VectorHalfBandLoopFullOuter(
+        public static unsafe void ProcessVectorHalfBandLoopFullOuter(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
             ValidateArguments(source, target, length, stride, offset, ref filter);
