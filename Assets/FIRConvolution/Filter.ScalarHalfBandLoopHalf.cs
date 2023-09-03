@@ -5,6 +5,11 @@ namespace FIRConvolution
 {
     public partial struct Filter
     {
+        public static Filter CreateScalarHalfBandLoopHalf(float[] h)
+        {
+            return Create(h, 1);
+        }
+
         [BurstCompile]
         [MonoPInvokeCallback(typeof(FilterMethod))]
         public static unsafe void ScalarHalfBandLoopHalf(

@@ -87,7 +87,7 @@ public abstract class UnitTestFilter
 
         var actual = MakeFilter(input, taps, factory, filterMethod);
 
-        var expected = MakeFilter(input, taps, FilterFactory.CreateScalarFullBand, Filter.ScalarFullBand);
+        var expected = MakeFilter(input, taps, Filter.CreateScalarFullBand, Filter.ScalarFullBand);
 
 #if DEBUG
         TestContext.WriteLine($"{nameof(taps)}: {taps.Length}, {nameof(input)}: {input.Length}");

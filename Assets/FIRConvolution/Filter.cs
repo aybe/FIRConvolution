@@ -106,6 +106,11 @@ namespace FIRConvolution
         /// </summary>
         public int VLength { get; }
 
+        private static Filter Create(float[] h, int v)
+        {
+            return new Filter(h, v, Filter.TryGetHalfBandStartTap(h, out var result) ? result : default);
+        }
+
         public static bool TryGetHalfBandStartTap(IReadOnlyCollection<float> taps, out int result)
         {
             var tap0 = taps.Where((_, i) => i % 2 == 0).ToArray();

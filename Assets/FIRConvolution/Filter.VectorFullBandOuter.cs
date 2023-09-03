@@ -6,6 +6,11 @@ namespace FIRConvolution
 {
     public partial struct Filter
     {
+        public static Filter CreateVectorFullBandOuter(float[] h)
+        {
+            return Create(h, 4);
+        }
+
         [BurstCompile]
         [MonoPInvokeCallback(typeof(FilterMethod))]
         public static unsafe void VectorFullBandOuter(
