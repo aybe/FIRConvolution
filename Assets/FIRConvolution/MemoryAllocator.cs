@@ -5,14 +5,28 @@ namespace FIRConvolution
     public abstract class MemoryAllocator
     {
         public static MemoryAllocator Current
+        public IntPtr AlignedAlloc<T>(T[] array) where T : unmanaged
         {
             get
+            unsafe
             {
 #if UNITY
                 return MemoryAllocatorUnity.Instance;
 #else
                 return MemoryAllocatorNet.Instance;
 #endif
+                var length    = array.Length;
+                var sizeOf    = SizeOf<T>();
+                var size      = sizeOf * length;
+                var alignment = AlignOf<T>();
+                var pointer   = AlignedAlloc(size, alignment);
+
+                var source = array.AsSpan();
+                var target = new Span<T>(pointer.ToPointer(), length);
+
+                source.CopyTo(target);
+
+                return pointer;
             }
         }
 
