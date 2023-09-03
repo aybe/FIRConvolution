@@ -43,7 +43,7 @@ public abstract class UnitTestFilter
     {
         const int blockSize = 16;
 
-        var allocator = MemoryAllocator.Current;
+        var allocator = MemoryAllocatorNet.Instance;
 
         var output = new List<float>();
 
