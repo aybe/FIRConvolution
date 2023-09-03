@@ -7,17 +7,9 @@ namespace FIRConvolution
     [UsedImplicitly]
     public sealed class MemoryAllocatorNet : MemoryAllocator<MemoryAllocatorNet>
     {
-        public override IntPtr AlignedAlloc(int size, int alignment)
+        public override IntPtr AlignedAlloc(in int size, in int alignment)
         {
-            if (size < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(size));
-            }
-
-            if (alignment <= 0 || (alignment & alignment - 1) != 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(alignment));
-            }
+            AlignedAllocCheckArgs(size, alignment);
 
             var padding = alignment - 1 + IntPtr.Size;
             var initial = Marshal.AllocHGlobal(size + padding);

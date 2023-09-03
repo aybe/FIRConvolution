@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace FIRConvolution
 {
@@ -23,7 +24,23 @@ namespace FIRConvolution
             }
         }
 
-        public abstract IntPtr AlignedAlloc(int cb, int alignment);
+        public abstract IntPtr AlignedAlloc(in int size, in int alignment);
+
+        [AssertionMethod]
+        protected static void AlignedAllocCheckArgs(in int size, in int alignment)
+        {
+            if (size < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(size), size,
+                    "The size must not be less than zero.");
+            }
+
+            if (alignment <= 0 || (alignment & alignment - 1) != 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(alignment), alignment,
+                    "The alignment must be a power of two.");
+            }
+        }
 
         public abstract void AlignedFree(IntPtr pointer);
 
