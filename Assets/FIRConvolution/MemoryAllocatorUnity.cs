@@ -40,7 +40,7 @@ namespace FIRConvolution
 
         public override unsafe void* Alloc(int cb)
         {
-            var pointer = UnsafeUtility.Malloc(cb, 1, Allocator.Persistent); // TODO alignment
+            var pointer = UnsafeUtility.Malloc(cb, 1, Allocator.Persistent);
 
             if (pointer == null)
             {
@@ -60,26 +60,6 @@ namespace FIRConvolution
             var sizeOf = UnsafeUtility.SizeOf<T>();
 
             return sizeOf;
-        }
-
-        private static unsafe T* AlignedAlloc<T>(T[] source) where T : unmanaged // TODO
-        {
-            var length    = source.Length;
-            var sizeOf    = UnsafeUtility.SizeOf<T>();
-            var size      = sizeOf * length;
-            var alignment = UnsafeUtility.AlignOf<T>();
-            var pointer   = UnsafeUtility.Malloc(size, alignment, Allocator.Persistent);
-
-            if (pointer == null)
-            {
-                throw new OutOfMemoryException();
-            }
-
-            var span = new Span<T>(pointer, length);
-
-            source.AsSpan().CopyTo(span);
-
-            return (T*)pointer;
         }
     }
 }
