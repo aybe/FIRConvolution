@@ -6,7 +6,7 @@ namespace FIRConvolution
 {
     public partial struct Filter
     {
-        public static Filter VectorFullBandOuterInnerCreate(float[] h)
+        public static Filter CreateVectorFullBandOuterInner(float[] h)
         {
             return Create(h, 4);
         }
