@@ -497,6 +497,7 @@ crashlytics-build.properties
 !**/[Pp]ackages/*
 
 # miscellaneous stuff
+.vscode
 *.cd
 *.cd.meta
 *.dgml
