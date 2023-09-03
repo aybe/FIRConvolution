@@ -6,14 +6,14 @@ namespace FIRConvolution
 {
     public partial struct Filter
     {
-        public static Filter CreateVectorHalfBandLoopHalfOuter(float[] h)
+        public static Filter CreateVectorHalfBandHalfLoopOuter(float[] h)
         {
             return Create(h, 4);
         }
 
         [BurstCompile]
         [MonoPInvokeCallback(typeof(FilterMethod))]
-        public static unsafe void ProcessVectorHalfBandLoopHalfOuter(
+        public static unsafe void ProcessVectorHalfBandHalfLoopOuter(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
             ValidateArguments(source, target, length, stride, offset, ref filter);
@@ -33,7 +33,7 @@ namespace FIRConvolution
 
                 var tap = filter.HOffset;
 
-                for (; tap < c; tap += 2) // TODO DRY VectorHalfBandLoopHalfOuterInner
+                for (; tap < c; tap += 2) // TODO DRY VectorHalfBandHalfLoopOuterInner
                 {
                     var h0 = h[tap];
 

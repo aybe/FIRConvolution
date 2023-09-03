@@ -6,14 +6,14 @@ namespace FIRConvolution
 {
     public partial struct Filter
     {
-        public static Filter CreateVectorHalfBandLoopHalfInner(float[] h)
+        public static Filter CreateVectorHalfBandHalfLoopInner(float[] h)
         {
             return Create(h, 1);
         }
 
         [BurstCompile]
         [MonoPInvokeCallback(typeof(FilterMethod))]
-        public static unsafe void ProcessVectorHalfBandLoopHalfInner(
+        public static unsafe void ProcessVectorHalfBandHalfLoopInner(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
             ValidateArguments(source, target, length, stride, offset, ref filter);
