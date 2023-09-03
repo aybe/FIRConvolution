@@ -20,6 +20,8 @@ namespace FIRConvolution
 
         public abstract void AlignedFree(IntPtr pointer);
 
+        public abstract int AlignOf<T>() where T : unmanaged;
+
         public abstract unsafe void* Alloc(int cb);
 
         public abstract unsafe void Free(void* pointer);

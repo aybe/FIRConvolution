@@ -37,6 +37,13 @@ namespace FIRConvolution
             Marshal.FreeHGlobal(initial);
         }
 
+        public override int AlignOf<T>()
+        {
+            var alignOf = MemoryUtility.AlignOf<T>();
+
+            return alignOf;
+        }
+
         public override unsafe void* Alloc(int cb)
         {
             var pointer = Marshal.AllocHGlobal(cb);

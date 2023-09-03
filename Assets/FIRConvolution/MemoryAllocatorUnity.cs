@@ -31,6 +31,13 @@ namespace FIRConvolution
             }
         }
 
+        public override int AlignOf<T>()
+        {
+            var alignOf = UnsafeUtility.AlignOf<T>();
+
+            return alignOf;
+        }
+
         public override unsafe void* Alloc(int cb)
         {
             var pointer = UnsafeUtility.Malloc(cb, 1, Allocator.Persistent); // TODO alignment
