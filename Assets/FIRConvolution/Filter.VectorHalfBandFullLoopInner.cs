@@ -80,7 +80,7 @@ namespace FIRConvolution
                     sum += h0 * z0;
                 }
 
-                ProcessCenterScalar(ref filter, ref sum);
+                UpdateCenterScalar(ref filter, ref sum);
 
                 target[sample] = sum;
             }

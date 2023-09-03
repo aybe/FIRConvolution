@@ -64,7 +64,7 @@ namespace FIRConvolution
                     sum += hv0 * (zv0 + zv1);
                 }
 
-                ProcessCenterVector(ref filter, ref sum);
+                UpdateCenterVector(ref filter, ref sum);
 
                 CopyTo(sum, &target[sample], stride, offset);
             }

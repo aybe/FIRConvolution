@@ -207,7 +207,7 @@ namespace FIRConvolution
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void ProcessCenterScalar(ref Filter filter, ref float sum)
+        private static void UpdateCenterScalar(ref Filter filter, ref float sum)
         {
             var h = filter.H;
             var z = filter.Z;
@@ -220,7 +220,7 @@ namespace FIRConvolution
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void ProcessCenterVector(ref Filter filter, ref float4 sum)
+        private static void UpdateCenterVector(ref Filter filter, ref float4 sum)
         {
             var h = filter.H;
             var c = filter.HCenter;
