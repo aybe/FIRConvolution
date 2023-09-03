@@ -18,21 +18,24 @@ namespace FIRConvolution
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public unsafe partial struct Filter
     {
-        private Filter(float[] h, int vLength, int hOffset = 0) // TODO replace by method
+        private Filter(float[] h, int vLength, int hOffset)
         {
-            if ((h.Length & 1) == 0)
+            if (h.Length % 2 is not 1)
             {
-                throw new ArgumentOutOfRangeException(nameof(h), "Expected an odd number of taps.");
+                throw new ArgumentOutOfRangeException(nameof(h),
+                    "The number of coefficients must be odd.");
             }
 
-            if (vLength <= 0)
+            if (vLength is < 1 or > 4)
             {
-                throw new ArgumentOutOfRangeException(nameof(vLength));
+                throw new ArgumentOutOfRangeException(nameof(vLength),
+                    "The vectorization count must be between 1 and 4.");
             }
 
             if (hOffset < 0 || hOffset >= h.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(hOffset));
+                throw new ArgumentOutOfRangeException(nameof(hOffset),
+                    "The index to the first coefficient must be a valid coefficient index.");
             }
 
             var z = new float[(h.Length + (vLength - 1)) * 2];
