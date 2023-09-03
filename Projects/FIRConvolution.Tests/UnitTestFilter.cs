@@ -85,11 +85,7 @@ public abstract class UnitTestFilter
 
         var input = GetInput(TestSignal, TestIterations);
 
-        Filters.Logger = o => TestContext.WriteLine(o?.ToString());
-
         var actual = MakeFilter(input, taps, factory, filterMethod);
-
-        Filters.Logger = null;
 
         var expected = MakeFilter(input, taps, FilterFactory.CreateScalarFullBand, Filters.ScalarFullBand);
 

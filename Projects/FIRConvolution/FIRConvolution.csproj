@@ -17,16 +17,6 @@
 		<DefineConstants>$(DefineConstants);UNITY_BURST_EXPERIMENTAL_LOOP_INTRINSICS</DefineConstants>
 	</PropertyGroup>
 
-	<!--enable logging-->
-	<PropertyGroup>
-		<DefineConstants>$(DefineConstants);FIR_LOG</DefineConstants>
-	</PropertyGroup>
-
-	<!--enable new convolution approach-->
-	<PropertyGroup>
-		<DefineConstants>$(DefineConstants);FIR_NEW</DefineConstants>
-	</PropertyGroup>
-
 	<ItemGroup>
 
 		<PackageReference Include="Unity3D" Version="2.1.3" />
