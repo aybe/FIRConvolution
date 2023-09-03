@@ -17,7 +17,7 @@ namespace FIRConvolution
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public unsafe partial struct Filter
     {
-        public Filter(float[] h, int vLength, int hOffset = 0) // TODO replace by method
+        private Filter(float[] h, int vLength, int hOffset = 0) // TODO replace by method
         {
             if ((h.Length & 1) == 0)
             {
@@ -59,17 +59,17 @@ namespace FIRConvolution
         /// <summary>
         ///     The taps center index.
         /// </summary>
-        public int HCenter { get; }
+        private int HCenter { get; }
 
         /// <summary>
         ///     The taps count.
         /// </summary>
-        public int HLength { get; }
+        private int HLength { get; }
 
         /// <summary>
         ///     The first tap offset (for half-band filtering).
         /// </summary>
-        public int HOffset { get; }
+        private int HOffset { get; }
 
         /// <summary>
         ///     The center tap multiplier.
@@ -104,7 +104,7 @@ namespace FIRConvolution
         /// <summary>
         ///     The vectorization count.
         /// </summary>
-        public int VLength { get; }
+        private int VLength { get; }
 
         private static Filter Create(float[] h, int v)
         {
@@ -157,7 +157,7 @@ namespace FIRConvolution
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static int UpdateZ(ref Filter filter, float* source, int sample, int stride, int offset)
+        private static int UpdateZ(ref Filter filter, float* source, int sample, int stride, int offset)
         {
             // normally one would need for a call to update the Z offset at the end
 
@@ -197,7 +197,7 @@ namespace FIRConvolution
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void ProcessCenterScalar(ref Filter filter, ref float sum)
+        private static void ProcessCenterScalar(ref Filter filter, ref float sum)
         {
             var h = filter.H;
             var z = filter.Z;
@@ -210,7 +210,7 @@ namespace FIRConvolution
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void ProcessCenterVector(ref Filter filter, ref float4 sum)
+        private static void ProcessCenterVector(ref Filter filter, ref float4 sum)
         {
             var h = filter.H;
             var c = filter.HCenter;
