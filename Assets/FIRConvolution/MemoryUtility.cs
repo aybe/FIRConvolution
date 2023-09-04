@@ -3,9 +3,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
+using JetBrains.Annotations;
 
 namespace FIRConvolution
 {
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public static class MemoryUtility
     {
         public static int AlignOf<T>() where T : struct
