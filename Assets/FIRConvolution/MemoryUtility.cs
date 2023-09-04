@@ -49,7 +49,7 @@ namespace FIRConvolution
             return isBlittable;
         }
 
-        private static bool IsBlittable(this Type type)
+        public static bool IsBlittable(Type type)
         {
             var handle = default(GCHandle);
 
