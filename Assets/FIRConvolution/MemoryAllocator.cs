@@ -58,7 +58,7 @@ namespace FIRConvolution
             }
         }
 
-        public abstract unsafe void Free(void* pointer);
+        public abstract void Free(in IntPtr pointer);
 
         public abstract int SizeOf<TElement>() where TElement : unmanaged;
     }

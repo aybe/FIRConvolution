@@ -45,9 +45,9 @@ namespace FIRConvolution
             return alloc;
         }
 
-        public override unsafe void Free(void* pointer)
+        public override void Free(in IntPtr pointer)
         {
-            Marshal.FreeHGlobal((IntPtr)pointer);
+            Marshal.FreeHGlobal(pointer);
         }
 
         public override int SizeOf<T>()

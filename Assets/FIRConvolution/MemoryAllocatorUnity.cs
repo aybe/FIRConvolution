@@ -57,9 +57,12 @@ namespace FIRConvolution
             }
         }
 
-        public override unsafe void Free(void* pointer)
+        public override void Free(in IntPtr pointer)
         {
-            UnsafeUtility.Free(pointer, Allocator.Persistent);
+            unsafe
+            {
+                UnsafeUtility.Free(pointer.ToPointer(), Allocator.Persistent);
+            }
         }
 
         public override int SizeOf<T>()
