@@ -8,12 +8,15 @@ namespace FIRConvolution
 {
     public static class MemoryUtility
     {
-        [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
         public static int AlignOf<T>() where T : struct
         {
-            var type = typeof(T);
+            return AlignOfCache<T>.Value;
+        }
 
-            if (!IsBlittable<T>())
+        [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
+        public static int AlignOf(Type type)
+        {
+            if (!IsBlittable(type))
             {
                 throw new InvalidOperationException("The type is not blittable.");
             }
@@ -69,6 +72,11 @@ namespace FIRConvolution
                     handle.Free();
                 }
             }
+        }
+
+        private static class AlignOfCache<T>
+        {
+            public static readonly int Value = AlignOf(typeof(T));
         }
 
         private static class IsBlittableCache<T>
