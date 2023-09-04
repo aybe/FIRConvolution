@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 
 namespace FIRConvolution
 {
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public abstract class MemoryAllocator
     {
         public IntPtr AlignedAlloc<T>(T[] array) where T : unmanaged
