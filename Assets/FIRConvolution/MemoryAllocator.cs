@@ -42,7 +42,7 @@ namespace FIRConvolution
             }
         }
 
-        public abstract void AlignedFree(IntPtr pointer);
+        public abstract void AlignedFree(in IntPtr pointer);
 
         public abstract int AlignOf<T>() where T : unmanaged;
 

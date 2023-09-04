@@ -21,7 +21,7 @@ namespace FIRConvolution
             return aligned;
         }
 
-        public override void AlignedFree(IntPtr pointer)
+        public override void AlignedFree(in IntPtr pointer)
         {
             var storage = pointer - IntPtr.Size;
             var initial = Marshal.ReadIntPtr(storage);

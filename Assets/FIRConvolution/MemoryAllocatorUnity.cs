@@ -25,7 +25,7 @@ namespace FIRConvolution
             }
         }
 
-        public override void AlignedFree(IntPtr pointer)
+        public override void AlignedFree(in IntPtr pointer)
         {
             unsafe
             {
