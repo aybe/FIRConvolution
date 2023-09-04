@@ -60,7 +60,7 @@ namespace FIRConvolution
 
         public abstract void Free(in IntPtr pointer);
 
-        public abstract int SizeOf<TElement>() where TElement : unmanaged;
+        public abstract int SizeOf<T>() where T : unmanaged;
     }
 
     public abstract class MemoryAllocator<TInstance> : MemoryAllocator
