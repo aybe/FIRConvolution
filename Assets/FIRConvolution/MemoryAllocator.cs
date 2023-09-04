@@ -46,7 +46,17 @@ namespace FIRConvolution
 
         public abstract int AlignOf<T>() where T : unmanaged;
 
-        public abstract unsafe void* Alloc(int cb);
+        public abstract IntPtr Alloc(in int size);
+
+        [AssertionMethod]
+        protected static void AllocCheckArgs(in int size)
+        {
+            if (size < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(size), size,
+                    "The size must not be less than zero.");
+            }
+        }
 
         public abstract unsafe void Free(void* pointer);
 

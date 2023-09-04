@@ -40,16 +40,21 @@ namespace FIRConvolution
             return alignOf;
         }
 
-        public override unsafe void* Alloc(int cb)
+        public override IntPtr Alloc(in int size)
         {
-            var pointer = UnsafeUtility.Malloc(cb, 1, Allocator.Persistent);
+            AllocCheckArgs(size);
 
-            if (pointer == null)
+            unsafe
             {
-                throw new OutOfMemoryException();
-            }
+                var pointer = UnsafeUtility.Malloc(size, 1, Allocator.Persistent);
 
-            return pointer;
+                if (pointer == null)
+                {
+                    throw new OutOfMemoryException();
+                }
+
+                return new IntPtr(pointer);
+            }
         }
 
         public override unsafe void Free(void* pointer)

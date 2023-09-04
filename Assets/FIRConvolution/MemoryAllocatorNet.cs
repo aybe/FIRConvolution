@@ -36,16 +36,13 @@ namespace FIRConvolution
             return alignOf;
         }
 
-        public override unsafe void* Alloc(int cb)
+        public override IntPtr Alloc(in int size)
         {
-            var pointer = Marshal.AllocHGlobal(cb);
+            AllocCheckArgs(size);
 
-            if (pointer == IntPtr.Zero)
-            {
-                throw new OutOfMemoryException();
-            }
+            var alloc = Marshal.AllocHGlobal(size);
 
-            return (void*)pointer;
+            return alloc;
         }
 
         public override unsafe void Free(void* pointer)
