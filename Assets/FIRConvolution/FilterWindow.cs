@@ -1,4 +1,4 @@
-﻿namespace FIRConvolution.Tests.Formats.Audio.Extensions
+namespace FIRConvolution
 {
     public enum FilterWindow
     {

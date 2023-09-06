@@ -221,7 +221,7 @@ public class UnitTest3
         const int fc = 11025;
         const int bw = 441;
 
-        var coefficients = Formats.Audio.Extensions.Filter.LowPass(fs, fc, bw, FilterWindow.Blackman);
+        var coefficients = FilterUtility.LowPass(fs, fc, bw, FilterWindow.Blackman);
 
         return coefficients;
     }

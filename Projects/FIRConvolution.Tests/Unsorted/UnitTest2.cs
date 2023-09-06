@@ -97,7 +97,7 @@ public class UnitTest2
         var targetPath = Path.Combine(directory ?? string.Empty, Path.ChangeExtension($"{fileName}-{fs}-{fc}-{bw}-{wt}", extension));
 
         Console.WriteLine(targetPath);
-        var coefficients = Formats.Audio.Extensions.Filter.LowPass(fs, fc, bw, wt);
+        var coefficients = FilterUtility.LowPass(fs, fc, bw, wt);
 
         var filter = new Formats.Audio.Extensions.Filter(coefficients);
 

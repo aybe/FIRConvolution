@@ -1,5 +1,4 @@
-﻿using FIRConvolution.Tests.Formats.Audio.Extensions;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace FIRConvolution.Tests.Unsorted;
 
@@ -20,7 +19,7 @@ internal sealed class FilterState1
 
     private static float[] GetCoefficients()
     {
-        var f = Formats.Audio.Extensions.Filter.LowPass(44100, 11025, 441, FilterWindow.Blackman);
+        var f = FilterUtility.LowPass(44100, 11025, 441, FilterWindow.Blackman);
 
         var h = Array.ConvertAll(f, Convert.ToSingle);
 

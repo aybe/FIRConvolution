@@ -34,7 +34,7 @@ namespace FIRConvolution.Tests.Formats.Audio.Extensions
 
             var fc = fs / 4.0d;
 
-            var lp = Filter.LowPass(fs, fc, bw, fw);
+            var lp = FilterUtility.LowPass(fs, fc, bw, fw);
 
             var hb = Filter.HalfBandTaps(lp.Length);
 
