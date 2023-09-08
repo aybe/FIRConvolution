@@ -52,11 +52,9 @@ public sealed class FFTRenderer : MonoBehaviour
     {
         UpdateArray();
 
-        Renderer.widthMultiplier = Thickness;
-
         AudioListener.GetSpectrumData(FFT, 0, FFTWindow);
 
-        Process(FFT);
+        UpdateGraph(FFT);
     }
 
     private void UpdateArray()
@@ -69,11 +67,13 @@ public sealed class FFTRenderer : MonoBehaviour
         FFT = new float[size];
     }
 
-    private void Process(float[] fft)
+    private void UpdateGraph(float[] fft)
     {
         var length = fft.Length;
 
         Renderer.positionCount = length;
+
+        Renderer.widthMultiplier = Thickness;
 
         // scale either mode so both are friendly to use
 
