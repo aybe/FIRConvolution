@@ -70,6 +70,7 @@ public sealed class FFTRenderer : MonoBehaviour
 
         FFTPositions = new Vector3[size];
 
+        FFTPositions[size - 1] = Vector3.right;
     }
 
     private void UpdateGraph(float[] fft)
@@ -139,7 +140,6 @@ public sealed class FFTRenderer : MonoBehaviour
             }
         }
 
-        Renderer.SetPosition(length - 1, Vector3.right);
         Renderer.SetPositions(FFTPositions);
     }
 
