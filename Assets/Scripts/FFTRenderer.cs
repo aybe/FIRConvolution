@@ -25,6 +25,8 @@ public sealed class FFTRenderer : MonoBehaviour
 
     private float[] FFT;
 
+    private Vector3[] FFTPositions;
+
     private void Awake()
     {
         if (Renderer == null)
@@ -65,6 +67,9 @@ public sealed class FFTRenderer : MonoBehaviour
             return;
 
         FFT = new float[size];
+
+        FFTPositions = new Vector3[size];
+
     }
 
     private void UpdateGraph(float[] fft)
@@ -113,7 +118,7 @@ public sealed class FFTRenderer : MonoBehaviour
 
                 var xf = BinToLogX((int)FFTSize, x, nf);
 
-                Renderer.SetPosition(x, new Vector3(xf, y, 0.0f));
+                FFTPositions[x] = new Vector3(xf, y, 0.0f);
             }
         }
         else
@@ -130,11 +135,12 @@ public sealed class FFTRenderer : MonoBehaviour
 
                 y = math.clamp(y, 0, 1);
 
-                Renderer.SetPosition(x, new Vector3(x, y, 0.0f) * scale);
+                FFTPositions[x] = new Vector3(x, y, 0.0f) * scale;
             }
         }
 
         Renderer.SetPosition(length - 1, Vector3.right);
+        Renderer.SetPositions(FFTPositions);
     }
 
     private static float BinToLogX(int fftSize, int binIndex, float nyquistFrequency)

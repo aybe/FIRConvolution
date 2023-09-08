@@ -281,6 +281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739b730844761d94eaccd8b4b8ef464d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FFT: []
+  FFTPositions: []
   FFTSize: 512
   FFTWindow: 4
   Renderer: {fileID: 472531825}
@@ -623,6 +625,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739b730844761d94eaccd8b4b8ef464d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FFT: []
+  FFTPositions: []
   FFTSize: 512
   FFTWindow: 4
   Renderer: {fileID: 1689570246}
