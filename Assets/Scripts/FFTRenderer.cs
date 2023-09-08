@@ -77,7 +77,7 @@ public sealed class FFTRenderer : MonoBehaviour
 
         // scale either mode so both are friendly to use
 
-        Span<float> logs = stackalloc float[fft.Length];
+        Span<float> logs = stackalloc float[length];
 
         const float logAbsMin = 0.0001f;
 
@@ -86,7 +86,7 @@ public sealed class FFTRenderer : MonoBehaviour
 
         var logRange = logMax - logMin;
 
-        for (var i = 0; i < logs.Length; i++)
+        for (var i = 0; i < length; i++)
         {
             var binVal = fft[i];
 
@@ -140,7 +140,7 @@ public sealed class FFTRenderer : MonoBehaviour
             }
         }
 
-        Renderer.SetPosition(fft.Length - 1, Vector3.right);
+        Renderer.SetPosition(length - 1, Vector3.right);
     }
 
     private static float BinToLogX(int fftSize, int binIndex, float nyquistFrequency)
