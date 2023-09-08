@@ -86,9 +86,6 @@ public sealed class FFTRenderer : MonoBehaviour
 
         var logRange = logMaxVal - logMinVal;
 
-        var logMin = float.MaxValue;
-        var logMax = float.MinValue;
-
         for (var i = 0; i < logs.Length; i++)
         {
             var binVal = fft[i];
@@ -98,10 +95,6 @@ public sealed class FFTRenderer : MonoBehaviour
             binLog = math.clamp(binLog, logMinVal, logMaxVal);
 
             logs[i] = binLog;
-
-            logMin = math.min(logMin, binLog);
-
-            logMax = math.max(logMax, binLog);
         }
 
         var yPosition = -VerticalPosition;
