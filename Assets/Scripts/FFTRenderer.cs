@@ -81,10 +81,10 @@ public sealed class FFTRenderer : MonoBehaviour
 
         const float logAbsMin = 0.0001f;
 
-        var logMinVal = math.log(logAbsMin);
-        var logMaxVal = math.log(1.0f);
+        var logMin = math.log(logAbsMin);
+        var logMax = math.log(1.0f);
 
-        var logRange = logMaxVal - logMinVal;
+        var logRange = logMax - logMin;
 
         for (var i = 0; i < logs.Length; i++)
         {
@@ -92,7 +92,7 @@ public sealed class FFTRenderer : MonoBehaviour
 
             var binLog = math.log(binVal + logAbsMin);
 
-            binLog = math.clamp(binLog, logMinVal, logMaxVal);
+            binLog = math.clamp(binLog, logMin, logMax);
 
             logs[i] = binLog;
         }
@@ -109,7 +109,7 @@ public sealed class FFTRenderer : MonoBehaviour
             {
                 var y = logs[x];
 
-                y = (y - logMinVal) / logRange;
+                y = (y - logMin) / logRange;
 
                 y -= yPosition;
 
@@ -128,7 +128,7 @@ public sealed class FFTRenderer : MonoBehaviour
 
             for (var x = 0; x < length - 1; x++)
             {
-                var y = FFTUtility.DbToLinear((FFTUtility.LinearToDb(fft[x]) - logMinVal) / logRange);
+                var y = FFTUtility.DbToLinear((FFTUtility.LinearToDb(fft[x]) - logMin) / logRange);
 
                 y -= yPosition;
 
