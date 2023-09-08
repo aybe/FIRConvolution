@@ -88,13 +88,7 @@ public sealed class FFTRenderer : MonoBehaviour
 
         for (var i = 0; i < length; i++)
         {
-            var binVal = fft[i];
-
-            var binLog = math.log(binVal + logAbsMin);
-
-            binLog = math.clamp(binLog, logMin, logMax);
-
-            logs[i] = binLog;
+            logs[i] = math.clamp(math.log(fft[i] + logAbsMin), logMin, logMax);
         }
 
         var yPosition = -VerticalPosition;
