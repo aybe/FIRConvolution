@@ -5,6 +5,14 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public sealed class FFTRenderer : MonoBehaviour
 {
+    [SerializeField]
+    [HideInInspector]
+    private float[] FFT;
+
+    [SerializeField]
+    [HideInInspector]
+    private Vector3[] FFTPositions;
+
     public FFTSize FFTSize = FFTSize._1024;
 
     public FFTWindow FFTWindow = FFTWindow.BlackmanHarris;
@@ -22,10 +30,6 @@ public sealed class FFTRenderer : MonoBehaviour
 
     [Range(1.0f, 4.0f)]
     public float VerticalScale = 1.0f;
-
-    private float[] FFT;
-
-    private Vector3[] FFTPositions;
 
     private void Awake()
     {
