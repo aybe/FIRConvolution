@@ -162,13 +162,13 @@ namespace FIRConvolution
                     "The length of arrays must be a multiple of vectorization length.");
             }
 
-            var abs = math.abs(target - source);
+            //var abs = math.abs(target - source);
 
-            if (abs < length)
-            {
-                throw new ArgumentException(
-                    "The pointers to source and target arrays must not overlap.");
-            }
+            //if (abs < length)
+            //{
+            //    throw new ArgumentException(
+            //        "The pointers to source and target arrays must not overlap.");
+            //}
 
             if (stride < 1)
             {
