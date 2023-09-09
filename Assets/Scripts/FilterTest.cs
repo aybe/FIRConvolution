@@ -143,5 +143,3 @@ public unsafe class FilterTest : MonoBehaviour
         FilterPass = method;
     }
 }
-
-internal delegate void FilterProc(float[] data, int channels); // TODO rename
