@@ -39,7 +39,7 @@ public abstract class UnitTestFilter
         return target;
     }
 
-    private static unsafe List<float> MakeFilter(float[] input, float[] taps, UnitTestFilterFactory<Filter> factory, FilterMethod filterMethod)
+    private static unsafe List<float> MakeFilter(float[] input, float[] taps, UnitTestFilterFactory<Filter> factory, FilterMethodHandler filterMethod)
     {
         const int blockSize = 16;
 
@@ -75,7 +75,7 @@ public abstract class UnitTestFilter
         return output;
     }
 
-    protected unsafe void TestFilter(UnitTestFilterFactory<Filter> factory, FilterMethod filterMethod, int bandwidth)
+    protected unsafe void TestFilter(UnitTestFilterFactory<Filter> factory, FilterMethodHandler filterMethod, int bandwidth)
     {
 #if !DEBUG
         TestContext.WriteLine("Not printing stats for release configuration!"); // OOM otherwise

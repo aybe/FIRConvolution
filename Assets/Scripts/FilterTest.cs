@@ -12,7 +12,7 @@ public unsafe class FilterTest : MonoBehaviour
 
     private Filter[]? FilterData;
 
-    private FilterMethod FilterPass = null!;
+    private FilterMethodHandler FilterPass = null!;
 
     private FilterProc FilterProc = null!;
 
@@ -146,7 +146,7 @@ public unsafe class FilterTest : MonoBehaviour
             _                                           => throw new ArgumentOutOfRangeException()
         };
 
-        FilterMethod method = FilterType switch
+        FilterMethodHandler method = FilterType switch
         {
             FilterType.ScalarFullBand                   => Filter.ProcessScalarFullBand,
             FilterType.ScalarHalfBandFullLoop           => Filter.ProcessScalarHalfBandFullLoop,
