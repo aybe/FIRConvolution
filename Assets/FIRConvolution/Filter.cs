@@ -118,18 +118,12 @@ namespace FIRConvolution
         }
 
         [BurstCompile]
-        private static void CopyTo(in float4 source, in float* target, in int stride, in int offset)
+        private static void CopyTo(in int sample, in int stride, in int offset, in float* target, in float4 source)
         {
-            var vec1 = new int4(0, 1, 2, 3);
-            var vec2 = vec1 * stride;
-            var vec3 = vec2 + offset;
-
-            for (var i = 0; i < 4; i++)
-            {
-                var index = vec3[i];
-
-                target[i] = source[index];
-            }
+            target[(sample + 0) * stride + offset] = source[0];
+            target[(sample + 1) * stride + offset] = source[1];
+            target[(sample + 2) * stride + offset] = source[2];
+            target[(sample + 3) * stride + offset] = source[3];
         }
 
         [BurstCompile]

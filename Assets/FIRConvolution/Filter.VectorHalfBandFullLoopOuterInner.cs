@@ -89,7 +89,7 @@ namespace FIRConvolution
 
                 UpdateCenterVector(ref filter, ref sum);
 
-                CopyTo(sum, &target[sample], stride, offset);
+                CopyTo(sample, stride, offset, target, sum);
             }
         }
     }
