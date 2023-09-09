@@ -80,7 +80,7 @@ namespace FIRConvolution
                     sum += math.dot(h0, z0);
                 }
 
-                target[sample] = sum;
+                CopyTo(sample, stride, offset, target, sum);
             }
         }
     }

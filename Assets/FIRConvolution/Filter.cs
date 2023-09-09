@@ -118,6 +118,12 @@ namespace FIRConvolution
         }
 
         [BurstCompile]
+        private static void CopyTo(in int sample, in int stride, in int offset, in float* target, in float source)
+        {
+            target[(sample + 0) * stride + offset] = source;
+        }
+
+        [BurstCompile]
         private static void CopyTo(in int sample, in int stride, in int offset, in float* target, in float4 source)
         {
             target[(sample + 0) * stride + offset] = source[0];

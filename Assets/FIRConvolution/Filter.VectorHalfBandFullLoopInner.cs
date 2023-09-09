@@ -82,7 +82,7 @@ namespace FIRConvolution
 
                 UpdateCenterScalar(ref filter, ref sum);
 
-                target[sample] = sum;
+                CopyTo(sample, stride, offset, target, sum);
             }
         }
     }
