@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using JetBrains.Annotations;
 using Unity.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -160,6 +161,33 @@ namespace WorkInProgress
         private void UpdateFFT()
         {
             AudioListener.GetSpectrumData(FFTArray, FFTChannel, FFTWindow);
+
+            var length = FFTArray.Length;
+
+            // scale FFT using logarithm so that it looks much better
+
+            Span<float> logs = stackalloc float[length];
+
+            const float logAbsMin = 0.0001f; // avoid infinite values
+
+            var logMin = math.log(logAbsMin);
+            var logMax = math.log(1.0f);
+
+            var logRange = logMax - logMin;
+
+            for (var i = 0; i < length; i++)
+            {
+                logs[i] = math.clamp(math.log(FFTArray[i] + logAbsMin), logMin, logMax);
+            }
+
+            for (var i = 0; i < length; i++)
+            {
+                var f = FFTArray[i];
+                var g = FFTUtility.LinearToDb(f);
+                var h = (g - logMin) / logRange;
+                var y = FFTUtility.DbToLinear(h);
+                FFTArray[i] = y;
+            }
 
             NativeArray<float>.Copy(FFTArray, 0, FFTArrayNative, FFTArray.Length * FFTHistoryIndex, FFTArray.Length);
 
