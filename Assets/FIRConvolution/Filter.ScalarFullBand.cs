@@ -1,10 +1,14 @@
 ﻿using AOT;
 using Unity.Burst;
+using Unity.Profiling;
 
 namespace FIRConvolution
 {
     public partial struct Filter
     {
+        private static readonly ProfilerMarker FilterProfilerMarkerFilterScalarFull
+            = new(ProfilerCategory.Audio, nameof(FilterProfilerMarkerFilterScalarFull));
+
         public static Filter CreateScalarFullBand(float[] h, MemoryAllocator allocator)
         {
             return Create(h, 1, allocator);
@@ -16,6 +20,8 @@ namespace FIRConvolution
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
             ProcessArgs(source, target, length, stride, offset, ref filter);
+
+            using var auto = FilterProfilerMarkerFilterScalarFull.Auto();
 
             var h = filter.H;
             var z = filter.Z;

@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Unity.Burst;
 using Unity.Mathematics;
+using Unity.Profiling;
 
 namespace FIRConvolution
 {
@@ -107,6 +108,24 @@ namespace FIRConvolution
         /// </summary>
         private int VLength { get; }
 
+        private static readonly ProfilerMarker FilterProfilerMarkerCopyTo1
+            = new(ProfilerCategory.Audio, nameof(FilterProfilerMarkerCopyTo1));
+
+        private static readonly ProfilerMarker FilterProfilerMarkerCopyTo4
+            = new(ProfilerCategory.Audio, nameof(FilterProfilerMarkerCopyTo4));
+
+        private static readonly ProfilerMarker FilterProfilerMarkerProcessArgs
+            = new(ProfilerCategory.Audio, nameof(FilterProfilerMarkerProcessArgs));
+
+        private static readonly ProfilerMarker FilterProfilerMarkerUpdateCenterScalar
+            = new(ProfilerCategory.Audio, nameof(FilterProfilerMarkerUpdateCenterScalar));
+
+        private static readonly ProfilerMarker FilterProfilerMarkerUpdateCenterVector
+            = new(ProfilerCategory.Audio, nameof(FilterProfilerMarkerUpdateCenterVector));
+
+        private static readonly ProfilerMarker FilterProfilerMarkerUpdateZ
+            = new(ProfilerCategory.Audio, nameof(FilterProfilerMarkerUpdateZ));
+
         private static Filter Create(float[] h, int v, MemoryAllocator allocator)
         {
             var sum0 = h.Where((_, i) => i % 2 == 0).Sum(Math.Abs);
@@ -120,12 +139,16 @@ namespace FIRConvolution
         [BurstCompile]
         private static void CopyTo(in int sample, in int stride, in int offset, in float* target, in float source)
         {
+            using var auto = FilterProfilerMarkerCopyTo1.Auto();
+
             target[(sample + 0) * stride + offset] = source;
         }
 
         [BurstCompile]
         private static void CopyTo(in int sample, in int stride, in int offset, in float* target, in float4 source)
         {
+            using var auto = FilterProfilerMarkerCopyTo4.Auto();
+
             target[(sample + 0) * stride + offset] = source[0];
             target[(sample + 1) * stride + offset] = source[1];
             target[(sample + 2) * stride + offset] = source[2];
@@ -138,6 +161,8 @@ namespace FIRConvolution
         private static void ProcessArgs(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
+            using var auto = FilterProfilerMarkerProcessArgs.Auto();
+
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source),
@@ -193,6 +218,8 @@ namespace FIRConvolution
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void UpdateCenterScalar(ref Filter filter, ref float sum)
         {
+            using var auto = FilterProfilerMarkerUpdateCenterScalar.Auto();
+
             var h = filter.H;
             var z = filter.Z;
             var c = filter.HCenter;
@@ -206,6 +233,8 @@ namespace FIRConvolution
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void UpdateCenterVector(ref Filter filter, ref float4 sum)
         {
+            using var auto = FilterProfilerMarkerUpdateCenterVector.Auto();
+
             var h = filter.H;
             var c = filter.HCenter;
             var z = filter.Z;
@@ -236,6 +265,7 @@ namespace FIRConvolution
 
             // at the same time we can also hide some details of the implementation
 
+            using var auto = FilterProfilerMarkerUpdateZ.Auto();
 
             // update the Z offsets, initial pre-roll is brought back to index zero
 
