@@ -484,12 +484,6 @@ crashlytics-build.properties
 # FIRConvolution
 ################################################################################
 
-# keep project so it can be referenced by MSTest project (fix Unity.gitignore)
-!/**/*.csproj
-
-# keep project ignores for Unity projects
-/*.csproj
-
 # keep meta for Unity (fix VisualStudio.gitignore)
 !/Assets/**/*.meta
 
@@ -497,7 +491,6 @@ crashlytics-build.properties
 !**/[Pp]ackages/*
 
 # miscellaneous stuff
-.vscode
 *.cd
 *.cd.meta
 *.dgml
