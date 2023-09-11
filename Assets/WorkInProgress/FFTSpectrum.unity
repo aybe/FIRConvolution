@@ -155,12 +155,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FFTArray: []
-  FFTSize: 256
+  FFTSize: 1024
   FFTWindow: 5
   FFTChannel: 0
-  FFTHistory: 256
+  FFTHistory: 1024
   FFTHistoryIndex: 0
   FFTTexture: {fileID: 0}
+  FFTMesh: {fileID: 0}
+  FFTMaterial: {fileID: 2100000, guid: 7e5ecf14725a0ca408f8ec8d85c82344, type: 2}
 --- !u!4 &1695938618
 Transform:
   m_ObjectHideFlags: 0

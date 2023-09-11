@@ -3,6 +3,7 @@ using System.ComponentModel;
 using JetBrains.Annotations;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace WorkInProgress
 {
@@ -36,6 +37,12 @@ namespace WorkInProgress
         [SerializeField] // TODO hide
         private Texture2D FFTTexture;
 
+        [SerializeField] // TODO hide
+        private Mesh FFTMesh;
+
+        [SerializeField]
+        private Material FFTMaterial;
+
         private NativeArray<float> FFTArrayNative;
 
         private void Reset()
@@ -52,6 +59,8 @@ namespace WorkInProgress
         private void Update()
         {
             UpdateFFT();
+
+            Graphics.DrawMesh(FFTMesh, Matrix4x4.identity, FFTMaterial, 0);
         }
 
         private void OnEnable()
@@ -64,6 +73,10 @@ namespace WorkInProgress
             FFTArray = null;
 
             FFTArrayNative.Dispose();
+
+            Destroy(FFTMesh);
+
+            FFTMesh = null;
 
             Destroy(FFTTexture);
 
@@ -190,6 +203,53 @@ namespace WorkInProgress
                 {
                     name = "FFT Texture"
                 };
+            }
+
+            var vertexCount = (size + 1) * (FFTHistory + 1);
+
+            if (FFTMesh == null || FFTMesh.vertexCount != vertexCount)
+            {
+                FFTMaterial.mainTexture = FFTTexture;
+
+                var vertices = new Vector3[vertexCount];
+                var uv       = new Vector2[vertices.Length];
+
+                for (int y = 0, i = 0; y <= FFTHistory; y++)
+                {
+                    for (var x = 0; x <= size; x++, i++)
+                    {
+                        var x1 = (float)x / size;
+                        var y1 = (float)y / FFTHistory;
+                        vertices[i] = new Vector3(x1, 0, y1) - new Vector3(0.5f, 0.0f, 0.5f);
+                        uv[i]       = new Vector2(x1, y1);
+                    }
+                }
+
+                var triangles = new int[size * FFTHistory * 6];
+
+                for (int ti = 0, vi = 0, y = 0; y < FFTHistory; y++, vi++)
+                {
+                    for (var x = 0; x < size; x++, ti += 6, vi++)
+                    {
+                        triangles[ti]     = vi;
+                        triangles[ti + 3] = triangles[ti + 2] = vi + 1;
+                        triangles[ti + 4] = triangles[ti + 1] = vi + size + 1;
+                        triangles[ti + 5] = vi + size + 2;
+                    }
+                }
+
+                Destroy(FFTMesh);
+
+                FFTMesh = new Mesh
+                {
+                    name        = "FFT Mesh",
+                    indexFormat = IndexFormat.UInt32,
+                    vertices    = vertices,
+                    uv          = uv,
+                    triangles   = triangles
+                };
+
+                FFTMesh.RecalculateNormals();
             }
         }
     }
