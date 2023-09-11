@@ -7,8 +7,8 @@ namespace FIRConvolution
 {
     public partial struct Filter
     {
-        private static readonly ProfilerMarker FilterProfilerMarkerFilterVectorFullOuter
-            = new(ProfilerCategory.Audio, nameof(FilterProfilerMarkerFilterVectorFullOuter));
+        private static readonly ProfilerMarker FilterVectorFullOuterMarker
+            = new(ProfilerCategory.Audio, nameof(FilterVectorFullOuterMarker));
 
         public static Filter CreateVectorFullBandOuter(float[] h, MemoryAllocator allocator)
         {
@@ -22,7 +22,7 @@ namespace FIRConvolution
         {
             ProcessArgs(source, target, length, stride, offset, ref filter);
             
-            using var auto = FilterProfilerMarkerFilterVectorFullOuter.Auto();
+            using var auto = FilterVectorFullOuterMarker.Auto();
 
             var h = filter.H;
             var z = filter.Z;

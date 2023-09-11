@@ -108,23 +108,23 @@ namespace FIRConvolution
         /// </summary>
         private int VLength { get; }
 
-        private static readonly ProfilerMarker FilterProfilerMarkerCopyTo1
-            = new(ProfilerCategory.Audio, nameof(FilterProfilerMarkerCopyTo1));
+        private static readonly ProfilerMarker CopyTo1Marker
+            = new(ProfilerCategory.Audio, nameof(CopyTo1Marker));
 
-        private static readonly ProfilerMarker FilterProfilerMarkerCopyTo4
-            = new(ProfilerCategory.Audio, nameof(FilterProfilerMarkerCopyTo4));
+        private static readonly ProfilerMarker CopyTo4Marker
+            = new(ProfilerCategory.Audio, nameof(CopyTo4Marker));
 
-        private static readonly ProfilerMarker FilterProfilerMarkerProcessArgs
-            = new(ProfilerCategory.Audio, nameof(FilterProfilerMarkerProcessArgs));
+        private static readonly ProfilerMarker ProcessArgsMarker
+            = new(ProfilerCategory.Audio, nameof(ProcessArgsMarker));
 
-        private static readonly ProfilerMarker FilterProfilerMarkerUpdateCenterScalar
-            = new(ProfilerCategory.Audio, nameof(FilterProfilerMarkerUpdateCenterScalar));
+        private static readonly ProfilerMarker UpdateCenterScalarMarker
+            = new(ProfilerCategory.Audio, nameof(UpdateCenterScalarMarker));
 
-        private static readonly ProfilerMarker FilterProfilerMarkerUpdateCenterVector
-            = new(ProfilerCategory.Audio, nameof(FilterProfilerMarkerUpdateCenterVector));
+        private static readonly ProfilerMarker UpdateCenterVectorMarker
+            = new(ProfilerCategory.Audio, nameof(UpdateCenterVectorMarker));
 
-        private static readonly ProfilerMarker FilterProfilerMarkerUpdateZ
-            = new(ProfilerCategory.Audio, nameof(FilterProfilerMarkerUpdateZ));
+        private static readonly ProfilerMarker UpdateZMarker
+            = new(ProfilerCategory.Audio, nameof(UpdateZMarker));
 
         private static Filter Create(float[] h, int v, MemoryAllocator allocator)
         {
@@ -139,7 +139,7 @@ namespace FIRConvolution
         [BurstCompile]
         private static void CopyTo(in int sample, in int stride, in int offset, in float* target, in float source)
         {
-            using var auto = FilterProfilerMarkerCopyTo1.Auto();
+            using var auto = CopyTo1Marker.Auto();
 
             target[(sample + 0) * stride + offset] = source;
         }
@@ -147,7 +147,7 @@ namespace FIRConvolution
         [BurstCompile]
         private static void CopyTo(in int sample, in int stride, in int offset, in float* target, in float4 source)
         {
-            using var auto = FilterProfilerMarkerCopyTo4.Auto();
+            using var auto = CopyTo4Marker.Auto();
 
             target[(sample + 0) * stride + offset] = source[0];
             target[(sample + 1) * stride + offset] = source[1];
@@ -161,7 +161,7 @@ namespace FIRConvolution
         private static void ProcessArgs(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
-            using var auto = FilterProfilerMarkerProcessArgs.Auto();
+            using var auto = ProcessArgsMarker.Auto();
 
             if (source == null)
             {
@@ -218,7 +218,7 @@ namespace FIRConvolution
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void UpdateCenterScalar(ref Filter filter, ref float sum)
         {
-            using var auto = FilterProfilerMarkerUpdateCenterScalar.Auto();
+            using var auto = UpdateCenterScalarMarker.Auto();
 
             var h = filter.H;
             var z = filter.Z;
@@ -233,7 +233,7 @@ namespace FIRConvolution
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void UpdateCenterVector(ref Filter filter, ref float4 sum)
         {
-            using var auto = FilterProfilerMarkerUpdateCenterVector.Auto();
+            using var auto = UpdateCenterVectorMarker.Auto();
 
             var h = filter.H;
             var c = filter.HCenter;
@@ -265,7 +265,7 @@ namespace FIRConvolution
 
             // at the same time we can also hide some details of the implementation
 
-            using var auto = FilterProfilerMarkerUpdateZ.Auto();
+            using var auto = UpdateZMarker.Auto();
 
             // update the Z offsets, initial pre-roll is brought back to index zero
 
