@@ -6,14 +6,14 @@ Shader"Custom/FFT Spectrum"
 		_MainTex ("Texture", 2D) = "white" {}
 		_Height("Height", float) = 1.0
 		_Blend("Blend", float) = 0.5
-		_Color0 ("Color 0", Color) = (1.0, 0.0, 0.0, 0.125)
-		_Color1 ("Color 1", Color) = (1.0, 0.5, 0.0, 0.250)
-		_Color2 ("Color 2", Color) = (1.0, 1.0, 0.0, 0.375)
-		_Color3 ("Color 3", Color) = (0.0, 1.0, 0.0, 0.500)
-		_Color4 ("Color 4", Color) = (0.0, 1.0, 1.0, 0.625)
-		_Color5 ("Color 5", Color) = (0.0, 0.0, 1.0, 0.750)
-		_Color6 ("Color 6", Color) = (0.5, 0.0, 1.0, 0.875)
-		_Color7 ("Color 7", Color) = (1.0, 0.0, 1.0, 1.000)
+		_Color0 ("Color 0", Color) = (1.0, 0.0, 0.0, 0.000) // 0/7
+		_Color1 ("Color 1", Color) = (1.0, 0.5, 0.0, 0.143) // 1/7
+		_Color2 ("Color 2", Color) = (1.0, 1.0, 0.0, 0.286) // 2/7
+		_Color3 ("Color 3", Color) = (0.0, 1.0, 0.0, 0.429) // 3/7
+		_Color4 ("Color 4", Color) = (0.0, 1.0, 1.0, 0.571) // 4/7
+		_Color5 ("Color 5", Color) = (0.0, 0.0, 1.0, 0.714) // 5/7
+		_Color6 ("Color 6", Color) = (0.5, 0.0, 1.0, 0.857) // 6/7
+		_Color7 ("Color 7", Color) = (1.0, 0.0, 1.0, 1.000) // 7/7
 	}
 	SubShader
 	{

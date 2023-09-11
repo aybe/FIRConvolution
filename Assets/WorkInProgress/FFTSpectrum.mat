@@ -32,12 +32,12 @@ Material:
     - _Blend: 0.5
     - _Height: 1
     m_Colors:
-    - _Color0: {r: 1, g: 0, b: 0, a: 0.125}
-    - _Color1: {r: 1, g: 0.5, b: 0, a: 0.25}
-    - _Color2: {r: 1, g: 1, b: 0, a: 0.375}
-    - _Color3: {r: 0, g: 1, b: 0, a: 0.5}
-    - _Color4: {r: 0, g: 1, b: 1, a: 0.625}
-    - _Color5: {r: 0, g: 0, b: 1, a: 0.75}
-    - _Color6: {r: 0.5, g: 0, b: 1, a: 0.875}
+    - _Color0: {r: 1, g: 0, b: 0, a: 0}
+    - _Color1: {r: 1, g: 0.5, b: 0, a: 0.143}
+    - _Color2: {r: 1, g: 1, b: 0, a: 0.286}
+    - _Color3: {r: 0, g: 1, b: 0, a: 0.429}
+    - _Color4: {r: 0, g: 1, b: 1, a: 0.571}
+    - _Color5: {r: 0, g: 0, b: 1, a: 0.714}
+    - _Color6: {r: 0.5, g: 0, b: 1, a: 0.857}
     - _Color7: {r: 1, g: 0, b: 1, a: 1}
   m_BuildTextureStacks: []
