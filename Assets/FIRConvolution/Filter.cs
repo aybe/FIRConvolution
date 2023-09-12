@@ -2,9 +2,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 using Unity.Burst;
 using Unity.Mathematics;
+#if FIR_CHECK_ARGS
+using JetBrains.Annotations;
+#endif
 #if FIR_PROFILE_MARKERS
 using Unity.Profiling;
 #endif
@@ -163,6 +165,7 @@ namespace FIRConvolution
             target[(sample + 3) * stride + offset] = source[3];
         }
 
+#if FIR_CHECK_ARGS
         [BurstCompile]
         [MethodImpl(MethodImplOptions.NoInlining)]
         [AssertionMethod]
@@ -223,6 +226,7 @@ namespace FIRConvolution
                     "The offset must be less than stride.");
             }
         }
+#endif
 
         [BurstCompile]
         [MethodImpl(MethodImplOptions.NoInlining)]

@@ -24,7 +24,9 @@ namespace FIRConvolution
         public static unsafe void ProcessVectorHalfBandFullLoopInner(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
+#if FIR_CHECK_ARGS
             ProcessArgs(source, target, length, stride, offset, ref filter);
+#endif
 
 #if FIR_PROFILE_MARKERS
             using var auto = FilterVectorHalfFullInnerMarker.Auto();
