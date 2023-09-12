@@ -14,8 +14,8 @@ namespace FIRConvolution
     public partial struct Filter
     {
 #if FIR_PROFILE_MARKERS
-        private static readonly ProfilerMarker FilterVectorHalfFullOuterInnerMarker
-            = new(ProfilerCategory.Audio, nameof(FilterVectorHalfFullOuterInnerMarker));
+        private static readonly ProfilerMarker ProcessVectorHalfFullOuterInnerMarker
+            = new(ProfilerCategory.Audio, nameof(ProcessVectorHalfFullOuterInnerMarker));
 #endif
 
         public static Filter CreateVectorHalfFullOuterInner(float[] h, MemoryAllocator allocator)
@@ -35,7 +35,7 @@ namespace FIRConvolution
 #endif
 
 #if FIR_PROFILE_MARKERS
-            using var auto = FilterVectorHalfFullOuterInnerMarker.Auto();
+            using var auto = ProcessVectorHalfFullOuterInnerMarker.Auto();
 #endif
 
             var h = filter.H;

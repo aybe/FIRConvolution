@@ -12,8 +12,8 @@ namespace FIRConvolution
     public partial struct Filter
     {
 #if FIR_PROFILE_MARKERS
-        private static readonly ProfilerMarker FilterScalarFullMarker
-            = new(ProfilerCategory.Audio, nameof(FilterScalarFullMarker));
+        private static readonly ProfilerMarker ProcessScalarFullMarker
+            = new(ProfilerCategory.Audio, nameof(ProcessScalarFullMarker));
 #endif
 
         public static Filter CreateScalarFull(float[] h, MemoryAllocator allocator)
@@ -33,7 +33,7 @@ namespace FIRConvolution
 #endif
 
 #if FIR_PROFILE_MARKERS
-            using var auto = FilterScalarFullMarker.Auto();
+            using var auto = ProcessScalarFullMarker.Auto();
 #endif
 
             var h = filter.H;
