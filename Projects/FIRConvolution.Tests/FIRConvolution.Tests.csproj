@@ -10,15 +10,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="Bass24.Net\**" />
-		<Compile Remove="bass24\**" />
-		<EmbeddedResource Remove="Bass24.Net\**" />
-		<EmbeddedResource Remove="bass24\**" />
-		<None Remove="Bass24.Net\**" />
-		<None Remove="bass24\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
 		<PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
@@ -37,9 +28,6 @@
 		<None Update="UnitTestFilter.tt">
 			<Generator>TextTemplatingFileGenerator</Generator>
 			<LastGenOutput>UnitTestFilter.g.cs</LastGenOutput>
-		</None>
-		<None Update="bass.dll">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
 
