@@ -151,3 +151,11 @@ $RECYCLE.BIN/
 
 # WPF temp projects
 *wpftmp.*
+
+
+################################################################################
+# FIRConvolution
+################################################################################
+
+# we don't want Unity tests to be visible in LUT; they won't work anyway
+Assets/FIRConvolution.Tests
