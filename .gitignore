@@ -490,6 +490,10 @@ crashlytics-build.properties
 # keep Unity packages (fix VisualStudio.gitignore)
 !**/[Pp]ackages/*
 
+# test stuff that occasionally doesn't get deleted
+Assets/InitTestScene*.unity
+Assets/InitTestScene*.unity.meta
+
 # miscellaneous stuff
 *.cd
 *.cd.meta
