@@ -2,6 +2,7 @@
 using AOT;
 using Unity.Burst;
 #endif
+
 #if FIR_PROFILE_MARKERS
 using Unity.Profiling;
 #endif

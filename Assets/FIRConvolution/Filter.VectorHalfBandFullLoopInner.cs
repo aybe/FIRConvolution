@@ -1,8 +1,10 @@
-﻿#if FIR_BURST
+﻿using Unity.Mathematics;
+
+#if FIR_BURST
 using AOT;
 using Unity.Burst;
 #endif
-using Unity.Mathematics;
+
 #if FIR_PROFILE_MARKERS
 using Unity.Profiling;
 #endif

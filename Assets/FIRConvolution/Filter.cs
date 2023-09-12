@@ -2,13 +2,16 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Unity.Mathematics;
+
 #if FIR_BURST
 using Unity.Burst;
 #endif
-using Unity.Mathematics;
+
 #if FIR_CHECK_ARGS
 using JetBrains.Annotations;
 #endif
+
 #if FIR_PROFILE_MARKERS
 using Unity.Profiling;
 #endif
