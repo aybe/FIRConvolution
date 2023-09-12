@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using FIRConvolution.Tests.Unsorted;
+using Unity.Mathematics;
 
 namespace FIRConvolution.Tests.Formats.Audio.Sony;
 

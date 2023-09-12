@@ -4,6 +4,7 @@ using FIRConvolution.Tests.Formats.Audio.Microsoft;
 using FIRConvolution.Tests.Formats.Audio.Sony;
 using FIRConvolution.Tests.Unsorted;
 using JetBrains.Annotations;
+using Unity.Mathematics;
 
 // ReSharper disable StringLiteralTypo
 // ReSharper disable once CheckNamespace
