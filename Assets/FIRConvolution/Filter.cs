@@ -2,7 +2,9 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
+#if FIR_BURST
 using Unity.Burst;
+#endif
 using Unity.Mathematics;
 #if FIR_CHECK_ARGS
 using JetBrains.Annotations;
@@ -13,7 +15,9 @@ using Unity.Profiling;
 
 namespace FIRConvolution
 {
+#if FIR_BURST
     [BurstCompile]
+#endif
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public unsafe partial struct Filter
     {
@@ -142,7 +146,9 @@ namespace FIRConvolution
             return new Filter(h, tap1, v, allocator);
         }
 
+#if FIR_BURST
         [BurstCompile]
+#endif
         private static void CopyTo(in int sample, in int stride, in int offset, in float* target, in float source)
         {
 #if FIR_PROFILE_MARKERS
@@ -152,7 +158,9 @@ namespace FIRConvolution
             target[(sample + 0) * stride + offset] = source;
         }
 
+#if FIR_BURST
         [BurstCompile]
+#endif
         private static void CopyTo(in int sample, in int stride, in int offset, in float* target, in float4 source)
         {
 #if FIR_PROFILE_MARKERS
@@ -166,7 +174,9 @@ namespace FIRConvolution
         }
 
 #if FIR_CHECK_ARGS
+#if FIR_BURST
         [BurstCompile]
+#endif
         [MethodImpl(MethodImplOptions.NoInlining)]
         [AssertionMethod]
         private static void ProcessArgs(
@@ -228,7 +238,9 @@ namespace FIRConvolution
         }
 #endif
 
+#if FIR_BURST
         [BurstCompile]
+#endif
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void UpdateCenterScalar(ref Filter filter, ref float sum)
         {
@@ -245,7 +257,9 @@ namespace FIRConvolution
             sum += filter.TCenter * cs;
         }
 
+#if FIR_BURST
         [BurstCompile]
+#endif
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void UpdateCenterVector(ref Filter filter, ref float4 sum)
         {
@@ -273,7 +287,9 @@ namespace FIRConvolution
             sum += filter.TCenter * v3;
         }
 
+#if FIR_BURST
         [BurstCompile]
+#endif
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static int UpdateZ(ref Filter filter, float* source, int sample, int stride, int offset)
         {

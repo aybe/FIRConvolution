@@ -1,5 +1,7 @@
-﻿using AOT;
+﻿#if FIR_BURST
+using AOT;
 using Unity.Burst;
+#endif
 using Unity.Mathematics;
 #if FIR_PROFILE_MARKERS
 using Unity.Profiling;
@@ -19,8 +21,10 @@ namespace FIRConvolution
             return Create(h, 4, allocator);
         }
 
+#if FIR_BURST
         [BurstCompile]
         [MonoPInvokeCallback(typeof(FilterMethodHandler))]
+#endif
         public static unsafe void ProcessVectorHalfBandFullLoopOuterInner(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
