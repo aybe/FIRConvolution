@@ -8,36 +8,36 @@ namespace FIRConvolution
         {
             create = filterType switch
             {
-                FilterType.ScalarFullBand                   => Filter.CreateScalarFullBand,
-                FilterType.ScalarHalfBandFullLoop           => Filter.CreateScalarHalfBandFullLoop,
-                FilterType.ScalarHalfBandHalfLoop           => Filter.CreateScalarHalfBandHalfLoop,
-                FilterType.VectorFullBandInner              => Filter.CreateVectorFullBandInner,
-                FilterType.VectorFullBandOuter              => Filter.CreateVectorFullBandOuter,
-                FilterType.VectorFullBandOuterInner         => Filter.CreateVectorFullBandOuterInner,
-                FilterType.VectorHalfBandFullLoopInner      => Filter.CreateVectorHalfBandFullLoopInner,
-                FilterType.VectorHalfBandFullLoopOuter      => Filter.CreateVectorHalfBandFullLoopOuter,
-                FilterType.VectorHalfBandFullLoopOuterInner => Filter.CreateVectorHalfBandFullLoopOuterInner,
-                FilterType.VectorHalfBandHalfLoopInner      => Filter.CreateVectorHalfBandHalfLoopInner,
-                FilterType.VectorHalfBandHalfLoopOuter      => Filter.CreateVectorHalfBandHalfLoopOuter,
-                FilterType.VectorHalfBandHalfLoopOuterInner => Filter.CreateVectorHalfBandHalfLoopOuterInner,
-                _                                           => throw new ArgumentOutOfRangeException(nameof(filterType))
+                FilterType.ScalarFull               => Filter.CreateScalarFull,
+                FilterType.ScalarHalfFull           => Filter.CreateScalarHalfFull,
+                FilterType.ScalarHalfHalf           => Filter.CreateScalarHalfHalf,
+                FilterType.VectorFullInner          => Filter.CreateVectorFullInner,
+                FilterType.VectorFullOuter          => Filter.CreateVectorFullOuter,
+                FilterType.VectorFullOuterInner     => Filter.CreateVectorFullOuterInner,
+                FilterType.VectorHalfFullInner      => Filter.CreateVectorHalfFullInner,
+                FilterType.VectorHalfFullOuter      => Filter.CreateVectorHalfFullOuter,
+                FilterType.VectorHalfFullOuterInner => Filter.CreateVectorHalfFullOuterInner,
+                FilterType.VectorHalfHalfInner      => Filter.CreateVectorHalfHalfInner,
+                FilterType.VectorHalfHalfOuter      => Filter.CreateVectorHalfHalfOuter,
+                FilterType.VectorHalfHalfOuterInner => Filter.CreateVectorHalfHalfOuterInner,
+                _                                   => throw new ArgumentOutOfRangeException(nameof(filterType))
             };
 
             method = filterType switch
             {
-                FilterType.ScalarFullBand                   => Filter.ProcessScalarFullBand,
-                FilterType.ScalarHalfBandFullLoop           => Filter.ProcessScalarHalfBandFullLoop,
-                FilterType.ScalarHalfBandHalfLoop           => Filter.ProcessScalarHalfBandHalfLoop,
-                FilterType.VectorFullBandInner              => Filter.ProcessVectorFullBandInner,
-                FilterType.VectorFullBandOuter              => Filter.ProcessVectorFullBandOuter,
-                FilterType.VectorFullBandOuterInner         => Filter.ProcessVectorFullBandOuterInner,
-                FilterType.VectorHalfBandFullLoopInner      => Filter.ProcessVectorHalfBandFullLoopInner,
-                FilterType.VectorHalfBandFullLoopOuter      => Filter.ProcessVectorHalfBandFullLoopOuter,
-                FilterType.VectorHalfBandFullLoopOuterInner => Filter.ProcessVectorHalfBandFullLoopOuterInner,
-                FilterType.VectorHalfBandHalfLoopInner      => Filter.ProcessVectorHalfBandHalfLoopInner,
-                FilterType.VectorHalfBandHalfLoopOuter      => Filter.ProcessVectorHalfBandHalfLoopOuter,
-                FilterType.VectorHalfBandHalfLoopOuterInner => Filter.ProcessVectorHalfBandHalfLoopOuterInner,
-                _                                           => throw new ArgumentOutOfRangeException(nameof(filterType))
+                FilterType.ScalarFull               => Filter.ProcessScalarFull,
+                FilterType.ScalarHalfFull           => Filter.ProcessScalarHalfFull,
+                FilterType.ScalarHalfHalf           => Filter.ProcessScalarHalfHalf,
+                FilterType.VectorFullInner          => Filter.ProcessVectorFullInner,
+                FilterType.VectorFullOuter          => Filter.ProcessVectorFullOuter,
+                FilterType.VectorFullOuterInner     => Filter.ProcessVectorFullOuterInner,
+                FilterType.VectorHalfFullInner      => Filter.ProcessVectorHalfFullInner,
+                FilterType.VectorHalfFullOuter      => Filter.ProcessVectorHalfFullOuter,
+                FilterType.VectorHalfFullOuterInner => Filter.ProcessVectorHalfFullOuterInner,
+                FilterType.VectorHalfHalfInner      => Filter.ProcessVectorHalfHalfInner,
+                FilterType.VectorHalfHalfOuter      => Filter.ProcessVectorHalfHalfOuter,
+                FilterType.VectorHalfHalfOuterInner => Filter.ProcessVectorHalfHalfOuterInner,
+                _                                   => throw new ArgumentOutOfRangeException(nameof(filterType))
             };
         }
     }

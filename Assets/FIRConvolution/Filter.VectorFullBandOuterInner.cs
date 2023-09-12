@@ -18,7 +18,7 @@ namespace FIRConvolution
             = new(ProfilerCategory.Audio, nameof(FilterVectorFullOuterInnerMarker));
 #endif
 
-        public static Filter CreateVectorFullBandOuterInner(float[] h, MemoryAllocator allocator)
+        public static Filter CreateVectorFullOuterInner(float[] h, MemoryAllocator allocator)
         {
             return Create(h, 4, allocator);
         }
@@ -27,7 +27,7 @@ namespace FIRConvolution
         [BurstCompile]
         [MonoPInvokeCallback(typeof(FilterMethodHandler))]
 #endif
-        public static unsafe void ProcessVectorFullBandOuterInner(
+        public static unsafe void ProcessVectorFullOuterInner(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
 #if FIR_CHECK_ARGS

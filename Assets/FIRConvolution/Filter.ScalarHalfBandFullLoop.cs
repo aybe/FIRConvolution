@@ -16,7 +16,7 @@ namespace FIRConvolution
             = new(ProfilerCategory.Audio, nameof(FilterScalarHalfFullMarker));
 #endif
 
-        public static Filter CreateScalarHalfBandFullLoop(float[] h, MemoryAllocator allocator)
+        public static Filter CreateScalarHalfFull(float[] h, MemoryAllocator allocator)
         {
             return Create(h, 1, allocator);
         }
@@ -25,7 +25,7 @@ namespace FIRConvolution
         [BurstCompile]
         [MonoPInvokeCallback(typeof(FilterMethodHandler))]
 #endif
-        public static unsafe void ProcessScalarHalfBandFullLoop(
+        public static unsafe void ProcessScalarHalfFull(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
 #if FIR_CHECK_ARGS

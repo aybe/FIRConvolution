@@ -8,7 +8,7 @@ using UnityEngine.Assertions;
 public unsafe class FilterTest : MonoBehaviour
 {
     [SerializeField]
-    private FilterType FilterType = FilterType.ScalarFullBand; // TODO this should be public
+    private FilterType FilterType = FilterType.ScalarFull; // TODO this should be public
 
     private Filter[]? FilterData;
 

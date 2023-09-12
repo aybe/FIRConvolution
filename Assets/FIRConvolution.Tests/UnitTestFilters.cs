@@ -52,86 +52,86 @@ namespace FIRConvolution.Tests
 
         [Test]
         [Performance]
-        public void TestScalarFullBand()
+        public void TestScalarFull()
         {
-            TestFilter(FilterType.ScalarFullBand);
+            TestFilter(FilterType.ScalarFull);
         }
 
         [Test]
         [Performance]
-        public void TestScalarHalfBandFullLoop()
+        public void TestScalarHalfFull()
         {
-            TestFilter(FilterType.ScalarHalfBandFullLoop);
+            TestFilter(FilterType.ScalarHalfFull);
         }
 
         [Test]
         [Performance]
-        public void TestScalarHalfBandHalfLoop()
+        public void TestScalarHalfHalf()
         {
-            TestFilter(FilterType.ScalarHalfBandHalfLoop);
+            TestFilter(FilterType.ScalarHalfHalf);
         }
 
         [Test]
         [Performance]
-        public void TestVectorFullBandInner()
+        public void TestVectorFullInner()
         {
-            TestFilter(FilterType.VectorFullBandInner);
+            TestFilter(FilterType.VectorFullInner);
         }
 
         [Test]
         [Performance]
-        public void TestVectorFullBandOuter()
+        public void TestVectorFullOuter()
         {
-            TestFilter(FilterType.VectorFullBandOuter);
+            TestFilter(FilterType.VectorFullOuter);
         }
 
         [Test]
         [Performance]
-        public void TestVectorFullBandOuterInner()
+        public void TestVectorFullOuterInner()
         {
-            TestFilter(FilterType.VectorFullBandOuterInner);
+            TestFilter(FilterType.VectorFullOuterInner);
         }
 
         [Test]
         [Performance]
-        public void TestVectorHalfBandFullLoopInner()
+        public void TestVectorHalfFullInner()
         {
-            TestFilter(FilterType.VectorHalfBandFullLoopInner);
+            TestFilter(FilterType.VectorHalfFullInner);
         }
 
         [Test]
         [Performance]
-        public void TestVectorHalfBandFullLoopOuter()
+        public void TestVectorHalfFullOuter()
         {
-            TestFilter(FilterType.VectorHalfBandFullLoopOuter);
+            TestFilter(FilterType.VectorHalfFullOuter);
         }
 
         [Test]
         [Performance]
-        public void TestVectorHalfBandFullLoopOuterInner()
+        public void TestVectorHalfFullOuterInner()
         {
-            TestFilter(FilterType.VectorHalfBandFullLoopOuterInner);
+            TestFilter(FilterType.VectorHalfFullOuterInner);
         }
 
         [Test]
         [Performance]
-        public void TestVectorHalfBandHalfLoopInner()
+        public void TestVectorHalfHalfInner()
         {
-            TestFilter(FilterType.VectorHalfBandHalfLoopInner);
+            TestFilter(FilterType.VectorHalfHalfInner);
         }
 
         [Test]
         [Performance]
-        public void TestVectorHalfBandHalfLoopOuter()
+        public void TestVectorHalfHalfOuter()
         {
-            TestFilter(FilterType.VectorHalfBandHalfLoopOuter);
+            TestFilter(FilterType.VectorHalfHalfOuter);
         }
 
         [Test]
         [Performance]
-        public void TestVectorHalfBandHalfLoopOuterInner()
+        public void TestVectorHalfHalfOuterInner()
         {
-            TestFilter(FilterType.VectorHalfBandHalfLoopOuterInner);
+            TestFilter(FilterType.VectorHalfHalfOuterInner);
         }
     }
 }

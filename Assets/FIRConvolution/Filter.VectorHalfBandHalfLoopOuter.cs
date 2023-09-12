@@ -18,7 +18,7 @@ namespace FIRConvolution
             = new(ProfilerCategory.Audio, nameof(FilterVectorHalfHalfOuterMarker));
 #endif
 
-        public static Filter CreateVectorHalfBandHalfLoopOuter(float[] h, MemoryAllocator allocator)
+        public static Filter CreateVectorHalfHalfOuter(float[] h, MemoryAllocator allocator)
         {
             return Create(h, 4, allocator);
         }
@@ -27,7 +27,7 @@ namespace FIRConvolution
         [BurstCompile]
         [MonoPInvokeCallback(typeof(FilterMethodHandler))]
 #endif
-        public static unsafe void ProcessVectorHalfBandHalfLoopOuter(
+        public static unsafe void ProcessVectorHalfHalfOuter(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
 #if FIR_CHECK_ARGS
@@ -53,7 +53,7 @@ namespace FIRConvolution
 
                 var tap = filter.HOffset;
 
-                for (; tap < c; tap += 2) // TODO DRY VectorHalfBandHalfLoopOuterInner
+                for (; tap < c; tap += 2) // TODO DRY VectorHalfHalfOuterInner
                 {
                     var h0 = h[tap];
 
