@@ -17,14 +17,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="$(SolutionDir)Projects\FIRConvolution\FIRConvolution.csproj" />
-		<PackageReference Include="Unity3D" Version="2.1.3" />
-		<Reference Remove="$(UnityEnginePath)" />
-		<Reference Include="$(UnityModulesPath)\UnityEngine.CoreModule.dll" Private="True" />
-		<Reference Include="$(UnityScriptAssembliesPath)\Unity.Mathematics.dll" Private="True" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -45,5 +38,8 @@
 			<DependentUpon>UnitTestFilter.tt</DependentUpon>
 		</Compile>
 	</ItemGroup>
+	
+	<!--import Unity stuff-->
+	<Import Project="$(SolutionDir)FIRConvolution.targets" />
 
 </Project>

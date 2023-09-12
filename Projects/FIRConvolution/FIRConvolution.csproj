@@ -7,38 +7,15 @@
 		<LangVersion>9</LangVersion>
 	</PropertyGroup>
 
-	<PropertyGroup>
-
-		<!--enable assertions-->
-		<DefineConstants>$(DefineConstants);UNITY_ASSERTIONS</DefineConstants>
-
-		<!--enable experimental stuff-->
-		<DefineConstants>$(DefineConstants);UNITY_BURST_EXPERIMENTAL_LOOP_INTRINSICS</DefineConstants>
-
-	</PropertyGroup>
-
+	<!--setup project content-->
 	<ItemGroup>
-
-		<PackageReference Include="Unity3D" Version="2.1.3" />
-
-		<!--fix incoming ambiguous references-->
-		<Reference Remove="$(UnityEnginePath)" />
-
-		<!--NOTE: Live Unit Testing wants Private="True"-->
-
-		<!--enable assertions-->
-		<Reference Include="$(UnityModulesPath)\UnityEngine.CoreModule.dll" Private="True" />
-
-		<!--enable extra stuff-->
-		<Reference Include="$(UnityScriptAssembliesPath)\Unity.Burst.dll" Private="True" />
-		<Reference Include="$(UnityScriptAssembliesPath)\Unity.Mathematics.dll" Private="True" />
-
-		<!--setup project content-->
 		<None Include="$(SolutionDir)Assets\$(MSBuildProjectName)\**\*.*" />
 		<None Remove="$(SolutionDir)Assets\$(MSBuildProjectName)\**\*.cs" />
 		<None Remove="$(SolutionDir)Assets\$(MSBuildProjectName)\**\*.meta" />
 		<Compile Include="$(SolutionDir)Assets\$(MSBuildProjectName)\**\*.cs" />
-
 	</ItemGroup>
+
+	<!--import Unity stuff-->
+	<Import Project="$(SolutionDir)FIRConvolution.targets" />
 
 </Project>
