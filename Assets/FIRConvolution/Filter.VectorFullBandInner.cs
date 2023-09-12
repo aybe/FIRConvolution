@@ -1,14 +1,18 @@
 ﻿using AOT;
 using Unity.Burst;
 using Unity.Mathematics;
+#if FIR_PROFILE_MARKERS
 using Unity.Profiling;
+#endif
 
 namespace FIRConvolution
 {
     public partial struct Filter
     {
+#if FIR_PROFILE_MARKERS
         private static readonly ProfilerMarker FilterVectorFullInnerMarker
             = new(ProfilerCategory.Audio, nameof(FilterVectorFullInnerMarker));
+#endif
 
         public static Filter CreateVectorFullBandInner(float[] h, MemoryAllocator allocator)
         {
@@ -22,7 +26,9 @@ namespace FIRConvolution
         {
             ProcessArgs(source, target, length, stride, offset, ref filter);
 
+#if FIR_PROFILE_MARKERS
             using var auto = FilterVectorFullInnerMarker.Auto();
+#endif
 
             var h = filter.H;
             var z = filter.Z;

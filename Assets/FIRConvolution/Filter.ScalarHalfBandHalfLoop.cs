@@ -1,13 +1,17 @@
 ﻿using AOT;
 using Unity.Burst;
+#if FIR_PROFILE_MARKERS
 using Unity.Profiling;
+#endif
 
 namespace FIRConvolution
 {
     public partial struct Filter
     {
+#if FIR_PROFILE_MARKERS
         private static readonly ProfilerMarker FilterScalarHalfHalfMarker
             = new(ProfilerCategory.Audio, nameof(FilterScalarHalfHalfMarker));
+#endif
 
         public static Filter CreateScalarHalfBandHalfLoop(float[] h, MemoryAllocator allocator)
         {
@@ -21,7 +25,9 @@ namespace FIRConvolution
         {
             ProcessArgs(source, target, length, stride, offset, ref filter);
 
+#if FIR_PROFILE_MARKERS
             using var auto = FilterScalarHalfHalfMarker.Auto();
+#endif
 
             var h = filter.H;
             var z = filter.Z;
