@@ -13,7 +13,7 @@ namespace FIRConvolution
     {
 #if FIR_PROFILE_MARKERS
         private static readonly ProfilerMarker ProcessScalarFullMarker
-            = new(ProfilerCategory.Audio, nameof(ProcessScalarFullMarker));
+            = new(ProfilerCategory.Audio, nameof(ProcessScalarFull));
 #endif
 
         public static Filter CreateScalarFull(float[] h, MemoryAllocator allocator)

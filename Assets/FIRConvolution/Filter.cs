@@ -127,7 +127,7 @@ namespace FIRConvolution
             = new(ProfilerCategory.Audio, nameof(CopyTo4Marker));
 
         private static readonly ProfilerMarker ProcessArgsMarker
-            = new(ProfilerCategory.Audio, nameof(ProcessArgsMarker));
+            = new(ProfilerCategory.Audio, nameof(ProcessArgs));
 
         private static readonly ProfilerMarker UpdateCenterScalarMarker
             = new(ProfilerCategory.Audio, nameof(UpdateCenterScalarMarker));

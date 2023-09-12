@@ -15,7 +15,7 @@ namespace FIRConvolution
     {
 #if FIR_PROFILE_MARKERS
         private static readonly ProfilerMarker ProcessVectorFullInnerMarker
-            = new(ProfilerCategory.Audio, nameof(ProcessVectorFullInnerMarker));
+            = new(ProfilerCategory.Audio, nameof(ProcessVectorFullInner));
 #endif
 
         public static Filter CreateVectorFullInner(float[] h, MemoryAllocator allocator)

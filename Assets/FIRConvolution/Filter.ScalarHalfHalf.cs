@@ -13,7 +13,7 @@ namespace FIRConvolution
     {
 #if FIR_PROFILE_MARKERS
         private static readonly ProfilerMarker ProcessScalarHalfHalfMarker
-            = new(ProfilerCategory.Audio, nameof(ProcessScalarHalfHalfMarker));
+            = new(ProfilerCategory.Audio, nameof(ProcessScalarHalfHalf));
 #endif
 
         public static Filter CreateScalarHalfHalf(float[] h, MemoryAllocator allocator)
