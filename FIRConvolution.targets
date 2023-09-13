@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project>
 
 	<!--import Unity3D package and relevant assemblies-->
 	<ItemGroup>
