@@ -81,7 +81,7 @@ public abstract class UnitTestFilter
         TestContext.WriteLine("Not printing stats for release configuration!"); // OOM otherwise
 #endif
 
-        var taps = FilterState.CreateHalfBand(44100.0d, bandwidth).Coefficients;
+        var taps = Array.ConvertAll(FilterUtility.LowPass(44100.0d, 11025.0d, bandwidth, FilterWindow.Blackman), Convert.ToSingle);
 
         var input = GetInput(TestSignal, TestIterations);
 

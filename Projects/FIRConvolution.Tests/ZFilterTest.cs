@@ -61,7 +61,7 @@ public class ZFilterTest
 
         var buffer = sourceWav.CreateBuffer<float>(bufferLength);
 
-        var h = FilterState.CreateHalfBand().Coefficients;
+        var h = Array.ConvertAll(FilterUtility.LowPass(44100.0d, 11025.0d, 441.0d, FilterWindow.Blackman), Convert.ToSingle);
 
         var filters = Enumerable.Range(0, sourceWav.Channels).Select(_ => new ZFilter(h, 4)).ToArray();
 
@@ -116,7 +116,7 @@ public class ZFilterTest
         var filterBuffer = new float[sourceBuffer.Length];
         var outputBuffer = new float[sourceBuffer.Length];
 
-        var h = FilterState.CreateHalfBand().Coefficients;
+        var h = Array.ConvertAll(FilterUtility.LowPass(44100.0d, 11025.0d, 441.0d, FilterWindow.Blackman), Convert.ToSingle);
 
         var filters = Enumerable.Range(0, channels).Select(_ => new ZFilter(h, 4)).ToArray();
 
