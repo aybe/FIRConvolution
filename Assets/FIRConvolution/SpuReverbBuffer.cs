@@ -1,4 +1,6 @@
-﻿namespace FIRConvolution.Tests.Formats.Audio.Sony
+﻿using System;
+
+namespace FIRConvolution.Tests.Formats.Audio.Sony
 {
     internal sealed class SpuReverbBuffer<T>
     {
