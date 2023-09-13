@@ -15,6 +15,14 @@
 		<Compile Include="$(SolutionDir)Assets\$(MSBuildProjectName)\**\*.cs" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Compile Remove="FakesAssemblies\**" />
+		<EmbeddedResource Remove="FakesAssemblies\**" />
+		<None Remove="FakesAssemblies\**" />
+		<PackageReference Include="Microsoft.QualityTools.Testing.Fakes" Version="16.11.230815" />
+		<AdditionalDesignTimeBuildInput Remove="FakesAssemblies\**" />
+	</ItemGroup>
+
 	<!--import Unity stuff-->
 	<Import Project="$(SolutionDir)FIRConvolution.targets" />
 
