@@ -144,8 +144,13 @@ namespace FIRConvolution.Tests.Formats.Audio.Sony
         }
 
         public static void Process(
-            in Span<float2> source, in Span<float2> filter, in Span<float2> output, in int length, in float dry, in float wet, ref SpuReverbBurst state)
+            in void* pSource, in void* pFilter, in void* pOutput,
+            in int length, in float dry, in float wet, ref SpuReverbBurst state)
         {
+            var source = new Span<float2>(pSource, length);
+            var filter = new Span<float2>(pFilter, length);
+            var output = new Span<float2>(pOutput, length);
+            
             var dAPF1   = state.dAPF1;
             var dAPF2   = state.dAPF2;
             var vIIR    = state.vIIR;

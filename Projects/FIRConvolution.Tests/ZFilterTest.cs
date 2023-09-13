@@ -4,7 +4,6 @@ using FIRConvolution.Tests.Formats.Audio.Microsoft;
 using FIRConvolution.Tests.Formats.Audio.Sony;
 using FIRConvolution.Tests.Unsorted;
 using JetBrains.Annotations;
-using Unity.Mathematics;
 
 // ReSharper disable StringLiteralTypo
 // ReSharper disable once CheckNamespace
@@ -125,10 +124,7 @@ public class ZFilterTest
 
         var allocator = MemoryAllocatorNet.Instance;
 
-        var rev       = new SpuReverbBurst(SpuReverbPreset.Hall, 44100, allocator);
-        var revSource = MemoryMarshal.Cast<float, float2>(sourceBuffer);
-        var revFilter = MemoryMarshal.Cast<float, float2>(filterBuffer);
-        var revOutput = MemoryMarshal.Cast<float, float2>(outputBuffer);
+        var rev = new SpuReverbBurst(SpuReverbPreset.Hall, 44100, allocator);
 
         // ReSharper disable InlineTemporaryVariable
         // ReSharper disable UnusedVariable
@@ -140,6 +136,7 @@ public class ZFilterTest
         
         fixed (float* pSource = sourceBuffer)
         fixed (float* pFilter = filterBuffer)
+        fixed (float* pOutput = outputBuffer)
         {
             int read;
 
@@ -154,7 +151,7 @@ public class ZFilterTest
                     ZFilter.ProcessFilterVector(pSource, pFilter, read, channels, i, ref filter);
                 }
 
-                SpuReverbBurst.Process(revSource, revFilter, revOutput, read, 1.0f - revVolume, revVolume, ref rev);
+                SpuReverbBurst.Process(pSource, pFilter, pOutput, read, 1.0f - revVolume, revVolume, ref rev);
 
                 targetWav.Write(outputBuffer, 0, read);
             } while (read == bufferLength);
