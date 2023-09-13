@@ -1,42 +1,28 @@
 ﻿using Unity.Mathematics;
-
-#if FIR_BURST
 using AOT;
 using Unity.Burst;
-#endif
-
-#if FIR_PROFILE_MARKERS
 using Unity.Profiling;
-#endif
 
 namespace FIRConvolution
 {
     public partial struct Filter
     {
-#if FIR_PROFILE_MARKERS
         private static readonly ProfilerMarker ProcessVectorFullOuterInnerMarker
             = new(ProfilerCategory.Audio, nameof(ProcessVectorFullOuterInner));
-#endif
 
         public static Filter CreateVectorFullOuterInner(float[] h, MemoryAllocator allocator)
         {
             return Create(h, 4, allocator);
         }
 
-#if FIR_BURST
         [BurstCompile]
         [MonoPInvokeCallback(typeof(FilterMethodHandler))]
-#endif
         public static unsafe void ProcessVectorFullOuterInner(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
-#if FIR_CHECK_ARGS
             ProcessArgs(source, target, length, stride, offset, ref filter);
-#endif
 
-#if FIR_PROFILE_MARKERS
             using var auto = ProcessVectorFullOuterInnerMarker.Auto();
-#endif
             
             var h = filter.H;
             var z = filter.Z;

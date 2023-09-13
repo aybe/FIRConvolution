@@ -642,7 +642,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: UNITY_BURST_EXPERIMENTAL_LOOP_INTRINSICS;FIR_BURST;FIR_CHECK_ARGS;FIR_PROFILE_MARKERS
+    Standalone: UNITY_BURST_EXPERIMENTAL_LOOP_INTRINSICS
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

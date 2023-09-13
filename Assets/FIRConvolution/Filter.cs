@@ -3,24 +3,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Unity.Mathematics;
-
-#if FIR_BURST
 using Unity.Burst;
-#endif
-
-#if FIR_CHECK_ARGS
 using JetBrains.Annotations;
-#endif
-
-#if FIR_PROFILE_MARKERS
 using Unity.Profiling;
-#endif
 
 namespace FIRConvolution
 {
-#if FIR_BURST
     [BurstCompile]
-#endif
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public unsafe partial struct Filter
     {
@@ -119,7 +108,6 @@ namespace FIRConvolution
         /// </summary>
         private int VLength { get; }
 
-#if FIR_PROFILE_MARKERS
         private static readonly ProfilerMarker CopyTo1Marker
             = new(ProfilerCategory.Audio, nameof(CopyTo1Marker));
 
@@ -137,7 +125,6 @@ namespace FIRConvolution
 
         private static readonly ProfilerMarker UpdateZMarker
             = new(ProfilerCategory.Audio, nameof(UpdateZMarker));
-#endif
 
         private static Filter Create(float[] h, int v, MemoryAllocator allocator)
         {
@@ -149,26 +136,18 @@ namespace FIRConvolution
             return new Filter(h, tap1, v, allocator);
         }
 
-#if FIR_BURST
         [BurstCompile]
-#endif
         private static void CopyTo(in int sample, in int stride, in int offset, in float* target, in float source)
         {
-#if FIR_PROFILE_MARKERS
             using var auto = CopyTo1Marker.Auto();
-#endif
 
             target[(sample + 0) * stride + offset] = source;
         }
 
-#if FIR_BURST
         [BurstCompile]
-#endif
         private static void CopyTo(in int sample, in int stride, in int offset, in float* target, in float4 source)
         {
-#if FIR_PROFILE_MARKERS
             using var auto = CopyTo4Marker.Auto();
-#endif
 
             target[(sample + 0) * stride + offset] = source[0];
             target[(sample + 1) * stride + offset] = source[1];
@@ -176,18 +155,13 @@ namespace FIRConvolution
             target[(sample + 3) * stride + offset] = source[3];
         }
 
-#if FIR_CHECK_ARGS
-#if FIR_BURST
         [BurstCompile]
-#endif
         [MethodImpl(MethodImplOptions.NoInlining)]
         [AssertionMethod]
         private static void ProcessArgs(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
-#if FIR_PROFILE_MARKERS
             using var auto = ProcessArgsMarker.Auto();
-#endif
 
             if (source == null)
             {
@@ -239,17 +213,12 @@ namespace FIRConvolution
                     "The offset must be less than stride.");
             }
         }
-#endif
 
-#if FIR_BURST
         [BurstCompile]
-#endif
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void UpdateCenterScalar(ref Filter filter, ref float sum)
         {
-#if FIR_PROFILE_MARKERS
             using var auto = UpdateCenterScalarMarker.Auto();
-#endif
 
             var h = filter.H;
             var z = filter.Z;
@@ -260,15 +229,11 @@ namespace FIRConvolution
             sum += filter.TCenter * cs;
         }
 
-#if FIR_BURST
         [BurstCompile]
-#endif
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void UpdateCenterVector(ref Filter filter, ref float4 sum)
         {
-#if FIR_PROFILE_MARKERS
             using var auto = UpdateCenterVectorMarker.Auto();
-#endif
 
             var h = filter.H;
             var c = filter.HCenter;
@@ -290,9 +255,7 @@ namespace FIRConvolution
             sum += filter.TCenter * v3;
         }
 
-#if FIR_BURST
         [BurstCompile]
-#endif
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static int UpdateZ(ref Filter filter, float* source, int sample, int stride, int offset)
         {
@@ -302,9 +265,7 @@ namespace FIRConvolution
 
             // at the same time we can also hide some details of the implementation
 
-#if FIR_PROFILE_MARKERS
             using var auto = UpdateZMarker.Auto();
-#endif
 
             // update the Z offsets, initial pre-roll is brought back to index zero
 
