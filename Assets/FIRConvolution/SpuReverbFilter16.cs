@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-using FIRConvolution.Tests.Formats.Audio.Sony;
 using JetBrains.Annotations;
 
-namespace FIRConvolution.Tests.Unsorted
+namespace FIRConvolution
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     [SuppressMessage("ReSharper", "IdentifierTypo")]

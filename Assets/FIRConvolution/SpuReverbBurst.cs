@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-using FIRConvolution.Tests.Unsorted;
 using Unity.Mathematics;
 using UnityEngine.Assertions;
 
-namespace FIRConvolution.Tests.Formats.Audio.Sony
+namespace FIRConvolution
 {
     [SuppressMessage("ReSharper", "IdentifierTypo")]
     [SuppressMessage("ReSharper", "InconsistentNaming")]

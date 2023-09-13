@@ -1,4 +1,4 @@
-﻿namespace FIRConvolution.Tests.New
+﻿namespace FIRConvolution
 {
     public unsafe delegate void ZFilterMethod(
         in float* source,

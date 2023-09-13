@@ -11,7 +11,7 @@ using Unity.Mathematics;
 
 // TODO
 
-namespace FIRConvolution.Tests
+namespace FIRConvolution
 {
     public sealed partial class ZFilter
     {
