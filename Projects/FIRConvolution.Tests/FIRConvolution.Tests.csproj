@@ -16,6 +16,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
 		<PackageReference Include="Microsoft.QualityTools.Testing.Fakes" Version="16.11.230815" />
 		<PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
@@ -45,9 +46,6 @@
 			<DependentUpon>UnitTestFilter.tt</DependentUpon>
 		</Compile>
 	</ItemGroup>
-	
-	<!--import Unity stuff-->
-	<Import Project="$(SolutionDir)FIRConvolution.targets" />
 	
 	<ItemGroup>
 	  <AdditionalDesignTimeBuildInput Remove="FakesAssemblies\**" />
