@@ -1,6 +1,6 @@
 {
     "name": "com.aybe.firconvolution",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "displayName": "FIR Convolution",
     "description": "FIR filter convolution algorithms.",
     "unity": "2022.3",
