@@ -1,0 +1,28 @@
+{
+    "name": "com.aybe.FIRConvolution",
+    "version": "1.0.0",
+    "displayName": "FIR Convolution",
+    "description": "FIR filter convolution algorithms.",
+    "unity": "2022.3",
+    "unityRelease": "8f1",
+    "documentationUrl": "https://github.com/aybe/FIRConvolution",
+    "changeLogUrl": "https://github.com/aybe/FIRConvolution/CHANGELOG",
+    "licensesUrl": "https://github.com/aybe/FIRConvolution/LICENSE",
+    "dependencies": {
+        "com.unity.burst": "1.8.8",
+        "com.unity.mathematics": "1.2.6"
+    },
+    "keywords": [
+        "FIR",
+        "filter",
+        "convolution",
+        "vectorized",
+        "SIMD",
+        "Burst"
+    ],
+    "author": {
+        "name": "aybe",
+        "email": "aybe@users.noreply.github.com",
+        "url": "https://github.com/aybe"
+    }
+}
