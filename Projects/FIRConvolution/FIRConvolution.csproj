@@ -9,10 +9,7 @@
 
 	<!--setup project content-->
 	<ItemGroup>
-		<None Include="$(SolutionDir)Assets\$(MSBuildProjectName)\**\*.*" />
-		<None Remove="$(SolutionDir)Assets\$(MSBuildProjectName)\**\*.cs" />
-		<None Remove="$(SolutionDir)Assets\$(MSBuildProjectName)\**\*.meta" />
-		<Compile Include="$(SolutionDir)Assets\$(MSBuildProjectName)\**\*.cs" />
+		<Compile Include="$(SolutionDir)Assets\FIRConvolution\Runtime\**\*.cs" />
 	</ItemGroup>
 
 	<!--import Unity stuff-->
