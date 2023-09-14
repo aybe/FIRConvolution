@@ -1,1 +1,1 @@
-https://github.com/aybe/FIRConvolution/CHANGELOG
+https://github.com/aybe/FIRConvolution/blob/develop/CHANGELOG
