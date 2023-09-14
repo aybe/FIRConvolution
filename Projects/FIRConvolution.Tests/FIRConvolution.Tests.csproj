@@ -39,5 +39,13 @@
 			<DependentUpon>UnitTestFilter.tt</DependentUpon>
 		</Compile>
 	</ItemGroup>
-	
+
+	<!-- ensure templates get built automatically -->
+	<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v17.0\TextTemplating\Microsoft.TextTemplating.targets" />
+	<PropertyGroup>
+		<TransformOnBuild>true</TransformOnBuild>
+		<OverwriteReadOnlyOutputFiles>true</OverwriteReadOnlyOutputFiles>
+		<TransformOutOfDateOnly>true</TransformOutOfDateOnly>
+	</PropertyGroup>
+
 </Project>
