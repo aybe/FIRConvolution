@@ -16,6 +16,9 @@
         "FIR",
         "filter",
         "convolution",
+        "vector",
+        "vectors",
+        "vectorization",
         "vectorized",
         "SIMD",
         "Burst"
@@ -24,5 +27,12 @@
         "name": "aybe",
         "email": "aybe@users.noreply.github.com",
         "url": "https://github.com/aybe"
-    }
+    },
+    "samples": [
+        {
+            "displayName": "Sample display name",
+            "description": "Sample description",
+            "path": "Samples~/Showcase"
+        }
+    ]
 }
