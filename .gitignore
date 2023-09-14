@@ -1,3 +1,7 @@
+################################################################################
+# Unity
+################################################################################
+
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
@@ -71,6 +75,10 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+
+################################################################################
+# FIRConvolution
+################################################################################
 
 [Bb][Ii][Nn]
 [Oo][Bb][Jj]
