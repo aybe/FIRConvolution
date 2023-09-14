@@ -1,2 +1,3 @@
+# LUT uses vanilla .NET so it needs solution and projects
 !*.sln
 !*.csproj
