@@ -2,9 +2,11 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using FIRConvolution.Tests.Extensions;
+using JetBrains.Annotations;
 
 namespace FIRConvolution.Tests.Formats.Audio.Microsoft
 {
+    [PublicAPI]
     [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 4, CharSet = CharSet.Ansi)]
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public readonly struct FourCC

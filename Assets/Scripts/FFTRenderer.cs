@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Unity.Mathematics;
 using UnityEngine;
 
 [DisallowMultipleComponent]
+[SuppressMessage("ReSharper", "IdentifierTypo")]
 public sealed class FFTRenderer : MonoBehaviour
 {
     [SerializeField]

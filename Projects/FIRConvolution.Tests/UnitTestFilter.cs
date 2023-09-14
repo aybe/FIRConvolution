@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using FIRConvolution.Tests.Formats.Audio.Extensions;
 using JetBrains.Annotations;
 
 namespace FIRConvolution.Tests;
@@ -24,7 +23,7 @@ public abstract class UnitTestFilter
 
     private static UnitTestFilterSignal TestSignal => UnitTestFilterSignal.Ascending;
 
-    public static float[] GetInput(UnitTestFilterSignal signal, int repeat = 1)
+    private static float[] GetInput(UnitTestFilterSignal signal, int repeat = 1)
     {
         var source = signal switch
         {

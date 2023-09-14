@@ -4,6 +4,7 @@
 
 // BUG logging when processing large input will make Live Unit Testing abandon at some point
 
+#nullable enable
 using System;
 using System.Diagnostics;
 using System.Linq;

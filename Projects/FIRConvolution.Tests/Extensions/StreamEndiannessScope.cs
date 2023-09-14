@@ -1,5 +1,8 @@
-﻿namespace FIRConvolution.Tests.Extensions
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace FIRConvolution.Tests.Extensions
 {
+    [SuppressMessage("ReSharper", "IdentifierTypo")]
     internal readonly struct StreamEndiannessScope : IDisposable
     {
         private Stream Stream { get; }

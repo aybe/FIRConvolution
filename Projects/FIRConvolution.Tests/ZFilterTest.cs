@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using FIRConvolution.Tests.Formats.Audio.Extensions;
-using FIRConvolution.Tests.Formats.Audio.Microsoft;
+﻿using FIRConvolution.Tests.Formats.Audio.Microsoft;
 using JetBrains.Annotations;
 
 // ReSharper disable StringLiteralTypo

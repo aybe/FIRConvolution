@@ -3,9 +3,12 @@ using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 
 namespace FIRConvolution.Tests.Extensions
 {
+    [PublicAPI]
+    [SuppressMessage("ReSharper", "IdentifierTypo")]
     public static class StreamEndiannessExtensions
     {
         public static Endianness Endianness { get; } =

@@ -1,7 +1,9 @@
 ﻿using FIRConvolution.Tests.Extensions;
+using JetBrains.Annotations;
 
 namespace FIRConvolution.Tests.Formats.Audio.Microsoft
 {
+    [PublicAPI]
     public abstract class WavChunk
     {
         protected WavChunk(FourCC chunkId, uint chunkSize = default)

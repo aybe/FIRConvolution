@@ -1,9 +1,11 @@
 ﻿using System.Runtime.InteropServices;
 using FIRConvolution.Tests.Extensions;
 using FIRConvolution.Tests.Formats.Audio.Extensions;
+using JetBrains.Annotations;
 
 namespace FIRConvolution.Tests.Formats.Audio.Microsoft
 {
+    [PublicAPI]
     public sealed class Wav : Disposable
     {
         public Wav(in Stream stream)

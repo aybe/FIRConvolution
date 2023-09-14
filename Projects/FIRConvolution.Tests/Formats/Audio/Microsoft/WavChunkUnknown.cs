@@ -1,7 +1,9 @@
 ﻿using FIRConvolution.Tests.Extensions;
+using JetBrains.Annotations;
 
 namespace FIRConvolution.Tests.Formats.Audio.Microsoft
 {
+    [PublicAPI]
     public sealed class WavChunkUnknown : WavChunk
     {
         public WavChunkUnknown(Stream reader)
