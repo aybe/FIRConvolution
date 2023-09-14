@@ -51,7 +51,6 @@ namespace FIRConvolution.Tests
         }
 
         [Test]
-        [Category("SkipWhenLiveUnitTesting")]
         [Performance]
         public void TestScalarFull()
         {
@@ -59,7 +58,6 @@ namespace FIRConvolution.Tests
         }
 
         [Test]
-        [Category("SkipWhenLiveUnitTesting")]
         [Performance]
         public void TestScalarHalfFull()
         {
@@ -67,7 +65,6 @@ namespace FIRConvolution.Tests
         }
 
         [Test]
-        [Category("SkipWhenLiveUnitTesting")]
         [Performance]
         public void TestScalarHalfHalf()
         {
@@ -75,7 +72,6 @@ namespace FIRConvolution.Tests
         }
 
         [Test]
-        [Category("SkipWhenLiveUnitTesting")]
         [Performance]
         public void TestVectorFullInner()
         {
@@ -83,7 +79,6 @@ namespace FIRConvolution.Tests
         }
 
         [Test]
-        [Category("SkipWhenLiveUnitTesting")]
         [Performance]
         public void TestVectorFullOuter()
         {
@@ -91,7 +86,6 @@ namespace FIRConvolution.Tests
         }
 
         [Test]
-        [Category("SkipWhenLiveUnitTesting")]
         [Performance]
         public void TestVectorFullOuterInner()
         {
@@ -99,7 +93,6 @@ namespace FIRConvolution.Tests
         }
 
         [Test]
-        [Category("SkipWhenLiveUnitTesting")]
         [Performance]
         public void TestVectorHalfFullInner()
         {
@@ -107,7 +100,6 @@ namespace FIRConvolution.Tests
         }
 
         [Test]
-        [Category("SkipWhenLiveUnitTesting")]
         [Performance]
         public void TestVectorHalfFullOuter()
         {
@@ -115,7 +107,6 @@ namespace FIRConvolution.Tests
         }
 
         [Test]
-        [Category("SkipWhenLiveUnitTesting")]
         [Performance]
         public void TestVectorHalfFullOuterInner()
         {
@@ -123,7 +114,6 @@ namespace FIRConvolution.Tests
         }
 
         [Test]
-        [Category("SkipWhenLiveUnitTesting")]
         [Performance]
         public void TestVectorHalfHalfInner()
         {
@@ -131,7 +121,6 @@ namespace FIRConvolution.Tests
         }
 
         [Test]
-        [Category("SkipWhenLiveUnitTesting")]
         [Performance]
         public void TestVectorHalfHalfOuter()
         {
@@ -139,7 +128,6 @@ namespace FIRConvolution.Tests
         }
 
         [Test]
-        [Category("SkipWhenLiveUnitTesting")]
         [Performance]
         public void TestVectorHalfHalfOuterInner()
         {
