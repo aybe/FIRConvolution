@@ -2,7 +2,7 @@
     "name": "com.aybe.firconvolution",
     "version": "1.0.0",
     "displayName": "FIR Convolution",
-    "description": "FIR filter convolution algorithms.\nFeatures SIMD-accelerated vectorized algorithms.",
+    "description": "FIR filter convolution algorithms.\r\n\r\nFeatures 12 algorithms, with a focus on half-band filters.\r\n\r\nMost of the algorithms are vectorized using SIMD extensions through Burst.",
     "unity": "2022.3",
     "unityRelease": "8f1",
     "documentationUrl": "https://github.com/aybe/FIRConvolution",
