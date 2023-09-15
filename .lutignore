@@ -1,3 +1,9 @@
 # LUT uses vanilla .NET so it needs solution and projects
 !*.sln
 !*.csproj
+
+# Fix "Reset Live Unit Testing state for solution" being unable to delete folder.
+.git
+
+# Fix symbolic link trick causing "A required privilege is not held by the client."
+Assets/Samples
