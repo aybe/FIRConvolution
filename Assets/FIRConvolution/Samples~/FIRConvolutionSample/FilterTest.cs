@@ -16,25 +16,13 @@ public unsafe class FilterTest : MonoBehaviour
 
     private FilterProc FilterProc = null!;
 
+    private AudioConfiguration AudioConfiguration;
+
     private static MemoryAllocator Allocator { get; } = MemoryAllocatorUnity.Instance;
 
     private void OnEnable()
     {
-        var configuration = AudioSettings.GetConfiguration();
-
-        if (configuration.sampleRate != 44100)
-        {
-            Debug.LogError("Sample rate must be 44100Hz.");
-            enabled = false;
-            return;
-        }
-
-        if (configuration.speakerMode != AudioSpeakerMode.Stereo)
-        {
-            Debug.LogError("Speaker mode must be stereo.");
-            enabled = false;
-            return;
-        }
+        AudioConfiguration = AudioSettings.GetConfiguration();
 
         FilterProc = AudioFilterSwap;
     }
@@ -90,8 +78,6 @@ public unsafe class FilterTest : MonoBehaviour
 
         Assert.AreEqual(0, data.Length % 4);
 
-        Assert.AreEqual(2, channels);
-
         var samples = data.Length / channels;
 
         fixed (float* temp = data)
@@ -127,18 +113,34 @@ public unsafe class FilterTest : MonoBehaviour
         FilterData = null;
     }
 
+    [SuppressMessage("ReSharper", "SwitchExpressionHandlesSomeKnownEnumValuesWithExceptionInDefault")]
     private void FilterInit()
     {
+        var sampleRate = AudioConfiguration.sampleRate;
+
+        var channels = AudioConfiguration.speakerMode switch
+        {
+            AudioSpeakerMode.Mono        => 1,
+            AudioSpeakerMode.Stereo      => 2,
+            AudioSpeakerMode.Quad        => 4,
+            AudioSpeakerMode.Surround    => 5,
+            AudioSpeakerMode.Mode5point1 => 6,
+            AudioSpeakerMode.Mode7point1 => 8,
+            AudioSpeakerMode.Prologic    => 2,
+            _                            => throw new ArgumentOutOfRangeException()
+        };
+
         FilterType.GetHandlers(out var create, out var method);
 
-        var lp64 = FilterUtility.LowPass(44100.0d, 11025.0d, 441.0d, FilterWindow.Blackman);
+        var lp64 = FilterUtility.LowPass(sampleRate, sampleRate / 4.0d, 441.0d, FilterWindow.Blackman);
         var lp32 = Array.ConvertAll(lp64, Convert.ToSingle);
 
-        FilterData = new[]
+        FilterData = new Filter[channels];
+
+        for (var i = 0; i < channels; i++)
         {
-            create(lp32, Allocator),
-            create(lp32, Allocator)
-        };
+            FilterData[i] = create(lp32, Allocator);
+        }
 
         FilterPass = method;
     }
