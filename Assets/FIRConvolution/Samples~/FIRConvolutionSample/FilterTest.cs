@@ -4,6 +4,9 @@ using System.Diagnostics.CodeAnalysis;
 using FIRConvolution;
 using UnityEngine;
 using UnityEngine.Assertions;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public unsafe class FilterTest : MonoBehaviour
 {
@@ -144,4 +147,22 @@ public unsafe class FilterTest : MonoBehaviour
 
         FilterPass = method;
     }
+
+#if UNITY_EDITOR
+    [CustomEditor(typeof(FilterTest))]
+    private sealed class FilterTestEditor : Editor
+    {
+        // BUG some more Unity shit -> no VU meter unless class has an editor!
+
+        public override void OnInspectorGUI()
+        {
+            if (EditorApplication.isPlaying)
+            {
+                EditorGUILayout.HelpBox("When profiling, collapse this component to avoid VU meter overhead.", MessageType.Warning, true);
+            }
+
+            base.OnInspectorGUI();
+        }
+    }
+#endif
 }
