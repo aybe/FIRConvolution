@@ -1,6 +1,6 @@
 {
     "name": "com.aybe.firconvolution",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "displayName": "FIR Convolution",
     "description": "FIR filter convolution algorithms.",
     "unity": "2022.3",
@@ -30,7 +30,7 @@
     },
     "samples": [
         {
-            "displayName": "FIR Convolution audio source filtering.",
+            "displayName": "FIR Convolution Sample",
             "description": "Applies one of the 12 available algorithms to an audio source.",
             "path": "Samples~/FIRConvolutionSample"
         }
