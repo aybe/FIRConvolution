@@ -32,7 +32,7 @@
         {
             "displayName": "FIR Convolution audio source filtering.",
             "description": "Applies one of the 12 available algorithms to an audio source.",
-            "path": "Samples~/AudioSourceFiltering"
+            "path": "Samples~/FIRConvolutionSample"
         }
     ]
 }
