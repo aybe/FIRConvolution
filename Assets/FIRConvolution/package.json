@@ -1,6 +1,6 @@
 {
     "name": "com.aybe.firconvolution",
-    "version": "1.0.4",
+    "version": "1.0.0",
     "displayName": "FIR Convolution",
     "description": "FIR filter convolution algorithms.\nFeatures SIMD-accelerated vectorized algorithms.",
     "unity": "2022.3",

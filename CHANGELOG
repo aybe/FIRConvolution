@@ -1,15 +1,2 @@
-1.0.4 9/15/2023
-Fix sample invalid folder name.
-
-1.0.3 9/14/2023
-Fix sample missing some components.
-
-1.0.2 9/14/2023
-Fix invalid CHANGELOG location.
-Fix invalid GUID for sample scene.
-
-1.0.1 9/14/2023
-Fix invalid sample location.
-
 1.0.0 9/14/2023
 First release.
