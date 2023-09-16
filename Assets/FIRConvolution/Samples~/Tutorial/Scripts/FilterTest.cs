@@ -20,7 +20,7 @@ namespace FIRConvolution.Samples.Tutorial
 
         private FilterMethodHandler FilterPass = null!;
 
-        private FilterProc FilterProc = null!;
+        private FilterProcHandler FilterProc = null!;
 
         private static MemoryAllocator Allocator { get; } = MemoryAllocatorUnity.Instance;
 
@@ -148,6 +148,8 @@ namespace FIRConvolution.Samples.Tutorial
 
             FilterPass = method;
         }
+
+        private delegate void FilterProcHandler(float[] data, int channels);
 
 #if UNITY_EDITOR
         [CustomEditor(typeof(FilterTest))]
