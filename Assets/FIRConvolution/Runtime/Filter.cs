@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Unity.Mathematics;
@@ -10,7 +9,6 @@ using Unity.Profiling;
 namespace FIRConvolution
 {
     [BurstCompile]
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public unsafe partial struct Filter
     {
         private Filter(float[] h, int hOffset, int vLength, MemoryAllocator allocator)
@@ -50,7 +48,7 @@ namespace FIRConvolution
             ZOffsetGet = 0;
             ZOffsetSet = HLength + VLength - 1;
             HOffset    = hOffset;
-            TCenter    = HCenter % 2 == 1 || HOffset == 1 ? 1.0f : 0.0f;
+            HMiddle    = HCenter % 2 == 1 || HOffset == 1 ? 1.0f : 0.0f;
         }
 
         /// <summary>
@@ -76,7 +74,7 @@ namespace FIRConvolution
         /// <summary>
         ///     The center tap multiplier.
         /// </summary>
-        private float TCenter { get; } // TODO rename TCenter
+        private float HMiddle { get; }
 
         /// <summary>
         ///     The doubled delay line.
@@ -234,7 +232,7 @@ namespace FIRConvolution
 
             var cs = h[c] * z[filter.ZOffsetGet - c];
 
-            sum += filter.TCenter * cs;
+            sum += filter.HMiddle * cs;
         }
 
         [BurstCompile]
@@ -260,7 +258,7 @@ namespace FIRConvolution
             var v2 = math.float4(z0, z1, z2, z3);
             var v3 = v1 * v2;
 
-            sum += filter.TCenter * v3;
+            sum += filter.HMiddle * v3;
         }
 
         [BurstCompile]
