@@ -3,64 +3,67 @@ using System.Diagnostics.CodeAnalysis;
 using Unity.Mathematics;
 using UnityEngine;
 
-[SuppressMessage("ReSharper", "IdentifierTypo")]
-public static class FFTUtility
+namespace FIRConvolution.Samples.Tutorial
 {
-    public static float DbToLinear(float dbValue)
+    [SuppressMessage("ReSharper", "IdentifierTypo")]
+    public static class FFTUtility
     {
-        var linear = math.pow(10.0f, dbValue / 20.0f);
-
-        return linear;
-    }
-
-    public static float LinearToDb(float linearValue)
-    {
-        var db = math.log10(linearValue) * 20.0f;
-
-        return db;
-    }
-
-    public static float BinToFrequency(int fftSize, float nyquistFrequency, int binIndex)
-    {
-        if (!Mathf.IsPowerOfTwo(fftSize))
+        public static float DbToLinear(float dbValue)
         {
-            throw new ArgumentOutOfRangeException(nameof(fftSize));
+            var linear = math.pow(10.0f, dbValue / 20.0f);
+
+            return linear;
         }
 
-        if (nyquistFrequency <= 0.0f)
+        public static float LinearToDb(float linearValue)
         {
-            throw new ArgumentOutOfRangeException(nameof(nyquistFrequency));
+            var db = math.log10(linearValue) * 20.0f;
+
+            return db;
         }
 
-        if (binIndex < 0 || binIndex >= fftSize)
+        public static float BinToFrequency(int fftSize, float nyquistFrequency, int binIndex)
         {
-            throw new ArgumentOutOfRangeException(nameof(binIndex));
+            if (!Mathf.IsPowerOfTwo(fftSize))
+            {
+                throw new ArgumentOutOfRangeException(nameof(fftSize));
+            }
+
+            if (nyquistFrequency <= 0.0f)
+            {
+                throw new ArgumentOutOfRangeException(nameof(nyquistFrequency));
+            }
+
+            if (binIndex < 0 || binIndex >= fftSize)
+            {
+                throw new ArgumentOutOfRangeException(nameof(binIndex));
+            }
+
+            var frequency = (float)binIndex / fftSize * nyquistFrequency;
+
+            return frequency;
         }
 
-        var frequency = (float)binIndex / fftSize * nyquistFrequency;
-
-        return frequency;
-    }
-
-    public static int FrequencyToBin(int fftSize, float nyquistFrequency, float frequency)
-    {
-        if (!Mathf.IsPowerOfTwo(fftSize))
+        public static int FrequencyToBin(int fftSize, float nyquistFrequency, float frequency)
         {
-            throw new ArgumentOutOfRangeException(nameof(fftSize));
+            if (!Mathf.IsPowerOfTwo(fftSize))
+            {
+                throw new ArgumentOutOfRangeException(nameof(fftSize));
+            }
+
+            if (nyquistFrequency <= 0.0f)
+            {
+                throw new ArgumentOutOfRangeException(nameof(nyquistFrequency));
+            }
+
+            if (frequency < 0.0f || frequency >= nyquistFrequency)
+            {
+                throw new ArgumentOutOfRangeException(nameof(frequency));
+            }
+
+            var bin = (int)Math.Round(frequency * fftSize / nyquistFrequency);
+
+            return bin;
         }
-
-        if (nyquistFrequency <= 0.0f)
-        {
-            throw new ArgumentOutOfRangeException(nameof(nyquistFrequency));
-        }
-
-        if (frequency < 0.0f || frequency >= nyquistFrequency)
-        {
-            throw new ArgumentOutOfRangeException(nameof(frequency));
-        }
-
-        var bin = (int)Math.Round(frequency * fftSize / nyquistFrequency);
-
-        return bin;
     }
 }
