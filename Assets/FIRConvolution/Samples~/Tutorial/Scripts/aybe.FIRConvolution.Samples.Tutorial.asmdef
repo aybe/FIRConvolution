@@ -1,5 +1,5 @@
 {
-    "name": "FIRConvolution.Sample",
+    "name": "FIRConvolution.Samples.Tutorial",
     "rootNamespace": "",
     "references": [
         "GUID:9735da20f1b5bc34ba731a4cd8f1ee26",
