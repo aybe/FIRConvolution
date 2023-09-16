@@ -56,7 +56,7 @@ namespace FIRConvolution
         /// <summary>
         ///     The taps.
         /// </summary>
-        public float* H { get; }
+        private float* H { get; }
 
         /// <summary>
         ///     The taps center index.
@@ -81,7 +81,7 @@ namespace FIRConvolution
         /// <summary>
         ///     The doubled delay line.
         /// </summary>
-        public float* Z { get; }
+        private float* Z { get; }
 
         /// <summary>
         ///     The delay line length.
