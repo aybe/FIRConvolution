@@ -13,13 +13,15 @@ namespace FIRConvolution
     {
         private Filter(float[] h, int hOffset, int vLength, MemoryAllocator allocator)
         {
-            if (h.Length % 2 is not 1)
+            var hLength = h.Length;
+
+            if (hLength % 2 is not 1)
             {
                 throw new ArgumentOutOfRangeException(nameof(h),
                     "The number of coefficients must be odd.");
             }
 
-            if (hOffset < 0 || hOffset >= h.Length)
+            if (hOffset < 0 || hOffset >= hLength)
             {
                 throw new ArgumentOutOfRangeException(nameof(hOffset),
                     "The index to the first coefficient must be a valid coefficient index.");
@@ -36,19 +38,23 @@ namespace FIRConvolution
                 throw new ArgumentNullException(nameof(allocator));
             }
 
-            var z = new float[(h.Length + (vLength - 1)) * 2];
+            var hCenter = hLength / 2;
 
-            VLength    = vLength;
+            var zLength = (hLength + (vLength - 1)) * 2;
+
+            var z = new float[zLength];
+
             H          = (float*)allocator.AlignedAlloc(h);
-            HLength    = h.Length;
-            HCenter    = h.Length / 2;
+            HCenter    = hCenter;
+            HLength    = hLength;
+            HMiddle    = hCenter % 2 == 1 || hOffset == 1 ? 1.0f : 0.0f;
+            HOffset    = hOffset;
+            VLength    = vLength;
             Z          = (float*)allocator.AlignedAlloc(z);
-            ZLength    = z.Length;
+            ZLength    = zLength;
             ZOffset    = VLength; // check UpdateZ
             ZOffsetGet = 0;
-            ZOffsetSet = HLength + VLength - 1;
-            HOffset    = hOffset;
-            HMiddle    = HCenter % 2 == 1 || HOffset == 1 ? 1.0f : 0.0f;
+            ZOffsetSet = hLength + vLength - 1;
         }
 
         /// <summary>
