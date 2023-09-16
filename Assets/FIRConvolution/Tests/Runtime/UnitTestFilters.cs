@@ -22,8 +22,6 @@ namespace FIRConvolution.Tests
             var allocator = MemoryAllocatorUnity.Instance;
 
             var filter = create(lp32, allocator);
-
-            Filter.Free(ref filter, allocator);
             
             const int length = 1024;
 
@@ -37,6 +35,8 @@ namespace FIRConvolution.Tests
                 .IterationsPerMeasurement(IterationsPerMeasurement)
                 .GC()
                 .Run();
+
+            Filter.Free(ref filter, allocator);
 
             return;
 
