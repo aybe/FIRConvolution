@@ -1,5 +1,7 @@
 # FIRConvolution
 
+![](README.png)
+
 ## Installation
 
 Add the package to your Unity project using the following Git URL: 
