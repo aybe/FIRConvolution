@@ -31,9 +31,9 @@
     },
     "samples": [
         {
-            "displayName": "FIR Convolution Sample",
+            "displayName": "FIR Convolution Tutorial",
             "description": "Applies one of the 12 available algorithms to an audio source.",
-            "path": "Samples~/FIRConvolutionSample"
+            "path": "Samples~/Tutorial"
         }
     ]
 }
