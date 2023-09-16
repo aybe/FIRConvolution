@@ -6,8 +6,6 @@ namespace FIRConvolution.Tests
 {
     public sealed class UnitTestFilters
     {
-        // TODO this currently takes ~108.538s to execute, editor appears frozen but it isn't
-
         private const int WarmupCount = 10;
 
         private const int MeasurementCount = 10;

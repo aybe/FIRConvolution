@@ -12,7 +12,7 @@ namespace FIRConvolution.Samples.Tutorial
     public unsafe class FilterTest : MonoBehaviour
     {
         [SerializeField]
-        private FilterType FilterType = FilterType.ScalarFull; // TODO this should be public
+        private FilterType FilterType = FilterType.ScalarFull;
 
         private AudioConfiguration AudioConfiguration;
 
@@ -155,7 +155,7 @@ namespace FIRConvolution.Samples.Tutorial
         [CustomEditor(typeof(FilterTest))]
         private sealed class FilterTestEditor : Editor
         {
-            // BUG some more Unity shit -> no VU meter unless class has an editor!
+            // some more Unity shit -> no VU meter unless class has an editor!
 
             public override void OnInspectorGUI()
             {
