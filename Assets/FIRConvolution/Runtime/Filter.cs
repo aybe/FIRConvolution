@@ -63,22 +63,22 @@ namespace FIRConvolution
         private float* H { get; }
 
         /// <summary>
-        ///     The taps center index.
+        ///     The index of the center tap.
         /// </summary>
         private int HCenter { get; }
 
         /// <summary>
-        ///     The taps count.
+        ///     The number of taps.
         /// </summary>
         private int HLength { get; }
 
         /// <summary>
-        ///     The center tap multiplier.
+        ///     The value of the center tap.
         /// </summary>
         private float HMiddle { get; }
 
         /// <summary>
-        ///     The first tap offset (for half-band filtering).
+        ///     The index of the first tap.
         /// </summary>
         private int HOffset { get; }
 
@@ -88,7 +88,7 @@ namespace FIRConvolution
         private int VLength { get; }
 
         /// <summary>
-        ///     The doubled delay line.
+        ///     The delay line (doubled).
         /// </summary>
         private float* Z { get; }
 
@@ -98,7 +98,7 @@ namespace FIRConvolution
         private int ZLength { get; }
 
         /// <summary>
-        ///     The doubled delay line state.
+        ///     The delay line state.
         /// </summary>
         private int ZOffset { get; set; }
 
@@ -198,14 +198,6 @@ namespace FIRConvolution
                 throw new ArgumentOutOfRangeException(nameof(length), length,
                     "The length of arrays must be a multiple of vectorization length.");
             }
-
-            //var abs = math.abs(target - source);
-
-            //if (abs < length)
-            //{
-            //    throw new ArgumentException(
-            //        "The pointers to source and target arrays must not overlap.");
-            //}
 
             if (stride < 1)
             {

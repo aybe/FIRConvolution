@@ -63,7 +63,7 @@ public class ZFilterTest
 
         var filters = Enumerable.Range(0, sourceWav.Channels).Select(_ => new ZFilter(h, 4)).ToArray();
 
-        // TODO ZFilter.Logger = null; // don't log else LUT will abandon at some point
+        // ZFilter.Logger = null; // don't log else LUT will abandon at some point
 
         var size = 0;
 

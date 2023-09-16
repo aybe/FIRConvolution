@@ -35,7 +35,7 @@ namespace FIRConvolution
 
                 var sum = 0.0f;
 
-                var tap = filter.HOffset; // TODO?
+                var tap = filter.HOffset;
 
                 int end;
 
