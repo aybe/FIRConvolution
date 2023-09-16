@@ -1,0 +1,17 @@
+{
+    "name": "FIRConvolution.Sample",
+    "rootNamespace": "",
+    "references": [
+        "GUID:9735da20f1b5bc34ba731a4cd8f1ee26",
+        "GUID:d8b63aba1907145bea998dd612889d6b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
