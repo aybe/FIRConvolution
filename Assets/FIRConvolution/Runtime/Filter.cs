@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Unity.Mathematics;
-using Unity.Burst;
 using JetBrains.Annotations;
+using Unity.Burst;
+using Unity.Mathematics;
 using Unity.Profiling;
 
 namespace FIRConvolution
@@ -73,14 +73,19 @@ namespace FIRConvolution
         private int HLength { get; }
 
         /// <summary>
+        ///     The center tap multiplier.
+        /// </summary>
+        private float HMiddle { get; }
+
+        /// <summary>
         ///     The first tap offset (for half-band filtering).
         /// </summary>
         private int HOffset { get; }
 
         /// <summary>
-        ///     The center tap multiplier.
+        ///     The vectorization count.
         /// </summary>
-        private float HMiddle { get; }
+        private int VLength { get; }
 
         /// <summary>
         ///     The doubled delay line.
@@ -106,11 +111,6 @@ namespace FIRConvolution
         ///     The delay line index to set samples.
         /// </summary>
         private int ZOffsetSet { get; }
-
-        /// <summary>
-        ///     The vectorization count.
-        /// </summary>
-        private int VLength { get; }
 
         private static readonly ProfilerMarker CopyTo1Marker
             = new(ProfilerCategory.Audio, nameof(CopyTo1Marker));
