@@ -68,8 +68,7 @@ public abstract class UnitTestFilter
             }
         }
 
-        allocator.AlignedFree(new IntPtr(filter.H));
-        allocator.AlignedFree(new IntPtr(filter.Z));
+        Filter.Free(ref filter, allocator);
 
         return output;
     }

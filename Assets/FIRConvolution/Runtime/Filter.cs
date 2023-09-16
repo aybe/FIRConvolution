@@ -136,6 +136,14 @@ namespace FIRConvolution
             return new Filter(h, tap1, v, allocator);
         }
 
+        public static void Free(ref Filter filter, in MemoryAllocator allocator)
+        {
+            allocator.Free(new IntPtr(filter.H));
+            allocator.Free(new IntPtr(filter.Z));
+
+            filter = default;
+        }
+
         [BurstCompile]
         private static void CopyTo(in int sample, in int stride, in int offset, in float* target, in float source)
         {

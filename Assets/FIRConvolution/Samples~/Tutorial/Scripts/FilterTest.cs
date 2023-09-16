@@ -106,12 +106,7 @@ namespace FIRConvolution.Samples.Tutorial
 
             for (var i = 0; i < filters.Length; i++)
             {
-                ref var filter = ref filters[i];
-
-                Allocator.Free(new IntPtr(filter.H));
-                Allocator.Free(new IntPtr(filter.Z));
-
-                filter = default;
+                Filter.Free(ref filters[i], Allocator);
             }
 
             FilterData = null;

@@ -23,10 +23,8 @@ namespace FIRConvolution.Tests
 
             var filter = create(lp32, allocator);
 
-            // TODO create a method in Filter for this
-            allocator.Free(new IntPtr(filter.H));
-            allocator.Free(new IntPtr(filter.Z));
-
+            Filter.Free(ref filter, allocator);
+            
             const int length = 1024;
 
             var source = stackalloc float[length];
