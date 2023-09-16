@@ -138,8 +138,8 @@ namespace FIRConvolution
 
         public static void Free(ref Filter filter, in MemoryAllocator allocator)
         {
-            allocator.Free(new IntPtr(filter.H));
-            allocator.Free(new IntPtr(filter.Z));
+            allocator.AlignedFree(new IntPtr(filter.H));
+            allocator.AlignedFree(new IntPtr(filter.Z));
 
             filter = default;
         }
