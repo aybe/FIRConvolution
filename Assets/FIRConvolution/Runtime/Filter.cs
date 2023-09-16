@@ -113,22 +113,22 @@ namespace FIRConvolution
         private int ZOffsetSet { get; }
 
         private static readonly ProfilerMarker CopyTo1Marker
-            = new(ProfilerCategory.Audio, nameof(CopyTo1Marker));
+            = new(ProfilerCategory.Audio, nameof(CopyTo));
 
         private static readonly ProfilerMarker CopyTo4Marker
-            = new(ProfilerCategory.Audio, nameof(CopyTo4Marker));
+            = new(ProfilerCategory.Audio, nameof(CopyTo));
 
         private static readonly ProfilerMarker ProcessArgsMarker
             = new(ProfilerCategory.Audio, nameof(ProcessArgs));
 
         private static readonly ProfilerMarker UpdateCenterScalarMarker
-            = new(ProfilerCategory.Audio, nameof(UpdateCenterScalarMarker));
+            = new(ProfilerCategory.Audio, nameof(UpdateCenterScalar));
 
         private static readonly ProfilerMarker UpdateCenterVectorMarker
-            = new(ProfilerCategory.Audio, nameof(UpdateCenterVectorMarker));
+            = new(ProfilerCategory.Audio, nameof(UpdateCenterVector));
 
         private static readonly ProfilerMarker UpdateZMarker
-            = new(ProfilerCategory.Audio, nameof(UpdateZMarker));
+            = new(ProfilerCategory.Audio, nameof(UpdateZ));
 
         private static Filter Create(float[] h, int v, MemoryAllocator allocator)
         {
