@@ -1,9 +1,11 @@
 #nullable enable
 using System;
 using System.Diagnostics.CodeAnalysis;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace FIRConvolution.Samples.Tutorial
 {
