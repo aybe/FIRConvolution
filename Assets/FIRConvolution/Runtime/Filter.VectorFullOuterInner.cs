@@ -1,6 +1,6 @@
-﻿using Unity.Mathematics;
-using AOT;
+﻿using AOT;
 using Unity.Burst;
+using Unity.Mathematics;
 using Unity.Profiling;
 
 namespace FIRConvolution
@@ -23,15 +23,14 @@ namespace FIRConvolution
             ProcessArgs(source, target, length, stride, offset, ref filter);
 
             using var auto = ProcessVectorFullOuterInnerMarker.Auto();
-            
-            var h = filter.H;
-            var z = filter.Z;
-            var n = filter.HLength;
-            var v = filter.VLength;
 
-            var k = length - v;
+            var h       = filter.H;
+            var z       = filter.Z;
+            var hLength = filter.HLength;
 
-            for (var sample = 0; sample <= k; sample += v)
+            var szLoop1 = hLength - 4;
+
+            for (var sample = 0; sample < length; sample += 4)
             {
                 var pos = UpdateZ(ref filter, source, sample, stride, offset);
 
@@ -39,9 +38,7 @@ namespace FIRConvolution
 
                 var tap = 0;
 
-                int end;
-
-                for (end = n - v; tap < end; tap += v)
+                for (; tap < szLoop1; tap += 4)
                 {
                     var h0 = h[tap + 0];
                     var h1 = h[tap + 1];
@@ -59,7 +56,6 @@ namespace FIRConvolution
                     var z6 = z[zP - 6];
 
                     var hv0 = new float4(h0, h1, h2, h3);
-
                     var zv0 = new float4(z0, z1, z2, z3);
                     var zv1 = new float4(z1, z2, z3, z4);
                     var zv2 = new float4(z2, z3, z4, z5);
@@ -72,7 +68,7 @@ namespace FIRConvolution
                         math.dot(hv0, zv3));
                 }
 
-                for (end = n - 0; tap < end; tap += 1)
+                for (; tap < hLength; tap += 1)
                 {
                     var h0 = h[tap];
 

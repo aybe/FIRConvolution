@@ -1,6 +1,6 @@
-﻿using Unity.Mathematics;
-using AOT;
+﻿using AOT;
 using Unity.Burst;
+using Unity.Mathematics;
 using Unity.Profiling;
 
 namespace FIRConvolution
@@ -24,34 +24,38 @@ namespace FIRConvolution
 
             using var auto = ProcessVectorHalfHalfOuterMarker.Auto();
 
-            var h = filter.H;
-            var z = filter.Z;
-            var n = filter.HLength;
-            var v = filter.VLength;
-            var c = filter.HCenter;
-            var e = n - 1;
+            var h       = filter.H;
+            var z       = filter.Z;
+            var hLength = filter.HLength;
+            var hCenter = filter.HCenter;
+            var hOffset = filter.HOffset;
 
-            for (var sample = 0; sample < length; sample += v)
+            for (var sample = 0; sample < length; sample += 4)
             {
                 var pos = UpdateZ(ref filter, source, sample, stride, offset);
 
                 var sum = float4.zero;
 
-                var tap = filter.HOffset;
+                var tap = hOffset;
 
-                for (; tap < c; tap += 2) // TODO DRY VectorHalfHalfOuterInner
+                var idx = pos - (hLength - 1);
+
+                for (; tap < hCenter; tap += 2)
                 {
                     var h0 = h[tap];
 
-                    var i0 = pos - tap - 0;
-                    var i1 = pos - tap - 1;
-                    var i2 = pos - tap - 2;
-                    var i3 = pos - tap - 3;
+                    var p0 = pos - tap;
+                    var p1 = idx + tap;
 
-                    var i4 = pos - e + tap - 0;
-                    var i5 = pos - e + tap - 1;
-                    var i6 = pos - e + tap - 2;
-                    var i7 = pos - e + tap - 3;
+                    var i0 = p0 - 0;
+                    var i1 = p0 - 1;
+                    var i2 = p0 - 2;
+                    var i3 = p0 - 3;
+
+                    var i4 = p1 - 0;
+                    var i5 = p1 - 1;
+                    var i6 = p1 - 2;
+                    var i7 = p1 - 3;
 
                     var z0 = z[i0];
                     var z1 = z[i1];

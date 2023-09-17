@@ -23,12 +23,11 @@ namespace FIRConvolution
 
             using var auto = ProcessScalarFullMarker.Auto();
 
-            var h = filter.H;
-            var z = filter.Z;
-            var n = filter.HLength;
-            var v = filter.VLength;
+            var h       = filter.H;
+            var z       = filter.Z;
+            var hLength = filter.HLength;
 
-            for (var sample = 0; sample < length; sample += v)
+            for (var sample = 0; sample < length; sample += 1)
             {
                 var pos = UpdateZ(ref filter, source, sample, stride, offset);
 
@@ -36,13 +35,10 @@ namespace FIRConvolution
 
                 var tap = 0;
 
-                for (; tap < n; tap += 1)
+                for (; tap < hLength; tap += 1)
                 {
                     var h0 = h[tap];
-
-                    var zP = pos - tap;
-
-                    var z0 = z[zP];
+                    var z0 = z[pos - tap];
 
                     sum += h0 * z0;
                 }

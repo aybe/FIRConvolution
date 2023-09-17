@@ -1,6 +1,6 @@
-﻿using Unity.Mathematics;
-using AOT;
+﻿using AOT;
 using Unity.Burst;
+using Unity.Mathematics;
 using Unity.Profiling;
 
 namespace FIRConvolution
@@ -24,14 +24,15 @@ namespace FIRConvolution
 
             using var auto = ProcessVectorHalfHalfInnerMarker.Auto();
 
-            var h = filter.H;
-            var z = filter.Z;
-            var n = filter.HLength;
-            var c = filter.HCenter;
-            var v = filter.VLength;
-            var e = n - 1;
+            var h       = filter.H;
+            var z       = filter.Z;
+            var hLength = filter.HLength - 1;
+            var hCenter = filter.HCenter;
 
-            for (var sample = 0; sample < length; sample += v)
+            var szLoop1 = hCenter - 8;
+            var szLoop2 = hCenter - 2;
+
+            for (var sample = 0; sample < length; sample += 1)
             {
                 var pos = UpdateZ(ref filter, source, sample, stride, offset);
 
@@ -39,9 +40,7 @@ namespace FIRConvolution
 
                 var tap = filter.HOffset;
 
-                int end;
-
-                for (end = c - 8; tap < end; tap += 8)
+                for (; tap < szLoop1; tap += 8)
                 {
                     var h0 = h[tap + 0];
                     var h1 = h[tap + 2];
@@ -53,10 +52,10 @@ namespace FIRConvolution
                     var i2 = pos - (tap + 4);
                     var i3 = pos - (tap + 6);
 
-                    var i4 = pos - (e - (tap + 0));
-                    var i5 = pos - (e - (tap + 2));
-                    var i6 = pos - (e - (tap + 4));
-                    var i7 = pos - (e - (tap + 6));
+                    var i4 = pos - (hLength - (tap + 0));
+                    var i5 = pos - (hLength - (tap + 2));
+                    var i6 = pos - (hLength - (tap + 4));
+                    var i7 = pos - (hLength - (tap + 6));
 
                     var z0 = z[i0];
                     var z1 = z[i1];
@@ -75,7 +74,7 @@ namespace FIRConvolution
                     sum += math.dot(hv0, zv0 + zv1);
                 }
 
-                for (end = c - 2; tap < end; tap += 4)
+                for (; tap < szLoop2; tap += 4)
                 {
                     var h0 = h[tap + 0];
                     var h1 = h[tap + 2];
@@ -83,8 +82,8 @@ namespace FIRConvolution
                     var i0 = pos - (tap + 0);
                     var i1 = pos - (tap + 2);
 
-                    var i2 = pos - (e - (tap + 0));
-                    var i3 = pos - (e - (tap + 2));
+                    var i2 = pos - (hLength - (tap + 0));
+                    var i3 = pos - (hLength - (tap + 2));
 
                     var z0 = z[i0];
                     var z1 = z[i1];
@@ -99,12 +98,12 @@ namespace FIRConvolution
                     sum += math.dot(hv0, zv0 + zv1);
                 }
 
-                for (end = c - 0; tap < end; tap += 2)
+                for (; tap < hCenter; tap += 2)
                 {
                     var h0 = h[tap];
 
                     var i0 = pos - tap;
-                    var i1 = pos - (e - tap);
+                    var i1 = pos - (hLength - tap);
 
                     var z0 = z[i0];
                     var z1 = z[i1];
