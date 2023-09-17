@@ -33,7 +33,9 @@ namespace FIRConvolution
             // +2, +4, +6, +8, -2, +0, +2, +4
             // +3, +5, +7, +9, -3, -1, +1, +3
 
+#if FIR_ASSERT
             ProcessArgs(source, target, length, stride, offset, ref filter);
+#endif
 
 #if FIR_PROFILE
             using var auto = ProcessVectorHalfHalfOuterInnerMarker.Auto();

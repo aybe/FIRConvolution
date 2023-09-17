@@ -173,6 +173,7 @@ namespace FIRConvolution
             target[(sample + 3) * stride + offset] = source[3];
         }
 
+#if FIR_ASSERT // marginal
         [BurstCompile]
         private static void ProcessArgs(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
@@ -223,6 +224,7 @@ namespace FIRConvolution
                     "The offset must be less than stride.");
             }
         }
+#endif
 
         [BurstCompile]
         private static void UpdateCenterScalar(ref Filter filter, ref float sum)
