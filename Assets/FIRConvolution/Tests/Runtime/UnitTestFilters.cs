@@ -42,6 +42,7 @@ namespace FIRConvolution.Tests
 
             void Action()
             {
+                // ReSharper disable once AccessToModifiedClosure
                 handler(source, target, length, 1, 0, ref filter);
             }
         }
