@@ -33,7 +33,6 @@ namespace FIRConvolution.Tests
                 .WarmupCount(WarmupCount)
                 .MeasurementCount(MeasurementCount)
                 .IterationsPerMeasurement(IterationsPerMeasurement)
-                .GC()
                 .Run();
 
             Filter.Free(ref filter, allocator);
