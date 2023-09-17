@@ -21,10 +21,10 @@ namespace FIRConvolution
                     "The number of coefficients must be odd.");
             }
 
-            if (hOffset < 0 || hOffset >= hLength)
+            if (hOffset is < 0 or > 1)
             {
                 throw new ArgumentOutOfRangeException(nameof(hOffset),
-                    "The index to the first coefficient must be a valid coefficient index.");
+                    "The index of the first coefficient must be 0 or 1.");
             }
 
             if (vLength is < 1 or > 4)
@@ -52,7 +52,7 @@ namespace FIRConvolution
             VLength    = vLength;
             Z          = (float*)allocator.AlignedAlloc(z);
             ZLength    = zLength;
-            ZOffset    = VLength; // check UpdateZ
+            ZOffset    = vLength; // see comment in UpdateZ
             ZOffsetGet = 0;
             ZOffsetSet = hLength + vLength - 1;
         }
