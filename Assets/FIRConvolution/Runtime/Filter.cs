@@ -60,57 +60,57 @@ namespace FIRConvolution
         /// <summary>
         ///     The taps.
         /// </summary>
-        private float* H { get; }
+        private readonly float* H;
 
         /// <summary>
         ///     The index of the center tap.
         /// </summary>
-        private int HCenter { get; }
+        private readonly int HCenter;
 
         /// <summary>
         ///     The number of taps.
         /// </summary>
-        private int HLength { get; }
+        private readonly int HLength;
 
         /// <summary>
         ///     The value of the center tap.
         /// </summary>
-        private float HMiddle { get; }
+        private readonly float HMiddle;
 
         /// <summary>
         ///     The index of the first tap.
         /// </summary>
-        private int HOffset { get; }
+        private readonly int HOffset;
 
         /// <summary>
         ///     The vectorization count.
         /// </summary>
-        private int VLength { get; }
+        private readonly int VLength;
 
         /// <summary>
         ///     The delay line (doubled).
         /// </summary>
-        private float* Z { get; }
+        private readonly float* Z;
 
         /// <summary>
         ///     The delay line length.
         /// </summary>
-        private int ZLength { get; }
+        private readonly int ZLength;
 
         /// <summary>
         ///     The delay line state.
         /// </summary>
-        private int ZOffset { get; set; }
+        private int ZOffset;
 
         /// <summary>
         ///     The delay line index to get samples.
         /// </summary>
-        private int ZOffsetGet { get; set; }
+        private int ZOffsetGet;
 
         /// <summary>
         ///     The delay line index to set samples.
         /// </summary>
-        private int ZOffsetSet { get; }
+        private readonly int ZOffsetSet;
 
 #if FIR_PROFILE
         private static readonly ProfilerMarker CopyTo1Marker
