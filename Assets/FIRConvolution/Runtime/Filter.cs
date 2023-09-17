@@ -157,7 +157,7 @@ namespace FIRConvolution
             using var auto = CopyTo1Marker.Auto();
 #endif
 
-            target[(sample + 0) * stride + offset] = source;
+            target[sample * stride + offset] = source;
         }
 
         [BurstCompile]
@@ -166,11 +166,15 @@ namespace FIRConvolution
 #if FIR_PROFILE
             using var auto = CopyTo4Marker.Auto();
 #endif
+            var index0 = sample * stride + offset;
+            var index1 = index0 + stride;
+            var index2 = index1 + stride;
+            var index3 = index2 + stride;
 
-            target[(sample + 0) * stride + offset] = source[0];
-            target[(sample + 1) * stride + offset] = source[1];
-            target[(sample + 2) * stride + offset] = source[2];
-            target[(sample + 3) * stride + offset] = source[3];
+            target[index0] = source[0];
+            target[index1] = source[1];
+            target[index2] = source[2];
+            target[index3] = source[3];
         }
 
 #if FIR_ASSERT // marginal
