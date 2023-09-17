@@ -6,11 +6,11 @@ namespace FIRConvolution.Tests
 {
     public sealed class UnitTestFilters
     {
-        private const int WarmupCount = 10;
+        private const int WarmupCount = 0;
 
         private const int MeasurementCount = 10;
 
-        private const int IterationsPerMeasurement = 100;
+        private const int IterationsPerMeasurement = 1000;
 
         private static unsafe void TestFilter(FilterType filterType)
         {
