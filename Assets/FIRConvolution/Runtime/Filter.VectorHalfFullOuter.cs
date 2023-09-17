@@ -1,14 +1,18 @@
 ﻿using AOT;
 using Unity.Burst;
 using Unity.Mathematics;
+#if FIR_PROFILE
 using Unity.Profiling;
+#endif
 
 namespace FIRConvolution
 {
     public partial struct Filter
     {
+#if FIR_PROFILE
         private static readonly ProfilerMarker ProcessVectorHalfFullOuterMarker
             = new(ProfilerCategory.Audio, nameof(ProcessVectorHalfFullOuter));
+#endif
 
         public static Filter CreateVectorHalfFullOuter(float[] h, MemoryAllocator allocator)
         {
@@ -22,7 +26,9 @@ namespace FIRConvolution
         {
             ProcessArgs(source, target, length, stride, offset, ref filter);
 
+#if FIR_PROFILE
             using var auto = ProcessVectorHalfFullOuterMarker.Auto();
+#endif
 
             var h       = filter.H;
             var z       = filter.Z;

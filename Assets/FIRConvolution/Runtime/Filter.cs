@@ -2,7 +2,9 @@
 using System.Linq;
 using Unity.Burst;
 using Unity.Mathematics;
+#if FIR_PROFILE // ~30% slower when enabled
 using Unity.Profiling;
+#endif
 
 namespace FIRConvolution
 {
@@ -110,6 +112,7 @@ namespace FIRConvolution
         /// </summary>
         private int ZOffsetSet { get; }
 
+#if FIR_PROFILE
         private static readonly ProfilerMarker CopyTo1Marker
             = new(ProfilerCategory.Audio, nameof(CopyTo));
 
@@ -127,6 +130,7 @@ namespace FIRConvolution
 
         private static readonly ProfilerMarker UpdateZMarker
             = new(ProfilerCategory.Audio, nameof(UpdateZ));
+#endif
 
         private static Filter Create(float[] h, int v, MemoryAllocator allocator)
         {
@@ -149,7 +153,9 @@ namespace FIRConvolution
         [BurstCompile]
         private static void CopyTo(in int sample, in int stride, in int offset, in float* target, in float source)
         {
+#if FIR_PROFILE
             using var auto = CopyTo1Marker.Auto();
+#endif
 
             target[(sample + 0) * stride + offset] = source;
         }
@@ -157,7 +163,9 @@ namespace FIRConvolution
         [BurstCompile]
         private static void CopyTo(in int sample, in int stride, in int offset, in float* target, in float4 source)
         {
+#if FIR_PROFILE
             using var auto = CopyTo4Marker.Auto();
+#endif
 
             target[(sample + 0) * stride + offset] = source[0];
             target[(sample + 1) * stride + offset] = source[1];
@@ -169,7 +177,9 @@ namespace FIRConvolution
         private static void ProcessArgs(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
+#if FIR_PROFILE
             using var auto = ProcessArgsMarker.Auto();
+#endif
 
             if (source == null)
             {
@@ -217,7 +227,9 @@ namespace FIRConvolution
         [BurstCompile]
         private static void UpdateCenterScalar(ref Filter filter, ref float sum)
         {
+#if FIR_PROFILE
             using var auto = UpdateCenterScalarMarker.Auto();
+#endif
 
             var h = filter.H;
             var z = filter.Z;
@@ -231,7 +243,9 @@ namespace FIRConvolution
         [BurstCompile]
         private static void UpdateCenterVector(ref Filter filter, ref float4 sum)
         {
+#if FIR_PROFILE
             using var auto = UpdateCenterVectorMarker.Auto();
+#endif
 
             var h = filter.H;
             var c = filter.HCenter;
@@ -262,7 +276,9 @@ namespace FIRConvolution
 
             // at the same time we can also hide some details of the implementation
 
+#if FIR_PROFILE
             using var auto = UpdateZMarker.Auto();
+#endif
 
             // update the Z offsets, initial pre-roll is brought back to index zero
 
