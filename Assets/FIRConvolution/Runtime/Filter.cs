@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 using Unity.Burst;
 using Unity.Mathematics;
 using Unity.Profiling;
@@ -168,8 +166,6 @@ namespace FIRConvolution
         }
 
         [BurstCompile]
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        [AssertionMethod]
         private static void ProcessArgs(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
@@ -219,7 +215,6 @@ namespace FIRConvolution
         }
 
         [BurstCompile]
-        [MethodImpl(MethodImplOptions.NoInlining)]
         private static void UpdateCenterScalar(ref Filter filter, ref float sum)
         {
             using var auto = UpdateCenterScalarMarker.Auto();
@@ -234,7 +229,6 @@ namespace FIRConvolution
         }
 
         [BurstCompile]
-        [MethodImpl(MethodImplOptions.NoInlining)]
         private static void UpdateCenterVector(ref Filter filter, ref float4 sum)
         {
             using var auto = UpdateCenterVectorMarker.Auto();
@@ -260,7 +254,6 @@ namespace FIRConvolution
         }
 
         [BurstCompile]
-        [MethodImpl(MethodImplOptions.NoInlining)]
         private static int UpdateZ(ref Filter filter, float* source, int sample, int stride, int offset)
         {
             // normally one would need for a call to update the Z offset at the end
