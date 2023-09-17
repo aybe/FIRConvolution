@@ -4,14 +4,18 @@
 
 // Solution: global using, it isn't the first time it saved our ass!
 
+#pragma warning disable IDE0005 // Remove unnecessary using directives
+// ReSharper disable once RedundantUsingDirective.Global
 global using ProfilerMarker = Unity.Profiling.Fakes.ShimProfilerMarker;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 
 // ReSharper disable CheckNamespace
 
 namespace Unity.Profiling.Fakes;
 
+[PublicAPI]
 internal readonly struct ShimProfilerMarker
 {
     [SuppressMessage("ReSharper", "UnusedParameter.Local")]
