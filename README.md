@@ -74,11 +74,11 @@ The method call overhead clearly has an impact, hindering some algorithms as you
 
 #### Versus, alphabetically
 
-<img src="Wiki\Versus-abc.png"/>
+<img src="Wiki\vs-abc.png"/>
 
 #### Versus, fastest to slowest
 
-<img src="Wiki\Versus-spd.png"/>
+<img src="Wiki\vs-spd.png"/>
 
 ### Conclusions
 
