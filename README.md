@@ -56,27 +56,27 @@ The method call overhead clearly has an impact, hindering some algorithms as you
   - `Outer` : samples loop vectorized
   - `OuterInner` : both loops vectorized
 
-#### Managed, sorted alphabetically
+#### Managed, alphabetically
 
 <img src="Wiki\managed-abc.png"/>
 
-#### Managed, sorted from fastest to slowest
+#### Managed, fastest to slowest
 
 <img src="Wiki\managed-spd.png"/>
 
-#### Native, sorted alphabetically
+#### Native, alphabetically
 
 <img src="Wiki\native-abc.png"/>
 
-#### Native, sorted from fastest to slowest
+#### Native, fastest to slowest
 
 <img src="Wiki\native-spd.png"/>
 
-#### Managed VS Native, sorted alphabetically
+#### Managed VS Native, alphabetically
 
 <img src="Wiki\vs-abc.png"/>
 
-#### Managed VS Native, sorted from fastest to slowest
+#### Managed VS Native, fastest to slowest
 
 <img src="Wiki\vs-spd.png"/>
 
