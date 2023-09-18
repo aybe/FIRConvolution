@@ -2,7 +2,7 @@
 
 Faster FIR filter convolution for Unity.
 
-<img src="Wiki/header.png"/>
+<img src="Wiki/header.png" width="500"/>
 
 ## Description
 
