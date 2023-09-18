@@ -2,7 +2,7 @@
 
 Faster FIR filter convolution for Unity.
 
-<img src="Wiki/header.png" width="500"/>
+<img src="Wiki/header.png" width="400"/>
 
 ## Description
 
@@ -72,13 +72,13 @@ The method call overhead clearly has an impact, hindering some algorithms as you
 
 <img src="Wiki\native-spd.png"/>
 
-#### Managed VS Native, alphabetically
+#### Versus, alphabetically
 
-<img src="Wiki\vs-abc.png"/>
+<img src="Wiki\Versus-abc.png"/>
 
-#### Managed VS Native, fastest to slowest
+#### Versus, fastest to slowest
 
-<img src="Wiki\vs-spd.png"/>
+<img src="Wiki\Versus-spd.png"/>
 
 ### Conclusions
 
