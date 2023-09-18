@@ -2,7 +2,7 @@
 
 Faster FIR filter convolution for Unity.
 
-<img src="Wiki/header.png" width="500"/>
+<img src="Wiki/header.png"/>
 
 ## Description
 
@@ -26,7 +26,7 @@ Implementing a high quality FIR filter convolution in pure managed code is too s
 
 The audio DSP CPU usage ranges between ~30% to ~50% no matter how optimized.
 
-Result is that audio dropouts are frequent since `OnAudioFilterRead` is struggling.
+Result is that the audio dropouts are frequent since `OnAudioFilterRead` is struggling.
 
 ### Profiling environment
 
@@ -58,27 +58,27 @@ The method call overhead clearly has an impact, hindering some algorithms as you
 
 #### Managed, sorted alphabetically
 
-<img src="Wiki\managed-abc.png" width="500"/>
+<img src="Wiki\managed-abc.png"/>
 
 #### Managed, sorted from fastest to slowest
 
-<img src="Wiki\managed-spd.png" width="500"/>
+<img src="Wiki\managed-spd.png"/>
 
 #### Native, sorted alphabetically
 
-<img src="Wiki\native-abc.png" width="500"/>
+<img src="Wiki\native-abc.png"/>
 
 #### Native, sorted from fastest to slowest
 
-<img src="Wiki\native-spd.png" width="500"/>
+<img src="Wiki\native-spd.png"/>
 
 #### Managed VS Native, sorted alphabetically
 
-<img src="Wiki\vs-abc.png" width="500"/>
+<img src="Wiki\vs-abc.png"/>
 
 #### Managed VS Native, sorted from fastest to slowest
 
-<img src="Wiki\vs-spd.png" width="500"/>
+<img src="Wiki\vs-spd.png"/>
 
 ### Conclusions
 
