@@ -38,7 +38,7 @@ The method call overhead clearly has an impact, hindering some algorithms as you
 
 ### Profiling results
 
-#### Legend
+**Legend:**
 
 - `[Scalar|Vector]`
   - `Scalar` : 1 sample at a time
@@ -56,27 +56,27 @@ The method call overhead clearly has an impact, hindering some algorithms as you
   - `Outer` : samples loop vectorized
   - `OuterInner` : both loops vectorized
 
-#### Managed, alphabetically
+**Managed, alphabetically:**
 
 <img src="Wiki\managed-abc.png"/>
 
-#### Managed, fastest to slowest
+**Managed, fastest to slowest:**
 
 <img src="Wiki\managed-spd.png"/>
 
-#### Native, alphabetically
+**Native, alphabetically:**
 
 <img src="Wiki\native-abc.png"/>
 
-#### Native, fastest to slowest
+**Native, fastest to slowest:**
 
 <img src="Wiki\native-spd.png"/>
 
-#### Versus, alphabetically
+**Versus, alphabetically:**
 
 <img src="Wiki\vs-abc.png"/>
 
-#### Versus, fastest to slowest
+**Versus, fastest to slowest:**
 
 <img src="Wiki\vs-spd.png"/>
 
