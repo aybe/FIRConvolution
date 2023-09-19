@@ -107,7 +107,7 @@ Overall, considering native implementations:
 
 There are additional projects that you'll want to add to the solution after generating it.
 
-These two projects: [the MSTest project](FIRConvolution.csproj) and [the decoy class library](FIRConvolution.Tests.csproj) for the test project.
+These two projects: [the MSTest project](Projects\FIRConvolution\FIRConvolution.csproj) and [the decoy class library](Projects\FIRConvolution.Tests\FIRConvolution.Tests.csproj) for the test project.
 
 Create a solution folder and add them there to avoid name clashes with Unity projects.
 
