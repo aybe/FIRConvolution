@@ -105,6 +105,33 @@ Overall, considering native implementations:
 
 ## Notes
 
-With a few tricks, it is possible to test code for Unity outside it, i.e. using MSTest and Live Unit Testing.
+There are additional projects that you'll want to add to the solution after generating it.
 
-This project does that and it has been tremendously helpful for implementing the different algorithms.
+These two projects: [the MSTest project](FIRConvolution.csproj) and [the decoy class library](FIRConvolution.Tests.csproj) for the test project.
+
+Create a solution folder and add them there to avoid name clashes with Unity projects.
+
+<br>
+
+That trick allowed to develop the project in a friendlier test environment than Unity's.
+
+Basically, it links to files in `Assets` so that the MSTest project can see and test them.
+
+Shims have been implemented [in a different way]((Projects/FIRConvolution/Fakes)) as Microsoft Fakes showed its limits.
+
+<br>
+
+Porting the code to vanilla .NET to generate a NuGet package should be pretty easy.
+
+By adding another shim for `float4` and substituting `math.dot`, one should be good.
+
+Then when using it, use the vanilla .NET [aligned memory allocator](Assets\FIRConvolution\Runtime\MemoryAllocatorNet.cs) instead of Unity's.
+
+## Credits
+
+https://fiiir.com
+
+https://thewolfsound.com/fir-filter-with-simd
+
+https://github.com/Rabadash8820/UnityAssemblies
+
