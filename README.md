@@ -117,7 +117,7 @@ That trick allowed to develop the project in a friendlier test environment than 
 
 Basically, it links to files in `Assets` so that the MSTest project can see and test them.
 
-Shims have been implemented [in a different way]((Projects/FIRConvolution/Fakes)) as Microsoft Fakes showed its limits.
+Shims have been implemented [in a different way](Projects/FIRConvolution/Fakes) as Microsoft Fakes showed its limits.
 
 <br>
 
