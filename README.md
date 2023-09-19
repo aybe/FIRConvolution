@@ -107,7 +107,7 @@ Overall, considering native implementations:
 
 There are additional projects that you'll want to add to the solution after generating it.
 
-These two projects: [the MSTest project](Projects\FIRConvolution\FIRConvolution.csproj) and [the decoy class library](Projects\FIRConvolution.Tests\FIRConvolution.Tests.csproj) for the test project.
+These two projects: [the MSTest project](Projects/FIRConvolution/FIRConvolution.csproj) and [the decoy class library](Projects/FIRConvolution.Tests/FIRConvolution.Tests.csproj) for the test project.
 
 Create a solution folder and add them there to avoid name clashes with Unity projects.
 
@@ -125,7 +125,7 @@ Porting the code to vanilla .NET to generate a NuGet package should be pretty ea
 
 By adding another shim for `float4` and substituting `math.dot`, one should be good.
 
-Then when using it, use the vanilla .NET [aligned memory allocator](Assets\FIRConvolution\Runtime\MemoryAllocatorNet.cs) instead of Unity's.
+Then when using it, use the vanilla .NET [aligned memory allocator](Assets/FIRConvolution/Runtime/MemoryAllocatorNet.cs) instead of Unity's.
 
 ## Credits
 
