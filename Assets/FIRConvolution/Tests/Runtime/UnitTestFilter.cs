@@ -4,7 +4,7 @@ using Unity.PerformanceTesting;
 
 namespace FIRConvolution.Tests
 {
-    public sealed class UnitTestFilters
+    public sealed class UnitTestFilter
     {
         private const int WarmupCount = 0;
 
