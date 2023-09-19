@@ -1,5 +1,4 @@
-﻿using AOT;
-using Unity.Burst;
+﻿using Unity.Burst;
 #if FIR_PROFILE
 using Unity.Profiling;
 #endif
@@ -19,7 +18,6 @@ namespace FIRConvolution
         }
 
         [BurstCompile]
-        [MonoPInvokeCallback(typeof(FilterMethodHandler))]
         public static unsafe void ProcessScalarHalfFull(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {

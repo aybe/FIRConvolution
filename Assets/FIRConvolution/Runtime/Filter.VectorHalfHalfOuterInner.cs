@@ -1,5 +1,4 @@
-﻿using AOT;
-using Unity.Burst;
+﻿using Unity.Burst;
 using Unity.Mathematics;
 #if FIR_PROFILE
 using Unity.Profiling;
@@ -20,7 +19,6 @@ namespace FIRConvolution
         }
 
         [BurstCompile]
-        [MonoPInvokeCallback(typeof(FilterMethodHandler))]
         public static unsafe void ProcessVectorHalfHalfOuterInner(
             in float* source, in float* target, in int length, in int stride, in int offset, ref Filter filter)
         {
