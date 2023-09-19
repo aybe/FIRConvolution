@@ -1,9 +1,9 @@
 {
-    "name": "FIRConvolution.Samples.Tutorial",
+    "name": "aybe.FIRConvolution.Samples.Tutorial",
     "rootNamespace": "FIRConvolution.Samples.Tutorial",
     "references": [
-        "GUID:9735da20f1b5bc34ba731a4cd8f1ee26",
-        "GUID:d8b63aba1907145bea998dd612889d6b"
+        "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:9735da20f1b5bc34ba731a4cd8f1ee26"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,11 +1,11 @@
 {
-    "name": "FIRConvolution.Tests",
-    "rootNamespace": "",
+    "name": "aybe.FIRConvolution.Tests",
+    "rootNamespace": "FIRConvolution.Tests",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Unity.PerformanceTesting",
-        "FIRConvolution"
+        "aybe.FIRConvolution"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
