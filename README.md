@@ -23,7 +23,7 @@ Add the package to your Unity project using the following Git URL:
 
 ### Motivation
 
-Implementing a fast FIR filter convolution purely using managed code ended up being an impossible task, because as soon as one tries to uses a high-quality filter with many taps; the audio DSP CPU usage immediately ranges between 30% to 50%, and this, no matter how hard you'd apply various optimizations in order to try speed up the processing time.
+Implementing a fast FIR filter convolution purely using managed code ended up being an impossible task, because as soon as one tries to uses a high-quality filter with many taps; the audio DSP CPU usage immediately ranges between 30% to 50%. This, no matter how hard you'd apply various optimizations in order to try speed up the processing time.
 
 ### Profiling environment
 
