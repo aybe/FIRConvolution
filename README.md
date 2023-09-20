@@ -107,11 +107,9 @@ Overall, considering native implementations:
 
 ## Notes
 
+In the repository, there are [extra projects](Projects) that implement testing using MSTest while using the Unity code base. Leveraging [a few tricks](Projects/FIRConvolution/Fakes), it is indeed possible to achieve such setup and in return benefit of a friendlier testing environment than Unity's one. As this is a Unity project, by convention the Visual Studio solution isn't committed so you'll have to add them manually to it.
 
-
-In the repository, there are [extra projects](Projects) that implement testing using MSTest while using the Unity code base. With [a few tricks](Projects/FIRConvolution/Fakes), it is indeed possible to achieve such setup and in return benefit of a friendlier testing environment than Unity's. As this is a Unity project, by convention, the Visual Studio solution isn't committed so you'll have to add them manually to it.
-
-Regarding getting the code to be runnable under vanilla .NET, it already does in the mentioned projects although there's an indirect use of `Unity.Mathematics`. However, one might not be able to use that assembly for licensing reasons. To address that, one shall create extra shims for relevant types and methods then use the aligned memory allocator [for vanilla .NET](Assets/FIRConvolution/Runtime/MemoryAllocatorNet.cs) instead.
+Regarding getting the code to be runnable under vanilla .NET, it already does in the mentioned projects although there's an indirect use of `Unity.Mathematics`. However, one might not be able to use that assembly for licensing reasons. To address that issue, one shall create extra shims for the relevant types and methods then use the aligned memory allocator [for vanilla .NET](Assets/FIRConvolution/Runtime/MemoryAllocatorNet.cs) instead.
 
 ## Credits
 
