@@ -19,6 +19,8 @@ Add the package to your Unity project using the following Git URL:
 
 `https://github.com/aybe/FIRConvolution.git?path=Assets/FIRConvolution`
 
+The project uses symbolic links, if cloning it on Windows, check [this](https://stackoverflow.com/questions/5917249/git-symbolic-links-in-windows/59761201#59761201).
+
 ## Performance
 
 ### Motivation
