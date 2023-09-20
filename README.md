@@ -37,6 +37,9 @@ Both managed and native implementations are tested to give the audience an overa
 
 The results are surprising, some algorithms perform better than some others ought to be worse.
 
+Note: an algorithm is fit to use without noticeable impact when it spends less than 10 seconds running.
+
+
 **Legend:**
 
 - `[Scalar|Vector]`
