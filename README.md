@@ -6,11 +6,12 @@ Faster FIR filter convolution for Unity.
 
 ## Description
 
-Collection of 12 algorithms for FIR filter convolution, with a focus on half-band filtering.
+This project is a collection of 12 algorithms for FIR filter convolution, with a focus on half-band filtering.
 
-Most of the algorithms are vectorized, leveraging SIMD extensions through Unity Burst.
+Most of the algorithms are vectorized, leveraging SIMD extensions through the Unity Burst compiler.
 
-Check the sample scene to see them in action and their performance using the profiler.
+Check the sample scene to see them perform filtering from within `MonoBehaviour.OnAudioFilterRead`.
+
 
 ## Installation
 
@@ -22,21 +23,19 @@ Add the package to your Unity project using the following Git URL:
 
 ### Motivation
 
-Implementing a high quality FIR filter convolution in pure managed code is too slow.
-
-The audio DSP CPU usage ranges between ~30% to ~50% no matter how optimized.
-
-Result is that the audio dropouts are frequent since `OnAudioFilterRead` is struggling.
+Implementing a fast FIR filter convolution purely using managed code ended up being an impossible task, because as soon as one tries to uses a high-quality filter with many taps; the audio DSP CPU usage immediately ranges between 30% to 50%, and this, no matter how hard you'd apply various optimizations in order to try speed up the processing time.
 
 ### Profiling environment
 
-Half-band filter, 44100 Hz, 461 taps, 1 channel, 10 measurements, 1000 iterations, 1024 samples.
+The candidate is a high-quality half-band FIR filter with 461 taps for 1 channel @ 44100 Hz.
 
-Mimicking what'd happen inside `OnAudioFilterRead`, other scenarios would yield other results.
+Trying to mimick the typical use with 10 measurements and 1000 iterations for 1024 samples.
 
-The method call overhead clearly has an impact, hindering some algorithms as you'll see below.
+Both managed and native implementations are tested to give the audience an overall comparison.
 
 ### Profiling results
+
+The results are surprising, some algorithms perform better than some others ought to be worse.
 
 **Legend:**
 
@@ -92,40 +91,24 @@ On the managed side:
 
 On the native side:
 - scalar half-band
-  - little gain, mostly due to short input and overhead
+  - little gain, likely due to short input and overhead
 - vectorized, outer/inner variant
   - full-band, performs worse than the other variants
-  - half-band, performs better but gain is marginal
+  - half-band, performs better but the gain is marginal
 
 Overall, considering native implementations:
 - full-band: outer variant is the fastest
-  - outer/inner variant ought to be the best but turns it isn't in the end
+  - outer/inner variant ought to be the fastest but really isn't in the end
 - half-band: half loop, outer/inner variant is the fastest
-  - when a substantially longer/trickier algorithm ends up being better
+  - when a substantially longer/trickier algorithm ends up being faster
 
 ## Notes
 
-There are additional projects that you'll want to add to the solution after generating it.
 
-These two projects: [the MSTest project](Projects/FIRConvolution/FIRConvolution.csproj) and [the decoy class library](Projects/FIRConvolution.Tests/FIRConvolution.Tests.csproj) for the test project.
 
-Create a solution folder and add them there to avoid name clashes with Unity projects.
+In the repository, there are [extra projects](Projects) that implement testing using MSTest while using the Unity code base. With [a few tricks](Projects/FIRConvolution/Fakes), it is indeed possible to achieve such setup and in return benefit of a friendlier testing environment than Unity's. As this is a Unity project, by convention, the Visual Studio solution isn't committed so you'll have to add them manually to it.
 
-<br>
-
-That trick allowed to develop the project in a friendlier test environment than Unity's.
-
-Basically, it links to files in `Assets` so that the MSTest project can see and test them.
-
-Shims have been implemented [in a different way](Projects/FIRConvolution/Fakes) as Microsoft Fakes showed its limits.
-
-<br>
-
-Porting the code to vanilla .NET to generate a NuGet package should be pretty easy.
-
-By adding another shim for `float4` and substituting `math.dot`, one should be good.
-
-Then when using it, use the vanilla .NET [aligned memory allocator](Assets/FIRConvolution/Runtime/MemoryAllocatorNet.cs) instead of Unity's.
+Regarding getting the code to be runnable under vanilla .NET, it already does in the mentioned projects although there's an indirect use of `Unity.Mathematics`. However, one might not be able to use that assembly for licensing reasons. To address that, one shall create extra shims for relevant types and methods then use the aligned memory allocator [for vanilla .NET](Assets/FIRConvolution/Runtime/MemoryAllocatorNet.cs) instead.
 
 ## Credits
 
