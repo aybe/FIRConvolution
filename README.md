@@ -27,7 +27,7 @@ Implementing a fast FIR filter convolution purely using managed code ended up be
 
 ### Profiling environment
 
-The candidate is a high-quality half-band FIR filter with 461 taps for 1 channel @ 44100 Hz.
+The candidate is a high-quality half-band FIR filter, with 461 taps and for 1 channel @ 44100 Hz.
 
 Trying to mimick the typical use with 10 measurements and 1000 iterations for 1024 samples.
 
