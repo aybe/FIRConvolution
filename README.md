@@ -23,7 +23,7 @@ Add the package to your Unity project using the following Git URL:
 
 **Developer audience:**
 
-The project uses symbolic links, for Windows, you can set them up [this way](https://stackoverflow.com/questions/5917249/).
+The project uses symbolic links, for Windows, you can set them up [this way](https://stackoverflow.com/a/59761201).
 
 (this is to alleviate the deficiencies of Unity [sample package authoring](https://docs.unity3d.com/Manual/cus-samples.html))
 
