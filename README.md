@@ -15,11 +15,21 @@ Check the sample scene to see them perform filtering from within `MonoBehaviour.
 
 ## Installation
 
+**Consumer audience:**
+
 Add the package to your Unity project using the following Git URL: 
 
 `https://github.com/aybe/FIRConvolution.git?path=Assets/FIRConvolution`
 
-The project uses symbolic links, if cloning it on Windows, check [this](https://stackoverflow.com/questions/5917249/git-symbolic-links-in-windows/59761201#59761201).
+**Developer audience:**
+
+The project uses symbolic links, for Windows, you can set them up [this way](https://stackoverflow.com/questions/5917249/).
+
+(this is to alleviate the deficiencies of Unity [sample package authoring](https://docs.unity3d.com/Manual/cus-samples.html))
+
+Included, an [MSTest project setup]((Projects)) that tests directly against the Unity code.
+
+(this neat trick allows to test code in a much friendlier test environment)
 
 ## Performance
 
@@ -109,9 +119,13 @@ Overall, considering native implementations:
 
 ## Notes
 
-In the repository, there are [extra projects](Projects) that implement testing using MSTest while using the Unity code base. Leveraging [a few tricks](Projects/FIRConvolution/Fakes), it is indeed possible to achieve such setup and in return benefit of a friendlier testing environment than Unity's one. As this is a Unity project, by convention the Visual Studio solution isn't committed so you'll have to add them manually to it.
+Porting it for vanilla .NET should be easy, it already works in the MSTest project:
 
-Regarding getting the code to be runnable under vanilla .NET, it already does in the mentioned projects although there's an indirect use of `Unity.Mathematics`. However, one might not be able to use that assembly for licensing reasons. To address that issue, one shall create extra shims for the relevant types and methods then use the aligned memory allocator [for vanilla .NET](Assets/FIRConvolution/Runtime/MemoryAllocatorNet.cs) instead.
+1. extend the pattern to [shim Unity types](Projects/FIRConvolution/Fakes) to `float2`, `float4` and `math.dot`
+2. use the aligned memory allocator [for vanilla .NET](Assets/FIRConvolution/Runtime/MemoryAllocatorNet.cs) instead of the Unity one
+
+(this is in order to avoid the gray area of using Unity assemblies outside Unity)
+
 
 ## Credits
 
