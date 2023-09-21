@@ -27,7 +27,7 @@ The project uses symbolic links, for Windows, you can set them up [this way](htt
 
 (this is to alleviate the deficiencies of Unity [sample package authoring](https://docs.unity3d.com/Manual/cus-samples.html))
 
-Included, an [MSTest project setup]((Projects)) that tests directly against the Unity code.
+Included, an [MSTest project setup](Projects) that tests directly against the Unity code.
 
 (this neat trick allows to test code in a much friendlier test environment)
 
