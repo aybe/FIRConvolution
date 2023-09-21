@@ -131,7 +131,7 @@ namespace FIRConvolution.Samples.Tutorial
 
             FilterType.GetHandlers(out var create, out var method);
 
-            var lp64 = FilterUtility.LowPass(sampleRate, sampleRate / 4.0d, 441.0d, FilterWindow.Blackman);
+            var lp64 = FilterUtility.LowPass(sampleRate, sampleRate / 4.0d, sampleRate / 100.0d, FilterWindow.Blackman);
             var lp32 = Array.ConvertAll(lp64, Convert.ToSingle);
 
             FilterData = new Filter[channels];
