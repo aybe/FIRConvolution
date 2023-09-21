@@ -115,9 +115,9 @@ Regarding getting the code to be runnable under vanilla .NET, it already does in
 
 ## Credits
 
-https://fiiir.com
+https://fiiir.com (filter design)
 
-https://thewolfsound.com/fir-filter-with-simd
+https://thewolfsound.com/fir-filter-with-simd (filter vectorization)
 
-https://github.com/Rabadash8820/UnityAssemblies
+https://github.com/Rabadash8820/UnityAssemblies (Unity bindings)
 
