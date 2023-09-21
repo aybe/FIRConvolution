@@ -121,7 +121,7 @@ Overall, considering native implementations:
 
 Porting it for vanilla .NET should be easy, it already works in the MSTest project:
 
-1. extend the pattern to [shim Unity types](Projects/FIRConvolution/Fakes) to `float2`, `float4` and `math.dot`
+1. extend the pattern of [shim Unity types](Projects/FIRConvolution/Fakes) to `float2`, `float4` and `math.dot`
 2. use the aligned memory allocator [for vanilla .NET](Assets/FIRConvolution/Runtime/MemoryAllocatorNet.cs) instead of the Unity one
 
 (this is in order to avoid the gray area of using Unity assemblies outside Unity)
